@@ -1,6 +1,7 @@
 <?php
 
-class FicheJeu{
+class FicheJeu extends FicheArticle
+{
     private $_nbreJoueursMin;
     private $_nbreJoueursMax;
     private $_reglesDuJeu;
@@ -8,7 +9,10 @@ class FicheJeu{
     
     //--------------------------Constructeur---------------------------//
     
-    
+    public function __construct(array $donnes)
+    {
+        $this->hydrate($donnes);
+    }
     
     //----------------------------Methodes-----------------------------//
     
@@ -41,9 +45,3 @@ class FicheJeu{
         $this->_reglesDuJeu = $regleDuJeu;
     }
 }
-    
-    
-    
-    
-    
-    

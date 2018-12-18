@@ -1,5 +1,5 @@
 <?php //Gaetan
-abstract class Adherent
+class Adherent extends Personne
 {
     private $_adhesionARenouveller = false;
     private $_chequeEstDepose = false;
