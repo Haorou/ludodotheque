@@ -1,4 +1,4 @@
-<?php
+<?php //Gaetan
 abstract class Person
 {
     private $_nom;

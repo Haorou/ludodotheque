@@ -1,4 +1,4 @@
-<?php
+<?php //Gaetan
 abstract class AdherentPrincipal
 {
     private $_renouvellerAdhesions = false;
