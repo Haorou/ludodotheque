@@ -1,4 +1,5 @@
 <?php
+
 require("controller/controller.php");
 
 try
