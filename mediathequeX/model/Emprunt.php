@@ -1,8 +1,10 @@
 <?php // Julien
 class Emprunt
 {
-    private $_dateEmprunt;
-    private $_estEnRetard;
+    private $_dateEmprunt = "";
+    private $_estEnRetard = false;
+    private $_adherent = NULL;
+    private $_article = NULL;
     
     //--------------------------Constructeur---------------------------//
     
@@ -30,13 +32,13 @@ class Emprunt
     
     public function dateEmprunt() { return $this->_dateEmprunt; }
     
-    public function estEnRetard() { return $this->_estEnRetard; }
-
     public function setDateEmprunt($date)
     {
         // Verifier si DateEmprunt est valide (if $date === ???)
         $this->_dateEmprunt = $date;
     }
+    
+    public function estEnRetard() { return $this->_estEnRetard; }
     
     public function setEstEnRetard($estEndRetard)
     {
@@ -44,5 +46,20 @@ class Emprunt
         
         $this->_estEnRetard = $estEndRetard;
     }
+
+    public function adherent() { return $this->_adherent; }
+    
+    public function setAdherent(Adherent $adherent)
+    {
+        $this->_adherent = $adherent;
+    }
+
+    public function article() { return $this->_article; }
+    
+    public function setAdherent(Article $article)
+    {
+        $this->_article = $article;
+    }
+
     
 }

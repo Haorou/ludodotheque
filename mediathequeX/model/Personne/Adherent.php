@@ -3,7 +3,7 @@ class Adherent extends Personne
 {
     private $_adhesionARenouveller = false;
     private $_chequeEstDepose = false;
-    private $_coordonnees;
+    private $_coordonnees = "";
     private $_dateAdhesions = array ();
     
     //--------------------------Constructeur---------------------------//
@@ -37,10 +37,7 @@ class Adherent extends Personne
     
     //----------------------Getters and Setters------------------------//
   
-    public function adhesionARenouveller()
-    {
-        return $this->_adhesionARenouveller;
-    }
+    public function adhesionARenouveller() { return $this->_adhesionARenouveller; }
     
     public function setAdhesionARenouveller($adhesionARenouveller)
     {
@@ -49,10 +46,7 @@ class Adherent extends Personne
         $this->_adhesionARenouveller = $adhesionARenouveller;
     }
     
-    public function chaqueEstDepose()
-    {
-        return $this->_chequeEstDepose;
-    }
+    public function chaqueEstDepose() { return $this->_chequeEstDepose; }
     
     public function setChequeEstDepose($chequeEstDepose)
     {
@@ -61,10 +55,7 @@ class Adherent extends Personne
         $this->_prenom = $chequeEstDepose;
     }
     
-    public function coordonnees()
-    {
-        return $this->_coordonnees;
-    }
+    public function coordonnees() { return $this->_coordonnees; }
     
     public function setCoordonnees($coordonnees)
     {
@@ -73,10 +64,7 @@ class Adherent extends Personne
         $this->_coordonnees = $coordonnees;
     }
     
-    public function dateAdhesions()
-    {
-        return $this->_dateAdhesion;
-    }
+    public function dateAdhesions() { return $this->_dateAdhesion; }
     
     public function setDateAdhesions($dateAdhesion)
     {

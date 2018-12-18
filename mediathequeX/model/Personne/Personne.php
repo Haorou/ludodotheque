@@ -1,8 +1,8 @@
 <?php //Gaetan
 abstract class Personne
 {
-    private $_nom;
-    private $_prenom;
+    private $_nom = "";
+    private $_prenom = "";
     
     //--------------------------Constructeur---------------------------//
     
@@ -11,10 +11,7 @@ abstract class Personne
     
     //----------------------Getters and Setters------------------------//
     
-    public function nom()
-    {
-        return $this->_nom;
-    }
+    public function nom() { return $this->_nom; }
     
     public function setNom($nom)
     {
@@ -23,10 +20,7 @@ abstract class Personne
         $this->_nom = $nom;
     }
     
-    public function prenom()
-    {
-        return $this->_nom;
-    }
+    public function prenom() { return $this->_nom; }
     
     public function setPrenom($prenom)
     {

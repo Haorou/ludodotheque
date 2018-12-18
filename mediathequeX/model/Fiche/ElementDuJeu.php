@@ -1,7 +1,7 @@
 <?php
 abstract class ElementDuJeu
 {
-    private $_degradation;
+    private $_degradation = NULL;
 
     //--------------------------Constructeur---------------------------//
     
@@ -9,12 +9,9 @@ abstract class ElementDuJeu
 
     //----------------------Getters and Setters------------------------//
     
-    public function degradation()
-    {
-        return $this->_degration;
-    }
+    public function degradation() { return $this->_degration; }
     
-    public function setDegradation($degradation)
+    public function setDegradation(Degradation $degradation)
     {
         $this->_degration = $degradation;
     }

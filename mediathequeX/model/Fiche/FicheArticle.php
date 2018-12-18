@@ -1,12 +1,13 @@
 <?php // Marc-Antoine
 abstract class FicheArticle
 {
-    private $_titre;
-    private $_auteur;
-    private $_editeur;
-    private $_ageMin;
-    private $_ageMax;
-    private $_dateDePublication;
+    private $_titre = "";
+    private $_auteur = "";
+    private $_editeur = "";
+    private $_ageMin = 0;
+    private $_ageMax = 0;
+    private $_dateDePublication = "";
+    private $_elementsDuJeu = array();
     
     //--------------------------Constructeur---------------------------//
 
@@ -16,11 +17,7 @@ abstract class FicheArticle
     
     //----------------------Getters and Setters------------------------//
 
-    public function titre()
-    {
-        
-        return $this->_titre;
-    }
+    public function titre() { return $this->_titre; }
         
     public function setTitre($titre)
     {
@@ -28,10 +25,7 @@ abstract class FicheArticle
         $this->_titre = $titre;
     }
 
-    public function auteur()
-    {
-        return $this->_auteur;
-    }
+    public function auteur() { return $this->_auteur; }
 
     public function setAuteur($auteur)
     {
@@ -39,10 +33,7 @@ abstract class FicheArticle
         $this->_auteur = $auteur;
     }
 
-    public function editeur()
-    {
-        return $this->_editeur;
-    }
+    public function editeur() { return $this->_editeur; }
     
     public function setEditeur($editeur)
     {
@@ -50,10 +41,7 @@ abstract class FicheArticle
         $this->_editeur = $editeur;
     }
 
-    public function ageMin()
-    {
-        return $this->_ageMin;
-    }
+    public function ageMin() { return $this->_ageMin; }
     
     public function setAgeMin($ageMin)
     {
@@ -61,10 +49,7 @@ abstract class FicheArticle
         $this->_ageMin = $ageMin;
     }
 
-    public function ageMax()
-    {
-        return $this->_ageMax;
-    }
+    public function ageMax() { return $this->_ageMax; }
 
     public function setAgeMax($ageMax)
     {
@@ -72,19 +57,18 @@ abstract class FicheArticle
         $this->_ageMax = $ageMax;
     }
 
-    public function dateDePublication()
-    {
-        return $this->_dateDePublication;
-    }
+    public function dateDePublication() { return $this->_dateDePublication; }
 
     public function setDateDePublication($dateDePublication)
     {
         $dateDePublication = (string)$dateDePublication;
         $this->_dateDePublication = $dateDePublication;
     }
-
     
-   
+    public function elementsDuJeu() { return $this->_elementsDuJeu; }
     
-   
+    public function setElementsDuJeu(ElementDuJeu $elementsDuJeu)
+    {
+        $this->_elementsDuJeu = $elementsDuJeu;
+    }
 }

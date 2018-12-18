@@ -1,8 +1,9 @@
 <?php // Julien
 abstract class Article
 {
-    private $_estEndommage;
-    private $_estEmprunte;
+    private $_estEndommage = false;
+    private $_estEmprunte = false;
+    private $_ficheArticle = NULL;
     
     //--------------------------Constructeur---------------------------//
     
@@ -14,8 +15,6 @@ abstract class Article
     
     public function estEndommage() { return $this->_estEndommage; }
     
-    public function estEmprunte() { return $this->_estEmprunte; }
-    
     public function setEstEndommage($estEndommage)
     {
         $estEndommage = (bool)$estEndommage;
@@ -23,10 +22,19 @@ abstract class Article
         $this->_estEndommage = $estEndommage;
     }
     
+    public function estEmprunte() { return $this->_estEmprunte; }
+    
     public function setEstEmprunte($estEmprunte)
     {
         $estEmprunte = (bool)$estEmprunte;
         
         $this->_estEmprunte = $estEmprunte;
+    }
+    
+    public function ficheArticle() { return $this->_ficheArticle; }
+    
+    public function setFicheArticle(FicheArticle $ficheArticle)
+    {
+        $this->_ficheArticle = $ficheArticle;
     }
 }

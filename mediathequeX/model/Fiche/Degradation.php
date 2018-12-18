@@ -1,8 +1,8 @@
 <?php
 class Degradation
 {
-    private $_estPresent;
-    private $_estNeuf;
+    private $_estPresent = false;
+    private $_estEnBonneEtat = false;
 
     //--------------------------Constructeur---------------------------//
     
@@ -28,10 +28,7 @@ class Degradation
     
     //----------------------Getters and Setters------------------------//
     
-    public function estPresent()
-    {
-        return $this->_estPresent;
-    }
+    public function estPresent() { return $this->_estPresent; }
     
     public function setEstPresent($estPresent)
     {
@@ -39,14 +36,11 @@ class Degradation
         $this->_estPresent = $estPresent;
     }
     
-    public function estNeuf()
-    {
-        return $this->_estNeuf;
-    }
+    public function estEnBonneEtat() { return $this->_estEnBonneEtat; }
     
-    public function setEstNeuf($estNeuf)
+    public function setEstEnBonneEtat($estEnBonneEtat)
     {
-        $estNeuf = (bool)$estNeuf;
-        $this->_estNeuf = $estNeuf;
+        $estEnBonneEtat = (bool)$estEnBonneEtat;
+        $this->_estEnBonneEtat = $estEnBonneEtat;
     }
 }
