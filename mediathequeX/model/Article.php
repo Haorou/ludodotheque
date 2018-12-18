@@ -1,10 +1,10 @@
-<?php
+<?php // Julien
 abstract class Article
 {
     private $_estEndommage;
     private $_estEmprunte;
     
-    //-------------------------constructeur----------------------------------
+    //--------------------------Constructeur---------------------------//
     
     public function __construct(array $donnes)
     {
@@ -26,10 +26,11 @@ abstract class Article
     }
     */
     
-    //-----------------------------methode--------------------------------------
+    //----------------------------Methodes-----------------------------//
     
     
-    //-----------------------------getter and setter---------------------------------------------
+    //----------------------Getters and Setters------------------------//
+    
     
     public function estEndommage() { return $this->_estEndommage; }
     

@@ -1,5 +1,4 @@
-<?php
-
+<?php // Julien
 class ManagerPDO
 {
     function dbConnect()

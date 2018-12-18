@@ -1,126 +1,90 @@
-<?php
-abstract class Fiche_article
+<?php // Marc-Antoine
+abstract class FicheArticle
 {
     private $_titre;
     private $_auteur;
     private $_editeur;
     private $_ageMin;
     private $_ageMax;
-    private $_date_de_publication;
+    private $_dateDePublication;
     
-    //-------------------------constructeur----------------------------------
+    //--------------------------Constructeur---------------------------//
     
     public function __construct(array $donnes)
     {
         $this->hydrate($donnes);
     }
     
-    //-----------------------------methode--------------------------------------
+    //----------------------------Methodes-----------------------------//
     
     
-    //-----------------------------getter and setter---------------------------------------------
-    
-    /**
-     * @return mixed
-     */
-    public function getTitre()
+    //----------------------Getters and Setters------------------------//
+
+    public function titre()
     {
         
         return $this->_titre;
     }
+        
+    public function setTitre($titre)
+    {
+        $titre = (string)$titre;
+        $this->_titre = $titre;
+    }
 
-    /**
-     * @return mixed
-     */
-    public function getAuteur()
+    public function auteur()
     {
         return $this->_auteur;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEditeur()
+    public function setAuteur($auteur)
+    {
+        $auteur = (string)$auteur;
+        $this->_auteur = $auteur;
+    }
+
+    public function editeur()
     {
         return $this->_editeur;
     }
+    
+    public function setEditeur($editeur)
+    {
+        $editeur = (string)$editeur;
+        $this->_editeur = $editeur;
+    }
 
-    /**
-     * @return mixed
-     */
-    public function getAge_min()
+    public function ageMin()
     {
         return $this->_ageMin;
     }
+    
+    public function setAgeMin($ageMin)
+    {
+        $ageMin = (int)$ageMin;
+        $this->_ageMin = $ageMin;
+    }
 
-    /**
-     * @return mixed
-     */
-    public function getAge_max()
+    public function ageMax()
     {
         return $this->_ageMax;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDate_de_publication()
+    public function setAgeMax($ageMax)
     {
-        return $this->_date_de_publication;
+        $ageMax = (int)$ageMax;
+        $this->_ageMax = $ageMax;
     }
 
-    /**
-     * @param mixed $_titre
-     */
-    public function setTitre($_titre)
+    public function dateDePublication()
     {
-        $_titre = (string)$_titre;
-        $this->_titre = $_titre;
+        return $this->_dateDePublication;
     }
 
-    /**
-     * @param mixed $_auteur
-     */
-    public function setAuteur($_auteur)
+    public function setDateDePublication($dateDePublication)
     {
-        $_auteur = (string)$_auteur;
-        $this->_auteur = $_auteur;
-    }
-
-    /**
-     * @param mixed $_editeur
-     */
-    public function setEditeur($_editeur)
-    {
-        $_editeur = (string)$_editeur;
-        $this->_editeur = $_editeur;
-    }
-
-    /**
-     * @param mixed $_age_min
-     */
-    public function setAge_min($_age_min)
-    {
-        $_age_min = (int)$_age_min;
-        $this->_ageMin = $_age_min;
-    }
-
-    /**
-     * @param mixed $_age_max
-     */
-    public function setAge_max($_age_max)
-    {
-        $_age_max = (int)$_age_max;
-        $this->_ageMax = $_age_max;
-    }
-
-    /**
-     * @param mixed $_date_de_publication
-     */
-    public function setDate_de_publication($_date_de_publication)
-    {
-        $_date_de_publication = (string)$_date_de_publication;
-        $this->_date_de_publication = $_date_de_publication;
+        $dateDePublication = (string)$dateDePublication;
+        $this->_dateDePublication = $dateDePublication;
     }
 
     

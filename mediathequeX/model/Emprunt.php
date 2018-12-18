@@ -1,10 +1,10 @@
-<?php
+<?php // Julien
 class Emprunt
 {
     private $_dateEmprunt;
     private $_estEnRetard;
     
-    //-------------------------constructeur----------------------------------
+    //--------------------------Constructeur---------------------------//
     
     public function __construct(array $donnes)
     {
@@ -26,9 +26,9 @@ class Emprunt
      }
      */
     
-    //-----------------------------methode--------------------------------------
+    //----------------------------Methodes-----------------------------//
     
-    //-----------------------------getter and setter---------------------------------------------
+    //----------------------Getters and Setters------------------------//
     
     public function dateEmprunt() { return $this->_dateEmprunt; }
     
