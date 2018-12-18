@@ -8,18 +8,17 @@ abstract class Fiche_article
     private $_ageMax;
     private $_date_de_publication;
     
-    //-------------------------constructeur----------------------------------
+    //--------------------------Constructeur---------------------------//
     
     public function __construct(array $donnes)
     {
         $this->hydrate($donnes);
     }
     
-    //-----------------------------methode--------------------------------------
+    //----------------------------Methodes-----------------------------//
     
     
-    //-----------------------------getter and setter---------------------------------------------
-    
+    //----------------------Getters and Setters------------------------//
     /**
      * @return mixed
      */

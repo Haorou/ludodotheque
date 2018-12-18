@@ -6,14 +6,14 @@ abstract class AdherentPrincipal
     private $_coordonnees;
     private $_dateAdhesions = array ();
     
-    //-------------------------constructeur----------------------------------
+    //--------------------------Constructeur---------------------------//
     
     public function __construct(array $donnes)
     {
         $this->hydrate($donnes);
     }
     
-    //-----------------------------methode--------------------------------------
+    //----------------------------Methodes-----------------------------//
     
     function isChequeDepose() {
         return $this->_chequeEstDepose = true;
@@ -22,8 +22,7 @@ abstract class AdherentPrincipal
         return $this->_renouvellerAdhesions = true;
     }
     
-    //-----------------------------getter and setter---------------------------------------------
-    
+    //----------------------Getters and Setters------------------------//
     
     public function setCoordonnees($coordonnees)
     {

@@ -4,7 +4,7 @@ abstract class Person
     private $_nom;
     private $_prenom;
     
-    //-------------------------constructeur----------------------------------
+    //--------------------------Constructeur---------------------------//
     
     public function __construct(array $donnes)
     {
@@ -12,10 +12,10 @@ abstract class Person
     }
     
     
-    //-----------------------------methode--------------------------------------
+    //----------------------------Methodes-----------------------------//
     
     
-    //-----------------------------getter and setter---------------------------------------------
+    //----------------------Getters and Setters------------------------//
     
     public function setNom($nom)
     {
