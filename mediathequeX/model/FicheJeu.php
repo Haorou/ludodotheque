@@ -1,5 +1,5 @@
 <?php
-
+// Designed by Mesguen Frédéric
 class FicheJeu{
     private $_nbreJoueursMin;
     private $_nbreJoueursMax;
