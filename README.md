@@ -1,7 +1,9 @@
 # ludodotheque
 
 // CONVENTION DE NOMMAGE :
+
 private _uneVariable;
+
 public uneVariable;
 
 // NOMMAGE TOUT EN FRANCAIS 
