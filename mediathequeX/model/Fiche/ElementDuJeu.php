@@ -2,11 +2,11 @@
 abstract class ElementDuJeu
 {
     private $_degradation;
-    
+
     //--------------------------Constructeur---------------------------//
     
     //----------------------------Methodes-----------------------------//
-    
+
     //----------------------Getters and Setters------------------------//
     
     public function degradation()

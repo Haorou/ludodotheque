@@ -6,12 +6,6 @@ abstract class Personne
     
     //--------------------------Constructeur---------------------------//
     
-    public function __construct(array $donnes)
-    {
-        $this->hydrate($donnes);
-    }
-    
-    
     //----------------------------Methodes-----------------------------//
     
     

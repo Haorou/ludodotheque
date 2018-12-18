@@ -9,11 +9,7 @@ abstract class FicheArticle
     private $_dateDePublication;
     
     //--------------------------Constructeur---------------------------//
-    
-    public function __construct(array $donnes)
-    {
-        $this->hydrate($donnes);
-    }
+
     
     //----------------------------Methodes-----------------------------//
     
