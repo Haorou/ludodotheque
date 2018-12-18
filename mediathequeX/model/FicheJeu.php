@@ -14,7 +14,7 @@ class FicheJeu{
     
     
     //----------------------Getters and Setters------------------------//
-    public function getNbreJoueurMin() {
+    public function nbreJoueurMin() {
         return $this->_nbreJoueursMin;
     }
     
@@ -23,7 +23,7 @@ class FicheJeu{
         return $this->_nbreJoueursMin = $_nbreJoueursMin;
     }
     
-    public function getNbreJoueurMax(){
+    public function nbreJoueurMax(){
         return $this->_nbreJoueursMax;
     }
     
@@ -32,8 +32,13 @@ class FicheJeu{
         return $this->_nbreJoueursMax = $_nbreJoueursMax;
     }
     
-    public function getreglesDuJeu() {
+    public function reglesDuJeu() {
         return $this->_reglesDuJeu;
+    }
+    
+    public function setReglesDuJeu($regleDuJeu) {
+        $regleDuJeu = (string)$regleDuJeu;
+        $this->_reglesDuJeu = $regleDuJeu;
     }
 }
     

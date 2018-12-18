@@ -1,5 +1,5 @@
 <?php //Gaetan
-abstract class Person
+abstract class Personne
 {
     private $_nom;
     private $_prenom;
@@ -17,11 +17,21 @@ abstract class Person
     
     //----------------------Getters and Setters------------------------//
     
+    public function nom()
+    {
+        return $this->_nom;
+    }
+    
     public function setNom($nom)
     {
         $nom = (string)$nom;
         
         $this->_nom = $nom;
+    }
+    
+    public function prenom()
+    {
+        return $this->_nom;
     }
     
     public function setPrenom($prenom)
@@ -31,4 +41,3 @@ abstract class Person
         $this->_prenom = $prenom;
     }
 }
-?>
