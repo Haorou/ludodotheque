@@ -1,5 +1,8 @@
 <?php
-class Controller
-{
+
+    session_start();
     
-}
+    function loginpage()
+    {
+        require("view/LoginView.php");
+    }
