@@ -1,4 +1,4 @@
-<?php
+<?php // Julien
 abstract class Article
 {
     private $_estEndommage;
