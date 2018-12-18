@@ -1,7 +1,6 @@
 <?php
 abstract class Article
 {
-    private $_dateEmprunt;
     private $_estEndommage;
     private $_estEmprunte;
     
@@ -25,17 +24,9 @@ abstract class Article
     }
     */
     
-    public function dateEmprunt() { return $this->_dateEmprunt; }
-    
     public function estEndommage() { return $this->_estEndommage; }
     
     public function estEmprunte() { return $this->_estEmprunte; }
-    
-    public function setDateEmprunt($date)
-    {
-        // Verifier si DateEmprunt est valide (if $date === ???)
-        $this->_dateEmprunt = $date;
-    }
     
     public function setEstEndommage($estEndommage)
     {
