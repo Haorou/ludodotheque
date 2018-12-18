@@ -6,8 +6,14 @@ class FicheJeu{
     private $_reglesDuJeu;
     
     
+    //-------------------------constructeur----------------------------------
     
     
+    
+    //-----------------------------methode--------------------------------------
+    
+    
+    //-----------------------------getter and setter---------------------------------------------
     
     public function getNbreJoueurMin() {
         return $this->_nbreJoueursMin;

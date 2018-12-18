@@ -4,7 +4,7 @@ abstract class AdherentPrincipal
     private $_renouveller_adhesions = false;
     private $_chequeEstDepose = false;
     private $_coordonnees;
-    private $date_adhesions = array ();
+    private $_date_adhesions = array ();
     
     //-------------------------constructeur----------------------------------
     
@@ -18,6 +18,7 @@ abstract class AdherentPrincipal
     function isChequeDepose() {
         return $this->_chequeEstDepose = true;
     }
+
     function isrenouveller_adhesions() {
         return $this->_renouveller_adhesions = true;
     }

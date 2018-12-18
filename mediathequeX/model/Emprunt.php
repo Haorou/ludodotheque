@@ -4,6 +4,8 @@ class Emprunt
     private $_dateEmprunt;
     private $_estEnRetard;
     
+    //-------------------------constructeur----------------------------------
+    
     public function __construct(array $donnes)
     {
         $this->hydrate($donnes);
@@ -23,6 +25,10 @@ class Emprunt
          }
      }
      */
+    
+    //-----------------------------methode--------------------------------------
+    
+    //-----------------------------getter and setter---------------------------------------------
     
     public function dateEmprunt() { return $this->_dateEmprunt; }
     

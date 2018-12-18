@@ -4,15 +4,21 @@ abstract class Fiche_article
     private $_titre;
     private $_auteur;
     private $_editeur;
-    private $_age_min;
-    private $_age_max;
+    private $_ageMin;
+    private $_ageMax;
     private $_date_de_publication;
+    
+    //-------------------------constructeur----------------------------------
     
     public function __construct(array $donnes)
     {
         $this->hydrate($donnes);
     }
     
+    //-----------------------------methode--------------------------------------
+    
+    
+    //-----------------------------getter and setter---------------------------------------------
     
     /**
      * @return mixed
@@ -44,7 +50,7 @@ abstract class Fiche_article
      */
     public function getAge_min()
     {
-        return $this->_age_min;
+        return $this->_ageMin;
     }
 
     /**
@@ -52,7 +58,7 @@ abstract class Fiche_article
      */
     public function getAge_max()
     {
-        return $this->_age_max;
+        return $this->_ageMax;
     }
 
     /**
@@ -96,7 +102,7 @@ abstract class Fiche_article
     public function setAge_min($_age_min)
     {
         $_age_min = (int)$_age_min;
-        $this->_age_min = $_age_min;
+        $this->_ageMin = $_age_min;
     }
 
     /**
@@ -105,7 +111,7 @@ abstract class Fiche_article
     public function setAge_max($_age_max)
     {
         $_age_max = (int)$_age_max;
-        $this->_age_max = $_age_max;
+        $this->_ageMax = $_age_max;
     }
 
     /**
@@ -113,7 +119,7 @@ abstract class Fiche_article
      */
     public function setDate_de_publication($_date_de_publication)
     {
-        $_date_de_publication = (int)$_date_de_publication;
+        $_date_de_publication = (string)$_date_de_publication;
         $this->_date_de_publication = $_date_de_publication;
     }
 

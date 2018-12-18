@@ -4,6 +4,8 @@ abstract class Article
     private $_estEndommage;
     private $_estEmprunte;
     
+    //-------------------------constructeur----------------------------------
+    
     public function __construct(array $donnes)
     {
         $this->hydrate($donnes);
@@ -23,6 +25,11 @@ abstract class Article
         }
     }
     */
+    
+    //-----------------------------methode--------------------------------------
+    
+    
+    //-----------------------------getter and setter---------------------------------------------
     
     public function estEndommage() { return $this->_estEndommage; }
     
