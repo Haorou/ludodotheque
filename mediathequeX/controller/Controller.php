@@ -1,5 +1,5 @@
 <?php
-class Plateau extends ElementDuJeu
+class Controller
 {
     //--------------------------Constructeur---------------------------//
     
