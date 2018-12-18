@@ -19,6 +19,7 @@ abstract class Fiche_article
      */
     public function getTitre()
     {
+        
         return $this->_titre;
     }
 
@@ -67,6 +68,7 @@ abstract class Fiche_article
      */
     public function setTitre($_titre)
     {
+        $_titre = (string)$_titre;
         $this->_titre = $_titre;
     }
 
@@ -75,6 +77,7 @@ abstract class Fiche_article
      */
     public function setAuteur($_auteur)
     {
+        $_auteur = (string)$_auteur;
         $this->_auteur = $_auteur;
     }
 
@@ -83,6 +86,7 @@ abstract class Fiche_article
      */
     public function setEditeur($_editeur)
     {
+        $_editeur = (string)$_editeur;
         $this->_editeur = $_editeur;
     }
 
@@ -91,6 +95,7 @@ abstract class Fiche_article
      */
     public function setAge_min($_age_min)
     {
+        $_age_min = (int)$_age_min;
         $this->_age_min = $_age_min;
     }
 
@@ -99,6 +104,7 @@ abstract class Fiche_article
      */
     public function setAge_max($_age_max)
     {
+        $_age_max = (int)$_age_max;
         $this->_age_max = $_age_max;
     }
 
@@ -107,6 +113,7 @@ abstract class Fiche_article
      */
     public function setDate_de_publication($_date_de_publication)
     {
+        $_date_de_publication = (int)$_date_de_publication;
         $this->_date_de_publication = $_date_de_publication;
     }
 
