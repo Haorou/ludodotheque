@@ -11,7 +11,7 @@ abstract class ElementsDuJeu
     
     private $_designation = 0;
     
-    private $_quantite = NULL;
+    private $_quantite = 0;
 
     //--------------------------Constructeur---------------------------//
     

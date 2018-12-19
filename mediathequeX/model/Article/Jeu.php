@@ -2,6 +2,8 @@
 
 class Jeu extends Article
 {
+    private $_elementsDuJeuProbleme = array();
+    
     //--------------------------Constructeur---------------------------//
     
     public function __construct(array $donnes)
@@ -27,5 +29,10 @@ class Jeu extends Article
     
     //----------------------Getters and Setters------------------------//
     
+    public function elementsDuJeuProbleme() { return $this->_elementsDuJeuProbleme; }
     
+    public function setElementsDuJeuProbleme(ElementsDuJeuProbleme $elementsDuJeuProbleme)
+    {
+        $this->_elementsDuJeuProbleme = $elementsDuJeuProbleme;
+    }
 }

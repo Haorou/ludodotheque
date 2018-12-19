@@ -9,6 +9,8 @@ class FicheJeu extends FicheArticle
     private $_nbreJoueursMax = 0;
     private $_reglesDuJeu = "";
     
+    private $_elementsDuJeu = array();
+    
     
     //--------------------------Constructeur---------------------------//
     
@@ -53,5 +55,11 @@ class FicheJeu extends FicheArticle
     public function setReglesDuJeu($regleDuJeu) {
         $regleDuJeu = (string)$regleDuJeu;
         $this->_reglesDuJeu = $regleDuJeu;
+    }
+    
+    public function elementsDuJeu() { return $this->_elementsDuJeu; }
+    
+    public function setReglesDuJeu(ElementsDuJeu $elementsDuJeu) {
+        $this->_elementsDuJeu = $elementsDuJeu;
     }
 }

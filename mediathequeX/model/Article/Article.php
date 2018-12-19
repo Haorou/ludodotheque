@@ -3,7 +3,9 @@ abstract class Article
 {
     private $_estEndommage = false;
     private $_estEmprunte = false;
+    
     private $_ficheArticle = NULL;
+    private $_elementsDuJeuProbleme = array();
     
     //--------------------------Constructeur---------------------------//
     
@@ -36,5 +38,12 @@ abstract class Article
     public function setFicheArticle(FicheArticle $ficheArticle)
     {
         $this->_ficheArticle = $ficheArticle;
+    }
+    
+    public function elementsDuJeuProbleme() { return $this->_elementsDuJeuProbleme; }
+    
+    public function setElementsDuJeuProbleme(ElementsDuJeuProbleme $elementsDuJeuProbleme)
+    {
+        $this->_elementsDuJeuProbleme = $elementsDuJeuProbleme;
     }
 }
