@@ -3,5 +3,5 @@
     
     function loginpage()
     {
-        require("view/LoginView.php");
+        require("view/ConnexionView.php");
     }
