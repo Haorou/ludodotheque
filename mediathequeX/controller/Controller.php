@@ -1,7 +1,7 @@
 <?php
     session_start();
     
-    function loginPage()
+    function ConnexionPage()
     {
         require("view/ConnexionView.php");
     }
