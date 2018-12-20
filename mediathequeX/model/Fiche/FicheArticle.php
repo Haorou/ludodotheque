@@ -1,6 +1,7 @@
 <?php // Marc-Antoine
 abstract class FicheArticle
 {
+    private $_id = 0;
     private $_titre = "";
     private $_auteur = "";
     private $_editeur = "";
@@ -17,6 +18,16 @@ abstract class FicheArticle
     
     //----------------------Getters and Setters------------------------//
 
+    
+    public function id() { return $this->_id; }
+    
+    public function setId($id)
+    {
+        $id = (int)$id;
+        
+        $this->_id = $id;
+    }
+    
     public function titre() { return $this->_titre; }
         
     public function setTitre($titre)

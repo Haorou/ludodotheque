@@ -1,10 +1,12 @@
 <?php // Julien
 class Emprunt
 {
-    private $_dateEmprunt = "";
-    private $_estEnRetard = false;
     private $_adherent = NULL;
     private $_article = NULL;
+    private $_dateEmprunt = "";
+    private $_dateRetourEffectif = "";
+    private $_estEnRetard = false;
+
     
     //--------------------------Constructeur---------------------------//
     
@@ -30,12 +32,34 @@ class Emprunt
     
     //----------------------Getters and Setters------------------------//
     
+    public function adherent() { return $this->_adherent; }
+    
+    public function setAdherent(Adherent $adherent)
+    {
+        $this->_adherent = $adherent;
+    }
+    
+    public function article() { return $this->_article; }
+    
+    public function setAdherent(Article $article)
+    {
+        $this->_article = $article;
+    }
+    
     public function dateEmprunt() { return $this->_dateEmprunt; }
     
     public function setDateEmprunt($date)
     {
         // Verifier si DateEmprunt est valide (if $date === ???)
         $this->_dateEmprunt = $date;
+    }
+    
+    public function dateRetourEffectif() { return $this->_dateRetourEffectif; }
+    
+    public function setDateRetourEffectif($date)
+    {
+        // Verifier si DateEmprunt est valide (if $date === ???)
+        $this->_dateRetourEffectif = $date;
     }
     
     public function estEnRetard() { return $this->_estEnRetard; }
@@ -45,20 +69,6 @@ class Emprunt
         $estEndRetard = (bool)$estEndRetard;
         
         $this->_estEnRetard = $estEndRetard;
-    }
-
-    public function adherent() { return $this->_adherent; }
-    
-    public function setAdherent(Adherent $adherent)
-    {
-        $this->_adherent = $adherent;
-    }
-
-    public function article() { return $this->_article; }
-    
-    public function setAdherent(Article $article)
-    {
-        $this->_article = $article;
     }
 
     

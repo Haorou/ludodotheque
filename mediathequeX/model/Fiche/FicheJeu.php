@@ -5,11 +5,19 @@
 class FicheJeu extends FicheArticle
 {
 
+    const FAMILIALE = 1;
+    const HASARD = 2;
+    const JEU_DE_ROLE = 3;
+    const STRATEGIE = 4;
+    
     private $_nbreJoueursMin = 0;
     private $_nbreJoueursMax = 0;
-    private $_reglesDuJeu = "";
+    private $_dureeMinDeJeu = 0;
+    private $_dureeMaxDeJeu = 0;
+    private $_descriptif = "";
     
     private $_elementsDuJeu = array();
+    private $_typesDeJeu = array();
     
     
     //--------------------------Constructeur---------------------------//
@@ -50,16 +58,36 @@ class FicheJeu extends FicheArticle
         return $this->_nbreJoueursMax = $_nbreJoueursMax;
     }
     
-    public function reglesDuJeu() { return $this->_reglesDuJeu; }
+    public function dureeMinDeJeu() { return $this->_dureeMinDeJeu; }
     
-    public function setReglesDuJeu($regleDuJeu) {
-        $regleDuJeu = (string)$regleDuJeu;
-        $this->_reglesDuJeu = $regleDuJeu;
+    public function setNDureeMinDeJeu($dureeMinDeJeu){
+        $dureeMinDeJeu = (int)$dureeMinDeJeu;
+        return $this->_dureeMinDeJeu = $dureeMinDeJeu;
+    }
+    
+    public function dureeMaxDeJeu() { return $this->_dureeMaxDeJeu; }
+    
+    public function setDureeMaxDeJeu($dureeMaxDeJeu) {
+        $dureeMaxDeJeu = (int)$dureeMaxDeJeu;
+        return $this->_dureeMaxDeJeu = $dureeMaxDeJeu;
+    }
+    
+    public function descriptif() { return $this->_descriptif; }
+    
+    public function setDescriptif($descriptif) {
+        $descriptif = (string)$descriptif;
+        $this->_descriptif = $descriptif;
     }
     
     public function elementsDuJeu() { return $this->_elementsDuJeu; }
     
-    public function setReglesDuJeu(ElementsDuJeu $elementsDuJeu) {
-        $this->_elementsDuJeu = $elementsDuJeu;
+    public function setReglesDuJeu(ElementDuJeu $elementDuJeu) {
+        $this->_elementsDuJeu = $elementDuJeu;
+    }
+    
+    public function typesDeJeu() { return $this->_typesDeJeu; }
+    
+    public function setTypesDeJeu($typeDeJeu) {
+        $this->_typesDeJeu = $typeDeJeu;
     }
 }

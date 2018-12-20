@@ -24,7 +24,7 @@ class Adherent extends Personne
                 $this->$method($values);
             }
         }
-    }
+       }
     
     //----------------------------Methodes-----------------------------//
     

@@ -1,19 +1,24 @@
 <?php
-class ElementsDuJeuProbleme
+class Alerte
 {
-    const PION = 1;
-    const PLATEAU = 2;
-    const NOTICE = 3;
-    const CARTE = 4;
-    const SABLIER = 5;
-    const BOITE = 6;
-    const DE = 7;
+    const ARTICLE = 1;
+    const NON_REPERTORIE = 2;
+    const PION = 3;
+    const PLATEAU = 4;
+    const NOTICE = 5;
+    const CARTE = 6;
+    const SABLIER = 7;
+    const BOITE = 8;
+    const DE = 9;
+    
+    private $_id;
     
     private $_designation = 0;
     private $_quantite = 0;
+    private $_commentaire = 0;
     
-    private $_estPresent = false;
-    private $_estEnBonneEtat = false;
+    private $_estPresent = true;
+    private $_estEnBonneEtat = true;
 
     //--------------------------Constructeur---------------------------//
     
@@ -39,6 +44,15 @@ class ElementsDuJeuProbleme
     
     //----------------------Getters and Setters------------------------//
     
+    public function id() { return $this->_id; }
+    
+    public function setId($id)
+    {
+        $id = (int)$id;
+        
+        $this->_id = $id;
+    }
+    
     public function designation() { return $this->_designation; }
     
     public function setDesignation($designation)
@@ -51,6 +65,13 @@ class ElementsDuJeuProbleme
     public function setQuantite($quantite)
     {
         $this->_quantite = $quantite;
+    }
+    
+    public function commentaire() { return $this->_commentaire; }
+    
+    public function setCommentaire($commentaire)
+    {
+        $this->_commentaire = $commentaire;
     }
     
     public function estPresent() { return $this->_estPresent; }

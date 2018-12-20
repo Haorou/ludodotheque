@@ -1,6 +1,7 @@
 <?php // Julien
 abstract class Article
 {
+    private $_id = 0;
     private $_estEndommage = false;
     private $_estEmprunte = false;
     
@@ -13,6 +14,15 @@ abstract class Article
     
     //----------------------Getters and Setters------------------------//
     
+    
+    public function id() { return $this->_id; }
+    
+    public function setId($id)
+    {
+        $id = (int)$id;
+        
+        $this->_id = $id;
+    }
     
     public function estEndommage() { return $this->_estEndommage; }
     

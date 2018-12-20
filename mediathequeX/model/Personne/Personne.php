@@ -1,6 +1,7 @@
 <?php //Gaetan
 abstract class Personne
 {
+    private $_id = 0;
     private $_nom = "";
     private $_prenom = "";
     
@@ -10,6 +11,15 @@ abstract class Personne
     
     
     //----------------------Getters and Setters------------------------//
+    
+    public function id() { return $this->_id; }
+    
+    public function setId($id)
+    {
+        $id = (int)$id;
+        
+        $this->_id = $id;
+    }
     
     public function nom() { return $this->_nom; }
     

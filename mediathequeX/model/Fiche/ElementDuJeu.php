@@ -1,5 +1,5 @@
 <?php
-abstract class ElementsDuJeu
+abstract class ElementDuJeu
 {    
     const PION = 1;
     const PLATEAU = 2;
@@ -8,6 +8,8 @@ abstract class ElementsDuJeu
     const SABLIER = 5;
     const BOITE = 6;
     const DE = 7;
+    
+    private $_id = 0;
     
     private $_designation = 0;
     
@@ -19,6 +21,14 @@ abstract class ElementsDuJeu
 
     //----------------------Getters and Setters------------------------//
     
+    public function id() { return $this->_id; }
+    
+    public function setId($id)
+    {
+        $id = (int)$id;
+        
+        $this->_id = $id;
+    }
     
     public function designation() { return $this->_designation; }
     
@@ -33,15 +43,4 @@ abstract class ElementsDuJeu
     {
         $this->_quantite = $quantite;
     }
-    
-    
-    /*
-    private $_degradation = NULL;
-    
-    public function degradation() { return $this->_degration; }
-    
-    public function setDegradation(Degradation $degradation)
-    {
-        $this->_degration = $degradation;
-    }*/
 }
