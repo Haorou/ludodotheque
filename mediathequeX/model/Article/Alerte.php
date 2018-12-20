@@ -16,6 +16,7 @@ class Alerte
     private $_designation = 0;
     private $_quantite = 0;
     private $_commentaire = 0;
+    private $_adherent = NULL;
     
     private $_estPresent = true;
     private $_estEnBonneEtat = true;
@@ -88,5 +89,12 @@ class Alerte
     {
         $estEnBonneEtat = (bool)$estEnBonneEtat;
         $this->_estEnBonneEtat = $estEnBonneEtat;
+    }
+    
+    public function adherent() { return $this->_adherent; }
+    
+    public function setAdherent(Adherent $adherent)
+    {
+        $this->_adherent = $adherent;
     }
 }

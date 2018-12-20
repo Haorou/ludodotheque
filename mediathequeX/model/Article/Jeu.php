@@ -2,7 +2,7 @@
 
 class Jeu extends Article
 {
-    private $_elementsDuJeuProbleme = array();
+    private $_alertes = array();
     
     //--------------------------Constructeur---------------------------//
     
@@ -29,10 +29,10 @@ class Jeu extends Article
     
     //----------------------Getters and Setters------------------------//
     
-    public function elementsDuJeuProbleme() { return $this->_elementsDuJeuProbleme; }
+    public function alertes() { return $this->_alertes; }
     
-    public function setElementsDuJeuProbleme(ElementsDuJeuProbleme $elementsDuJeuProbleme)
+    public function setAlertes(Alerte $alerte)
     {
-        $this->_elementsDuJeuProbleme = $elementsDuJeuProbleme;
+        $this->_alertes = $alerte;
     }
 }
