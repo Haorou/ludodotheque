@@ -7,13 +7,13 @@
     </head>
 
     <body>
-		<h1>Bienvenue</h1>
+		<h1>Bienvenue utilisateur</h1>
 		
 		<form action="index.php?action=seConnecter" method="post">
             <p>
                 Nom d'utilisateur : <br/><input type="text" name="nomUtilisateur" maxlength="50" /><br/>
                 Mot de passe : <br/><input type="text" name="motDePasse" maxlength="50" /><br/>
-                <input type="submit" value="Se connecter" name="connexion" />
+                <input type="submit" value="connexion" name="connexion" />
             </p>
         </form>
 		

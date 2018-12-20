@@ -7,7 +7,7 @@
     </head>
 
     <body>
-		<h1>Bienvenue</h1>
+		<h1>Bienvenue gestionnaire / administrateur</h1>
 		
 		<form action="index.php?action=seConnecter" method="post">
             <p>
