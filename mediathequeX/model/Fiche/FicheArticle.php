@@ -1,6 +1,7 @@
 <?php // Marc-Antoine
 abstract class FicheArticle
 {
+   
     private $_id = 0;
     private $_titre = "";
     private $_auteur = "";
@@ -78,7 +79,7 @@ abstract class FicheArticle
     
     public function elementsDuJeu() { return $this->_elementsDuJeu; }
     
-    public function setElementsDuJeu(ElementDuJeu $elementsDuJeu)
+    public function setElementsDuJeu(ElementsDuJeu $elementsDuJeu)
     {
         $this->_elementsDuJeu = $elementsDuJeu;
     }

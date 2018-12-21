@@ -1,15 +1,15 @@
 <?php // Julien
-class Emprunt
-{
-    private $_adherent = NULL;
-    private $_article = NULL;
-    private $_dateEmprunt = "";
-    private $_dateRetourEffectif = "";
-    private $_commentaire = "";
-    private $_estEnRetard = false;
-
-
+class AlerteJeu
+{   
+    private $_id;
     
+    private $_adherent = NULL;
+    private $_date_emprunt = "";
+    private $_element_du_jeu = NULL;
+    private $_probleme = "";
+    private $_quantite = 0;
+    private $_commentaire = "";
+
     //--------------------------Constructeur---------------------------//
     
     public function __construct(array $donnes)
@@ -30,9 +30,18 @@ class Emprunt
         }
     }
     
-    //----------------------------Methodes-----------------------------//
+    //----------------------------Methodes-----------------------------//  
     
     //----------------------Getters and Setters------------------------//
+    
+    public function id() { return $this->_id; }
+    
+    public function setId($id)
+    {
+        $id = (int)$id;
+        
+        $this->_id = $id;
+    } 
     
     public function adherent() { return $this->_adherent; }
     
@@ -41,44 +50,38 @@ class Emprunt
         $this->_adherent = $adherent;
     }
     
-    public function article() { return $this->_article; }
-    
-    public function setAdherent(Article $article)
-    {
-        $this->_article = $article;
-    }
-    
     public function dateEmprunt() { return $this->_dateEmprunt; }
     
-    public function setDateEmprunt($date)
+    public function setDateEmprunt($dateEmprunt)
     {
-        // Verifier si DateEmprunt est valide (if $date === ???)
-        $this->_dateEmprunt = $date;
+        $this->_dateEmprunt = $dateEmprunt;
     }
     
-    public function dateRetourEffectif() { return $this->_dateRetourEffectif; }
+    public function element_du_jeu() { return $this->_element_du_jeu; }
     
-    public function setDateRetourEffectif($date)
+    public function setElement_du_jeu(ElementDuJeu $element_du_jeu)
     {
-        // Verifier si DateEmprunt est valide (if $date === ???)
-        $this->_dateRetourEffectif = $date;
+        $this->_element_du_jeu = $element_du_jeu;
     }
     
-    public function estEnRetard() { return $this->_estEnRetard; }
+    public function probleme() { return $this->_probleme; }
     
-    public function setEstEnRetard($estEndRetard)
+    public function setProbleme($probleme)
     {
-        $estEndRetard = (bool)$estEndRetard;
-        
-        $this->_estEnRetard = $estEndRetard;
+        $this->_probleme = $probleme;
     }
-
+    
+    public function quantite() { return $this->_quantite; }
+    
+    public function setQuantite($quantite)
+    {
+        $this->_quantite = $quantite;
+    }
+    
     public function commentaire() { return $this->_commentaire; }
     
     public function setCommentaire($commentaire)
     {
         $this->_commentaire = $commentaire;
     }
-    
-    
 }

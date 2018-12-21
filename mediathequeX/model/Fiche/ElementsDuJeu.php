@@ -1,18 +1,8 @@
 <?php
-abstract class ElementDuJeu
-{    
-    const PION = 1;
-    const PLATEAU = 2;
-    const NOTICE = 3;
-    const CARTE = 4;
-    const SABLIER = 5;
-    const BOITE = 6;
-    const DE = 7;
-    
-    private $_id = 0;
-    
-    private $_designation = 0;
-    
+abstract class ElementsDuJeu
+{        
+    private $_element_du_jeu = "";
+    private $_couleur = "";
     private $_quantite = 0;
 
     //--------------------------Constructeur---------------------------//
@@ -30,11 +20,18 @@ abstract class ElementDuJeu
         $this->_id = $id;
     }
     
-    public function designation() { return $this->_designation; }
+    public function element_du_jeu() { return $this->_element_du_jeu; }
     
-    public function setDesignation($designation)
+    public function setElement_du_jeu($element_du_jeu)
     {
-        $this->_designation = $designation;
+        $this->_element_du_jeu = $element_du_jeu;
+    }
+    
+    public function couleur() { return $this->_couleur; }
+    
+    public function setCouleur($couleur)
+    {
+        $this->_couleur = $couleur;
     }
     
     public function quantite() { return $this->_quantite; }

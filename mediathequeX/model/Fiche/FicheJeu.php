@@ -3,13 +3,7 @@
 // Designed by Mesguen Frédéric
 
 class FicheJeu extends FicheArticle
-{
-
-    const FAMILIALE = 1;
-    const HASARD = 2;
-    const JEU_DE_ROLE = 3;
-    const STRATEGIE = 4;
-    
+{    
     private $_nbreJoueursMin = 0;
     private $_nbreJoueursMax = 0;
     private $_dureeMinDeJeu = 0;
@@ -81,8 +75,8 @@ class FicheJeu extends FicheArticle
     
     public function elementsDuJeu() { return $this->_elementsDuJeu; }
     
-    public function setReglesDuJeu(ElementDuJeu $elementDuJeu) {
-        $this->_elementsDuJeu = $elementDuJeu;
+    public function setElementsDuJeu(ElementsDuJeu $elementsDuJeu) {
+        $this->_elementsDuJeu = $elementsDuJeu;
     }
     
     public function typesDeJeu() { return $this->_typesDeJeu; }

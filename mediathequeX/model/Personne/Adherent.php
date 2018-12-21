@@ -3,8 +3,9 @@ class Adherent extends Personne
 {
     private $_adhesionARenouveller = false;
     private $_chequeEstDepose = false;
-    private $_coordonnees = "";
+    private $_adresse = NULL;
     private $_dateAdhesions = array ();
+    private $_commentaire = "";
     
     //--------------------------Constructeur---------------------------//
     
@@ -55,13 +56,11 @@ class Adherent extends Personne
         $this->_prenom = $chequeEstDepose;
     }
     
-    public function coordonnees() { return $this->_coordonnees; }
+    public function adresse() { return $this->_adresse; }
     
-    public function setCoordonnees($coordonnees)
-    {
-        $coordonnees = (string)$coordonnees;
-        
-        $this->_coordonnees = $coordonnees;
+    public function setAdresse(Adresse $adresse)
+    {        
+        $this->_adresse = $adresse;
     }
     
     public function dateAdhesions() { return $this->_dateAdhesion; }
@@ -71,4 +70,12 @@ class Adherent extends Personne
         $dateAdhesion = (string)$dateAdhesion;
         $this->_dateAdhesion = $dateAdhesion;
     }
+    
+    public function commentaire() { return $this->_commentaire; }
+    
+    public function setCommentaire($commentaire)
+    {
+        $this->_commentaire = $commentaire;
+    }
+    
 }
