@@ -59,7 +59,7 @@ class AlerteJeu
     
     public function element_du_jeu() { return $this->_element_du_jeu; }
     
-    public function setElement_du_jeu(ElementDuJeu $element_du_jeu)
+    public function setElement_du_jeu(ElementsDuJeu $element_du_jeu)
     {
         $this->_element_du_jeu = $element_du_jeu;
     }
