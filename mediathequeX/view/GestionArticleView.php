@@ -3,15 +3,15 @@
     <head>
         <title>Mediatheque : Article</title>
         
- 		<?php require("view/HeadReferenceView.php");?>
+ 		<?php require("view/require/HeadReferenceView.php");?>
     </head>
 
     <body>
-		<?php require("view/HeaderView.php");?>
-    
-		<h1>Bienvenue sur la page Article</h1>
+		<?php require("view/require/HeaderView.php");?>
 		
-		<?php require("view/FooterView.php");?>
+		<?php require("view/require/SearchBarView.php");?>
+		
+		<?php require("view/require/FooterView.php");?>
 		
     </body>
 </html>

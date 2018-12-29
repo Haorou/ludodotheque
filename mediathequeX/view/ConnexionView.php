@@ -2,7 +2,7 @@
 <html>  
     <head>
         <title>Mediatheque : Connexion</title>
- 		<?php require("view/HeadReferenceView.php");?>
+ 		<?php require("view/require/HeadReferenceView.php");?>
     </head>
 
     <body>
@@ -33,7 +33,7 @@
             </form>
             </div></div></div>
 		
-			<?php require("view/FooterView.php");?>
+			<?php require("view/require/FooterView.php");?>
 		
     </body>
 </html>
