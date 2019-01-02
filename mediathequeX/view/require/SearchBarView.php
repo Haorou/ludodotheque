@@ -1,5 +1,5 @@
 <?php 
-$placeholder = "Recherer";
+$placeholder = "";
 
 if ($GLOBALS["isActiveAdherent"] == TRUE)
 {
