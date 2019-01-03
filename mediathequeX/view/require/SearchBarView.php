@@ -49,6 +49,9 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
         <div class="row">
             <div class="col-md-10">
             
+            <!-- IL FAUT PEUPLER CECI EN FONCTION D'UNE REQUETE INITAL GENERAL "SELECT * FROM ... " -->
+	        <!-- PUIS PRECISER LA REQUETE EN FONCTION DES MOTS TAPPER DANS LE CHAMPS DE RECHERCE "SELECT * FROM ... WHERE = "champs de recherche" " -->
+	        <!-- POUR ACTUALISER : UTILISATION JAVASCRIPT -->
         		<form>
         			<select class="custom-select" size="3">
                       <option selected="1">One</option>
