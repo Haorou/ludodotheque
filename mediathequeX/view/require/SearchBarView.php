@@ -45,7 +45,7 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
         </div>
     </div>
     
-    <div class="container">
+    <div class="container" style="margin-top: 10px">
         <div class="row">
             <div class="col-md-10">
             
@@ -53,7 +53,7 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
 	        <!-- PUIS PRECISER LA REQUETE EN FONCTION DES MOTS TAPPER DANS LE CHAMPS DE RECHERCE "SELECT * FROM ... WHERE = "champs de recherche" " -->
 	        <!-- POUR ACTUALISER : UTILISATION JAVASCRIPT -->
         		<form>
-        			<select class="custom-select" size="3">
+        			<select class="custom-select" size="15">
                       <option selected="1">One</option>
                       <option value="2">Two</option>
                       <option value="3">Three</option>
