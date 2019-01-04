@@ -17,15 +17,42 @@ require_once("model/ManagerPDO.php");
         
         public function createAdherent(Adherent $perso)
         {
-            $addPerso = $this->_db->prepare("INSERT INTO personnages(nom)
-                                        VALUES(:nom)");
-            $addPerso->execute(array(
-                "nom" => $perso->nom()));
+            $addPersone = $this->_db->prepare("INSERT INTO personne(civilite, nom, prenom)
+                                        VALUES(:civilite, :nom, :prenom)");
+            $addPersone->execute(array(
+                "civilite" => $perso->civilite(),
+                "nom" => $perso->nom(),
+                "prenom" => $perso->prenom()
+            ));
+
+            $perso->hydrate(['id' => $this->_db->lastInsertId()]);
             
-            $perso->hydrate(["id" => 8, "degats" => 0]);
+            $addAdresse = $this->_db->prepare("INSERT INTO adresse(numero, nom_voie, TYPE_VOIE, complement, CODE_POSTAL, VILLE)
+                                        VALUES(:numero, :nom_voie, :TYPE_VOIE, :complement, :CODE_POSTAL, :VILLE)");
             
-            $perso->hydrate(['id' => $this->_db->lastInsertId(),
-                'degats' => 0,]);
+            $addAdresse->execute(array(
+                "numero" => $perso->adresse()->numero(),
+                "nom_voie" => $perso->adresse()->nom_voie(),
+                "TYPE_VOIE" => $perso->adresse()->type_voie(),
+                "complement" => $perso->adresse()->completement(),
+                "CODE_POSTAL" => $perso->adresse()->code_postal(),
+                "VILLE" => $perso->adresse()->ville(),
+            ));
+            
+            $perso->adresse()->hydrate(['id' => $this->_db->lastInsertId()]);
+            
+            $addAdherent = $this->_db->prepare("INSERT INTO adherent(ID_ADRESSE, commentaire)
+                                        VALUES (:ID_ADRESSE, :commentaire)");
+
+            $addAdherent->execute(array(
+                "ID_ADRESSE" => $perso->adresse()->id(),
+                "commentaire" => $perso->commentaire()
+            ));
+            
+            $addDate = $this->_db->prepare("INSERT INTO adhesion(ID_ADHERENT, DATE_ADHESION)
+                                        VALUES (:ID_ADHERENT, :DATE_ADHESION)");
+            
+            
         }
         
         public function createAyantDroit(AyantDroit $perso)
