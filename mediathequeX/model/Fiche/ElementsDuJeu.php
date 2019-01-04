@@ -1,5 +1,5 @@
 <?php
-abstract class ElementsDuJeu
+class ElementsDuJeu
 {        
     private $_element_du_jeu = "";
     private $_couleur = "";

@@ -1,4 +1,16 @@
 <?php
+    function chargerClasse($classname)
+    {
+        // Voir si c'est possible d'écrire autant de require qui vont renvoyer dans le vide
+        require('model/'.$classname.'.php');
+        require('model/Article/'.$classname.'.php');
+        require('model/Fiche/'.$classname.'.php');
+        require('model/Mediatheque/'.$classname.'.php');
+        require('model/Personne/'.$classname.'.php');
+    }
+    
+    spl_autoload_register('chargerClasse');
+
     session_start();
 
     // Variables utilisés pour activer certaines composantes de la navbar
