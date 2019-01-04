@@ -1,5 +1,5 @@
 <?php
-    class PersonneManger extends ManagerPDO
+    class PersonneManager extends ManagerPDO
     {
         private $_db;
         
