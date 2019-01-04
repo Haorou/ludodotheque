@@ -1,4 +1,6 @@
 <?php
+require_once("model/ManagerPDO.php");
+
     class EmpruntManager extends ManagerPDO
     {
         private $_db;
