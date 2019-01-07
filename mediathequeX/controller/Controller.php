@@ -2,19 +2,20 @@
     function chargerClasse($classname)
     {
         // Voir si c'est possible d'écrire autant de require qui vont renvoyer dans le vide
-        require('model/'.$classname.'.php');
+        require('model/PDO/'.$classname.'.php');
         require('model/Article/'.$classname.'.php');
         require('model/Fiche/'.$classname.'.php');
         require('model/Mediatheque/'.$classname.'.php');
         require('model/Personne/'.$classname.'.php');
     }
     
+    // SERT A CHARGER DES PAGES EN FONCTION DES OBJET CREER - VOIR SI SA FONCTION
     spl_autoload_register('chargerClasse');
 
     session_start();
 
     // Variables utilisés pour activer certaines composantes de la navbar
-    // Utilisatur de $GLOBALS par la suite pour utiliser les variables déclaré Globales en Locales
+    // Utilisation de $GLOBALS par la suite pour utiliser ces variables qu'on définit à chaque fois par FALSE
     $isActiveMenu = FALSE;
     $isActiveAdherent = FALSE;
     $isActiveArticle = FALSE;

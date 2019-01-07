@@ -1,7 +1,7 @@
 <?php
-require_once("model/ManagerPDO.php");
+require_once("model/PDO/ManagerPDO.php");
 
-    class FicheJeuManager extends ManagerPDO
+    class EmpruntManager extends ManagerPDO
     {
         private $_db;
         

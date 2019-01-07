@@ -46,8 +46,8 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
     </div>
     
     <div class="container" style="margin-top: 10px">
-        <div class="row">
-            <div class="col-md-10">
+        <div class="row"  >
+            <div class="col-md-10" <!-- style="background-color: red"  UTILE A METTRE POUR VOIR LA TAILLE DES CHAMPS --> >
             
             <!-- IL FAUT PEUPLER CECI EN FONCTION D'UNE REQUETE INITAL GENERAL "SELECT * FROM ... " -->
 	        <!-- PUIS PRECISER LA REQUETE EN FONCTION DES MOTS TAPPER DANS LE CHAMPS DE RECHERCE "SELECT * FROM ... WHERE = "champs de recherche" " -->

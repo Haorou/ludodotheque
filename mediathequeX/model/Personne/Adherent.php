@@ -6,6 +6,7 @@ class Adherent extends Personne
     private $_adresse = NULL;
     private $_dateAdhesions = array ();
     private $_commentaire = "";
+    private $_ayantDroits = array();
     
     //--------------------------Constructeur---------------------------//
     
@@ -76,6 +77,13 @@ class Adherent extends Personne
     public function setCommentaire($commentaire)
     {
         $this->_commentaire = $commentaire;
+    }
+    
+    public function ayantDroits() { return $this->_ayantDroits; }
+    
+    public function setAyantDroits($ayantDroits)
+    {
+        $this->_ayantDroits = $ayantDroits;
     }
     
 }

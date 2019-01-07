@@ -1,9 +1,12 @@
 <?php
-require_once("model/ManagerPDO.php");
+require_once("model/PDO/ManagerPDO.php");
     class PersonneManager extends ManagerPDO
     {
         private $_db;
         
+        // DES QU'ON CREER VEUT ENREGISTRER UN ADHERENT, ON DOIT CREER LE MANAGER
+        // $Manager = PersonneManager()
+        // AVEC LE CONSTRUCTEUR ON SE CONNECT A LA DB
         public function __construct()
         {
             $db = $this->dbConnect();
@@ -56,7 +59,6 @@ require_once("model/ManagerPDO.php");
                 "ID_ADHERENT" => $perso->id(), 
                 "DATE_ADHESION" => $perso->dateAdhesions()
             ));
-            
         }
         
         public function createAyantDroit(AyantDroit $perso)
