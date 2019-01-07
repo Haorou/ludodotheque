@@ -61,21 +61,71 @@ require_once("model/PDO/ManagerPDO.php");
             ));
         }
         
-        public function createAyantDroit(AyantDroit $perso)
+        public function createAyantDroit(AyantDroit $perso, Adherent $referant)
         {
-            $addPerso = $this->_db->prepare("INSERT INTO personnages(nom)
-                                        VALUES(:nom)");
-            $addPerso->execute(array(
-                "nom" => $perso->nom()));
+            $addPersone = $this->_db->prepare("INSERT INTO personne(civilite, nom, prenom)
+                                        VALUES(:civilite, :nom, :prenom)");
+            $addPersone->execute(array(
+                "civilite" => $perso->civilite(),
+                "nom" => $perso->nom(),
+                "prenom" => $perso->prenom()
+            ));
             
-            $perso->hydrate(["id" => 8, "degats" => 0]);
+            $addAyantDroit = $this->_db->prepare("INSERT INTO ayantdroit(id_personne,id_adherent)
+                                          VALUES(:id_adherent)");
+
+            $addAyantDroit->execute(array(
+                "id_adherent" => $referant->id()
+            ));
             
-            $perso->hydrate(['id' => $this->_db->lastInsertId(),
-                'degats' => 0,]);
+            $perso->hydrate(['id' => $this->_db->lastInsertId()]);
         }
         
         public function updateAdherent(Adherent $perso)
         {
+            
+            $updatePersone = $this->_db->prepare("UPDATE personne
+                                                 SET civile = :civilite,
+                                                 nom = :nom,
+                                                 prenom = :prenom)");
+            $addPersone->execute(array(
+                "civilite" => $perso->civilite(),
+                "nom" => $perso->nom(),
+                "prenom" => $perso->prenom()
+            ));
+            
+            $perso->hydrate(['id' => $this->_db->lastInsertId()]);
+            
+            $addAdresse = $this->_db->prepare("INSERT INTO adresse(numero, nom_voie, TYPE_VOIE, complement, CODE_POSTAL, VILLE)
+                                        VALUES(:numero, :nom_voie, :TYPE_VOIE, :complement, :CODE_POSTAL, :VILLE)");
+            
+            $addAdresse->execute(array(
+                "numero" => $perso->adresse()->numero(),
+                "nom_voie" => $perso->adresse()->nom_voie(),
+                "TYPE_VOIE" => $perso->adresse()->type_voie(),
+                "complement" => $perso->adresse()->completement(),
+                "CODE_POSTAL" => $perso->adresse()->code_postal(),
+                "VILLE" => $perso->adresse()->ville(),
+            ));
+            
+            $perso->adresse()->hydrate(['id' => $this->_db->lastInsertId()]);
+            
+            $addAdherent = $this->_db->prepare("INSERT INTO adherent(ID_ADRESSE, commentaire)
+                                        VALUES (:ID_ADRESSE, :commentaire)");
+            
+            $addAdherent->execute(array(
+                "ID_ADRESSE" => $perso->adresse()->id(),
+                "commentaire" => $perso->commentaire()
+            ));
+            
+            $addDate = $this->_db->prepare("INSERT INTO adhesion(ID_ADHERENT, DATE_ADHESION)
+                                        VALUES (:ID_ADHERENT, :DATE_ADHESION)");
+            
+            $addDate->execute(array(
+                "ID_ADHERENT" => $perso->id(),
+                "DATE_ADHESION" => $perso->dateAdhesions()
+            ));
+            
             $updatePerso = $this->_db->prepare("UPDATE personnages
                                         SET nom = :nom, degats = :degats
                                         WHERE id = :id");

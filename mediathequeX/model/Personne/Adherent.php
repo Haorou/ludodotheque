@@ -81,7 +81,7 @@ class Adherent extends Personne
     
     public function ayantDroits() { return $this->_ayantDroits; }
     
-    public function setAyantDroits($ayantDroits)
+    public function setAyantDroits(AyantDroit $ayantDroits)
     {
         $this->_ayantDroits = $ayantDroits;
     }
