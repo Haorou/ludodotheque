@@ -52,6 +52,10 @@ require_once("model/ManagerPDO.php");
             $addDate = $this->_db->prepare("INSERT INTO adhesion(ID_ADHERENT, DATE_ADHESION)
                                         VALUES (:ID_ADHERENT, :DATE_ADHESION)");
             
+            $addDate->execute(array(
+                "ID_ADHERENT" => $perso->id(), 
+                "DATE_ADHESION" => $perso->dateAdhesions()
+            ));
             
         }
         
