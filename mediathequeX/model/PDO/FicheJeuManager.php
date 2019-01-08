@@ -186,15 +186,43 @@ require_once("model/PDO/ManagerPDO.php");
         
         // OON EST ICICICICICICICICCICII
         
-        public function readJeu($info)
+        public function readFicheJeu($info)
         {
-            $q = $this->_db->query('SELECT * FROM article
-                                    INNER JOIN fiche_article ON fiche_article.id = article.id_fiche_article
-                                    WHERE article.id = '.$info);
-            $donnees = $q->fetch(PDO::FETCH_ASSOC);
+            $readJeu = $this->_db->prepare("SELECT * FROM fiche_jeu
+                                        INNER JOIN fiche_article ON fiche_article.id = fiche_jeu.id_fiche_article
+                                        WHERE fiche_jeu.id_fiche_article = :id)");
+            $readJeu->execute(array(
+                "id" => $info));
+
+            $donnees = $readJeu->fetch(PDO::FETCH_ASSOC);
+            $ficheJeu = new FicheJeu($donnees);
             
-            $jeu = new Jeu($donnees);
+            $readTypeJeu = $this->_db->prepare("SELECT type_jeu FROM type_jeu
+                                        WHERE id_fiche_jeu = :id)");
+            $readTypeJeu->execute(array(
+                "id" => $ficheJeu->id()));
             
+            $typeseDeJeu = [];
+            
+            while($typeJeu = $readTypeJeu->fetch())
+            {
+                $typeseDeJeu[] = $typeJeu;
+            }
+            
+            foreach($typeseDeJeu as $typeDeJeu)
+            {
+                $ficheJeu->hydrate($typeDeJeu);
+            }
+            
+            // ICI READ ELEMENTS !!!
+            $readJeu = $this->_db->prepare("SELECT * FROM fiche_jeu
+                                        INNER JOIN fiche_article ON fiche_article.id = fiche_jeu.id_fiche_article
+                                        WHERE fiche_jeu.id_fiche_article= :id)");
+            $readJeu->execute(array(
+                "id" => $info));
+            
+            $donnees = $readJeu->fetch(PDO::FETCH_ASSOC);
+            $ficheJeu = new Jeu($donnees);    
         }
         
         public function jeuExists($info)
