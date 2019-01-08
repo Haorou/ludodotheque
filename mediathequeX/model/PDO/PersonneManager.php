@@ -20,9 +20,11 @@ require_once("model/PDO/ManagerPDO.php");
         
         public function createAdherent(Adherent $perso)
         {
-            $addPersone = $this->_db->prepare("INSERT INTO personne(civilite, nom, prenom)
+            
+            
+            $addPersonne = $this->_db->prepare("INSERT INTO personne(civilite, nom, prenom)
                                         VALUES(:civilite, :nom, :prenom)");
-            $addPersone->execute(array(
+            $addPersonne->execute(array(
                 "civilite" => $perso->civilite(),
                 "nom" => $perso->nom(),
                 "prenom" => $perso->prenom()
@@ -30,42 +32,42 @@ require_once("model/PDO/ManagerPDO.php");
 
             $perso->hydrate(['id' => $this->_db->lastInsertId()]);
             
-            $addAdresse = $this->_db->prepare("INSERT INTO adresse(numero, nom_voie, TYPE_VOIE, complement, CODE_POSTAL, VILLE)
-                                        VALUES(:numero, :nom_voie, :TYPE_VOIE, :complement, :CODE_POSTAL, :VILLE)");
+            $addAdresse = $this->_db->prepare("INSERT INTO adresse(numero, nom_voie, type_voie, complement, code_postal, VILLE)
+                                        VALUES(:numero, :nom_voie, :type_voie, :complement, :code_postal, :ville)");
             
             $addAdresse->execute(array(
                 "numero" => $perso->adresse()->numero(),
                 "nom_voie" => $perso->adresse()->nom_voie(),
-                "TYPE_VOIE" => $perso->adresse()->type_voie(),
+                "type_voie" => $perso->adresse()->type_voie(),
                 "complement" => $perso->adresse()->completement(),
-                "CODE_POSTAL" => $perso->adresse()->code_postal(),
-                "VILLE" => $perso->adresse()->ville(),
+                "code_postal" => $perso->adresse()->code_postal(),
+                "ville" => $perso->adresse()->ville(),
             ));
             
             $perso->adresse()->hydrate(['id' => $this->_db->lastInsertId()]);
             
-            $addAdherent = $this->_db->prepare("INSERT INTO adherent(ID_ADRESSE, commentaire)
-                                        VALUES (:ID_ADRESSE, :commentaire)");
+            $addAdherent = $this->_db->prepare("INSERT INTO adherent(id_adresse, commentaire)
+                                        VALUES (:id_adresse, :commentaire)");
 
             $addAdherent->execute(array(
-                "ID_ADRESSE" => $perso->adresse()->id(),
+                "id_adresse" => $perso->adresse()->id(),
                 "commentaire" => $perso->commentaire()
             ));
             
-            $addDate = $this->_db->prepare("INSERT INTO adhesion(ID_ADHERENT, DATE_ADHESION)
-                                        VALUES (:ID_ADHERENT, :DATE_ADHESION)");
+            $addDate = $this->_db->prepare("INSERT INTO adhesion(id_adherent, date_adhesion)
+                                        VALUES (:id_adherent, :date_adhesion)");
             
             $addDate->execute(array(
-                "ID_ADHERENT" => $perso->id(), 
-                "DATE_ADHESION" => $perso->dateAdhesions()
+                "id_adherent" => $perso->id(), 
+                "date_adhesion" => $perso->dateAdhesions()
             ));
         }
         
         public function createAyantDroit(AyantDroit $perso, Adherent $referant)
         {
-            $addPersone = $this->_db->prepare("INSERT INTO personne(civilite, nom, prenom)
+            $addPersonne = $this->_db->prepare("INSERT INTO personne(civilite, nom, prenom)
                                         VALUES(:civilite, :nom, :prenom)");
-            $addPersone->execute(array(
+            $addPersonne->execute(array(
                 "civilite" => $perso->civilite(),
                 "nom" => $perso->nom(),
                 "prenom" => $perso->prenom()
@@ -84,128 +86,139 @@ require_once("model/PDO/ManagerPDO.php");
         public function updateAdherent(Adherent $perso)
         {
             
-            $updatePersone = $this->_db->prepare("UPDATE personne
+            $updatePersonne = $this->_db->prepare("UPDATE personne
                                                  SET civile = :civilite,
                                                  nom = :nom,
-                                                 prenom = :prenom)");
-            $addPersone->execute(array(
+                                                 prenom = :prenom
+                                                 WHERE id = :id)");
+                                
+            $updatePersonne->execute(array(
                 "civilite" => $perso->civilite(),
                 "nom" => $perso->nom(),
-                "prenom" => $perso->prenom()
+                "prenom" => $perso->prenom(),
+                "id" => $perso->id()
             ));
             
-            $perso->hydrate(['id' => $this->_db->lastInsertId()]);
+            $updateAdresse = $this->_db->prepare("UPDATE adresse
+                                               SET nummero = numero, nom_voie = :nom_voie, type_voie = TYPE_VOIE, 
+                                               complet = :complement, code_postal = :CODE_POSTAL, ville = :VILLE
+                                               WHERE id = :id");
             
-            $addAdresse = $this->_db->prepare("INSERT INTO adresse(numero, nom_voie, TYPE_VOIE, complement, CODE_POSTAL, VILLE)
-                                        VALUES(:numero, :nom_voie, :TYPE_VOIE, :complement, :CODE_POSTAL, :VILLE)");
-            
-            $addAdresse->execute(array(
+            $updateAdresse->execute(array(
                 "numero" => $perso->adresse()->numero(),
                 "nom_voie" => $perso->adresse()->nom_voie(),
                 "TYPE_VOIE" => $perso->adresse()->type_voie(),
                 "complement" => $perso->adresse()->completement(),
                 "CODE_POSTAL" => $perso->adresse()->code_postal(),
                 "VILLE" => $perso->adresse()->ville(),
+                "id" => $perso->adresse()->id()
             ));
             
-            $perso->adresse()->hydrate(['id' => $this->_db->lastInsertId()]);
+            $updateAdherent = $this->_db->prepare("UPDATE adherent SET commentaire = :commentaire WHERE id = :id");
             
-            $addAdherent = $this->_db->prepare("INSERT INTO adherent(ID_ADRESSE, commentaire)
-                                        VALUES (:ID_ADRESSE, :commentaire)");
-            
-            $addAdherent->execute(array(
-                "ID_ADRESSE" => $perso->adresse()->id(),
-                "commentaire" => $perso->commentaire()
+            $updateAdherent->execute(array(
+                "commentaire" => $perso->commentaire(),
+                "id" => $perso->id()
             ));
-            
-            $addDate = $this->_db->prepare("INSERT INTO adhesion(ID_ADHERENT, DATE_ADHESION)
-                                        VALUES (:ID_ADHERENT, :DATE_ADHESION)");
-            
-            $addDate->execute(array(
-                "ID_ADHERENT" => $perso->id(),
-                "DATE_ADHESION" => $perso->dateAdhesions()
-            ));
-            
-            $updatePerso = $this->_db->prepare("UPDATE personnages
-                                        SET nom = :nom, degats = :degats
-                                        WHERE id = :id");
-            $updatePerso->execute(array(
-                "nom" => $perso->nom(),
-                "degats" => $perso->degats(),
-                "id" => $perso->id() ) );
         }
+        
+        // FUNCTION ADD DATE ADHESION !!!
         
         public function updateAyantDroit(AyantDroit $perso)
         {
-            $updatePerso = $this->_db->prepare("UPDATE personnages
-                                        SET nom = :nom, degats = :degats
-                                        WHERE id = :id");
-            $updatePerso->execute(array(
+            $updatePersonne = $this->_db->prepare("UPDATE personne
+                                                 SET civile = :civilite,
+                                                 nom = :nom,
+                                                 prenom = :prenom
+                                                 WHERE id = :id)");
+            
+            $updatePersonne->execute(array(
+                "civilite" => $perso->civilite(),
                 "nom" => $perso->nom(),
-                "degats" => $perso->degats(),
-                "id" => $perso->id() ) );
+                "prenom" => $perso->prenom(),
+                "id" => $perso->id()
+                ));
         }
         
         public function deleteAdherent(Adherent $perso)
         {
-            $deletePerso = $this->_db->prepare("DELETE FROM personnages
+            $deleteAdresse = $this->_db->prepare("DELETE FROM adresse
                                         WHERE id = :id)");
-            $deletePerso->execute(array(
+            $deleteAdresse->execute(array(
+                "id" => $perso->adresse()->id()));
+            
+            $deleteAdhesion = $this->_db->prepare("DELETE FROM adhesion
+                                        WHERE id = :id)");
+            $deleteAdhesion->execute(array(
+                "id" => $perso->id()));
+            
+            $deleteAdherent = $this->_db->prepare("DELETE FROM adherent
+                                        WHERE id = :id)");
+            $deleteAdherent->execute(array(
+                "id" => $perso->id()));
+            
+            $deletePersonne = $this->_db->prepare("DELETE FROM personne
+                                        WHERE id = :id)");
+            $deletePersonne->execute(array(
                 "id" => $perso->id()));
         }
         
         public function deleteAyantDroit(AyantDroit $perso)
         {
-            $deletePerso = $this->_db->prepare("DELETE FROM personnages
+            $deleteAyantDroit = $this->_db->prepare("DELETE FROM ayantdroit
                                         WHERE id = :id)");
-            $deletePerso->execute(array(
+            $deleteAyantDroit->execute(array(
+                "id" => $perso->id()));
+            
+            $deletePersonne = $this->_db->prepare("DELETE FROM personne
+                                        WHERE id = :id)");
+            $deletePersonne->execute(array(
                 "id" => $perso->id()));
         }
         
         public function readAdherent($info)
-        {            
+        {   
+            $adherent = null;
             if (is_int($info))
             {
-                $q = $this->_db->query('SELECT id, nom, degats FROM personnages WHERE id = '.$info);
+                $q = $this->_db->query('SELECT * FROM personne 
+                                        INNER JOIN adherent ON adherent.id_personne = personne.id 
+                                        INNER JOIN adhesion ON adhesion.id_adherent = adherent.id_personne
+                                        INNER JOIN adresse ON adherent.id_adresse = adresse.id  WHERE personne.id = '.$info);
                 $donnees = $q->fetch(PDO::FETCH_ASSOC);
                 
-                return new Adherent($donnees);
+                $adherent = new Adherent($donnees);
             }
             else
             {
-                $q = $this->_db->prepare('SELECT id, nom, degats FROM personnages WHERE nom = :nom');
+                $q = $this->_db->query('SELECT * FROM personne
+                                        INNER JOIN adherent ON adherent.id_personne = personne.id
+                                        INNER JOIN adhesion ON adhesion.id_adherent = adherent.id_personne
+                                        INNER JOIN adresse ON adherent.id_adresse = adresse.id  WHERE personne.nom = :nom');
                 $q->execute([':nom' => $info]);
                 
-                return new Adherent($q->fetch(PDO::FETCH_ASSOC));
+                $adherent = new Adherent($q->fetch(PDO::FETCH_ASSOC));
             }
+            return $adherent;
         }
         
-        public function readAAyantDroit($info)
+        public function readAyantDroit(Adherent $perso)
         {    
-            if (is_int($info))
-            {
-                $q = $this->_db->query('SELECT id, nom, degats FROM personnages WHERE id = '.$info);
+                $q = $this->_db->query('SELECT * FROM ayantdroit INNER JOIN adherent ON adherent.id = ayantdroit.id_adherent WHERE id = :id');
+                $q->execute([':id' => $perso->id()]);
                 $donnees = $q->fetch(PDO::FETCH_ASSOC);
                 
                 return new AyantDroit($donnees);
-            }
-            else
-            {
-                $q = $this->_db->prepare('SELECT id, nom, degats FROM personnages WHERE nom = :nom');
-                $q->execute([':nom' => $info]);
-                
-                return new AyantDroit($q->fetch(PDO::FETCH_ASSOC));
-            }
         }
         
         public function adherentExists($info)
         {
-            if (is_int($info)) // On veut voir si tel personnage ayant pour id $info existe.
+            if (is_int($info)) // On veut voir si tel ayantdroit existe ayant pour id $info existe.
             {
-                return (bool) $this->_db->query('SELECT COUNT(*) FROM personnages WHERE id = '.$info)->fetchColumn();
+                return (bool) $this->_db->query('SELECT COUNT(*) FROM adherent WHERE id_personne = '.$info)->fetchColumn();
             }
-            // Sinon, c'est qu'on veut vérifier que le nom existe ou pas.
-            $q = $this->_db->prepare('SELECT COUNT(*) FROM personnages WHERE nom = :nom');
+            // Sinon, c'est qu'on veut vÃ©rifier que le nom existe ou pas.
+            $q = $this->_db->prepare('SELECT COUNT(*) FROM personne INNER JOIN adherent ON adherent.id_personne = personne.id WHERE nom = :nom');
             $q->execute([':nom' => $info]);
             
             return (bool) $q->fetchColumn();
@@ -213,12 +226,12 @@ require_once("model/PDO/ManagerPDO.php");
         
         public function ayantDroitExists($info)
         {
-            if (is_int($info)) // On veut voir si tel personnage ayant pour id $info existe.
+            if (is_int($info)) // On veut voir si tel ayantdroit existe ayant pour id $info existe.
             {
-                return (bool) $this->_db->query('SELECT COUNT(*) FROM personnages WHERE id = '.$info)->fetchColumn();
+                return (bool) $this->_db->query('SELECT COUNT(*) FROM ayantdroit WHERE id_personne = '.$info)->fetchColumn();
             }
-            // Sinon, c'est qu'on veut vérifier que le nom existe ou pas.
-            $q = $this->_db->prepare('SELECT COUNT(*) FROM personnages WHERE nom = :nom');
+            // Sinon, c'est qu'on veut vÃ©rifier que le nom existe ou pas.
+            $q = $this->_db->prepare('SELECT COUNT(*) FROM personne INNER JOIN ayantdroit ON ayantdroit.id_personne = personne.id WHERE nom = :nom');
             $q->execute([':nom' => $info]);
             
             return (bool) $q->fetchColumn();
@@ -226,7 +239,10 @@ require_once("model/PDO/ManagerPDO.php");
         
         public function readAllAdherent()
         {
-            $selectPerso = $this->_db->query("SELECT * FROM personnages");
+            $selectPerso = $this->_db->query("SELECT * FROM personne
+                                        INNER JOIN adherent ON adherent.id_personne = personne.id
+                                        INNER JOIN adhesion ON adhesion.id_adherent = adherent.id_personne
+                                        INNER JOIN adresse ON adherent.id_adresse = adresse.id");
             $listeDePersonnages = [];
             
             while($perso = $selectPerso->fetch())
@@ -238,7 +254,7 @@ require_once("model/PDO/ManagerPDO.php");
         
         public function readAllAyantDroit()
         {
-            $selectPerso = $this->_db->query("SELECT * FROM personnages");
+            $selectPerso = $this->_db->query("SELECT * FROM ayantdroit INNER JOIN adherent ON adherent.id = ayantdroit.id_adherent");
             $listeDePersonnages = [];
             
             while($perso = $selectPerso->fetch())
@@ -250,12 +266,12 @@ require_once("model/PDO/ManagerPDO.php");
         
         public function countAdherent()
         {
-            return $this->_db->query("SELECT COUNT(*) FROM personnages")->fetchColumn();
+            return $this->_db->query("SELECT COUNT(*) FROM adherent")->fetchColumn();
         }
         
         public function countAyantDroit()
         {
-            return $this->_db->query("SELECT COUNT(*) FROM personnages")->fetchColumn();
+            return $this->_db->query("SELECT COUNT(*) FROM ayantdroit")->fetchColumn();
         }
         
         
