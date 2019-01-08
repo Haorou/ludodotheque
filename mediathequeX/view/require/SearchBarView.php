@@ -1,4 +1,4 @@
-<?php 
+<?php
 $placeholder = "";
 
 if ($GLOBALS["isActiveAdherent"] == TRUE)
@@ -69,15 +69,21 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             
             <div class="col-md-2">
             <?php if ($GLOBALS["isActiveAdherent"] == TRUE){?>
-    <div>
-            	<a href="#" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-user"></span> Créer utilisateur</a>
+            <form action="index.php" method="post">
+    			<div>
+            		<button type="submit" class="btn btn-lg btn-success" value="Page Creer Utilisateur" name="PageCreerUtilisateur">
+            		<span class="glyphicon glyphicon-user"></span> Créer utilisateur</button>
+            	</div>
+
+            	<div>
+            		<button type="submit" class="btn btn-lg btn-primary" value="Modifier utilisateur" name="ModifierUtilisateur">
+            		<span class="glyphicon glyphicon-cog"></span> Modifier utilisateur</button>
             	</div>
             	<div>
-            	<a href="#" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-cog"></span> Modifier utilisateur</a>
+            		<button type="submit" class="btn btn-lg btn-danger" value="Supprimer utilisateur" name="SupprimerUtilisateur">
+            		<span class="glyphicon glyphicon-trash"></span> Supprimer utilisateur</button>
             	</div>
-            	<div>
-            	<a href="#" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-trash"></span> Supprimer utilisateur</a>
-            	</div>
+            </form>
 			<?php }?>
 			</div>
         </div>

@@ -26,9 +26,14 @@ try
     {
         GestionAdherentsPage();
     }
+    else if(isset($_POST["PageCreerUtilisateur"]) && $_POST["PageCreerUtilisateur"] === "Page Creer Utilisateur")
+    {
+        PageFormulaireAdhesion();
+    }
     else
     {
         ConnexionPage();
+        //require("view/AffichageAdherentView.php");
     }
 
 }
