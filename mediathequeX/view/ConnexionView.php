@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>  
     <head>
-        <title>Mediatheque : Connexion</title>
+        <title>Médiatheque : Connexion</title>
  		<?php require("view/require/HeadReferenceView.php");?>
     </head>
 
