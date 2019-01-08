@@ -33,7 +33,7 @@ try
     else
     {
         ConnexionPage();
-        //require("view/AffichageAdherentView.php");
+        //   require("view/AffichageAdherentView.php");
     }
 
 }

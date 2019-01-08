@@ -10,8 +10,7 @@
 			</div>
 			<button type="button" class="btn btn-danger">Supprimer Ayant droit</button>
 			<button type="button" class="btn btn-primary">Renouveller Adhesion</button>
-		</div>
-		
+		</div>		
 		<div class="col-sm">
 			<div class="p-3 mb-2 bg-primary text-white">Nouveau Ayant droit</div>
 			<div class="input-group">
