@@ -9,7 +9,7 @@
     <body>
 		<?php require("view/require/HeaderView.php");?>
 		
-		<?php require("view/require/FormulaireAdhesion.php");?>
+		<?php require("view/require/FormulaireView.php");?>
 		
 		<?php require("view/require/FooterView.php");?>
 		
