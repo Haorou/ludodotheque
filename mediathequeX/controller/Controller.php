@@ -1,7 +1,7 @@
 <?php
     function chargerClasse($classname)
     {
-        // Voir si c'est possible d'écrire autant de require qui vont renvoyer dans le vide
+        // Voir si c'est possible d'ï¿½crire autant de require qui vont renvoyer dans le vide
         require('model/PDO/'.$classname.'.php');
         require('model/Article/'.$classname.'.php');
         require('model/Fiche/'.$classname.'.php');
@@ -14,8 +14,8 @@
 
     session_start();
 
-    // Variables utilisés pour activer certaines composantes de la navbar
-    // Utilisation de $GLOBALS par la suite pour utiliser ces variables qu'on définit à chaque fois par FALSE
+    // Variables utilisï¿½s pour activer certaines composantes de la navbar
+    // Utilisation de $GLOBALS par la suite pour utiliser ces variables qu'on dï¿½finit ï¿½ chaque fois par FALSE
     $isActiveMenu = FALSE;
     $isActiveAdherent = FALSE;
     $isActiveArticle = FALSE;
@@ -48,4 +48,10 @@
     {
         $GLOBALS["isActiveAdherent"] = TRUE;
         require("view/GestionAdherentView.php");
+    }
+    
+    function PageFormulaireAdhesion()
+    {
+        $GLOBALS["isActiveAdherent"] = TRUE;
+        require("view/FormulaireAdhesion.php");
     }

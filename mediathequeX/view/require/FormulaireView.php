@@ -76,9 +76,9 @@
 								</div>
 							</div>
 
-
-							<button type="submit" class="btn btn-primary" value="connexion"
-								name="Creer Utilisateur">Creer Utilisateur</button>
+							<form method="post">
+								<button type="submit" class="btn btn-primary" value="Creer Utilisateur" name="Creer Utilisateur">Creer Utilisateur</button>
+							</form>
 
 						</form>
 					</div>
