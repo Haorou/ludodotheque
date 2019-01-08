@@ -59,7 +59,7 @@ require_once("model/PDO/ManagerPDO.php");
             
             $addDate->execute(array(
                 "id_adherent" => $perso->id(), 
-                "date_adhesion" => $perso->dateAdhesions()
+                "date_adhesion" => $perso->firstDateAdhesion()
             ));
         }
         
@@ -81,6 +81,17 @@ require_once("model/PDO/ManagerPDO.php");
             ));
             
             $perso->hydrate(['id' => $this->_db->lastInsertId()]);
+        }
+        
+        public function addAdhesion(Adherent $perso)
+        {
+            $addAhession = $this->_db->prepare("INSERT INTO adhesion(id_adherent,date_adhesion)
+                                          VALUES(:id_adherent, :date_adhesion)");
+            
+            $addAhession->execute(array(
+                "id_adherent" => $perso->id(),
+                "date_adhesion" => $perso->lastDateAdhesion()
+            ));
         }
         
         public function updateAdherent(Adherent $perso)
@@ -122,7 +133,6 @@ require_once("model/PDO/ManagerPDO.php");
             ));
         }
         
-        // FUNCTION ADD DATE ADHESION !!!
         
         public function updateAyantDroit(AyantDroit $perso)
         {
@@ -273,6 +283,4 @@ require_once("model/PDO/ManagerPDO.php");
         {
             return $this->_db->query("SELECT COUNT(*) FROM ayantdroit")->fetchColumn();
         }
-        
-        
     }

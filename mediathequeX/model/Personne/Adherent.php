@@ -65,6 +65,8 @@ class Adherent extends Personne
     }
     
     public function dateAdhesions() { return $this->_dateAdhesion; }
+    public function firstDateAdhesion() { return $this->_dateAdhesion[0]; }
+    public function lastDateAdhesion() { return $this->_dateAdhesion[count(_dateAdhesion)-1]; }
     
     public function setDateAdhesions($dateAdhesion)
     {
