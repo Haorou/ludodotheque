@@ -22,7 +22,7 @@
 	<variableList>
 		<variable>
 			<name>ludotheque</name>
-			<value>file:/C:/wamp64/www/MesProjets</value>
+			<value>file:/C:/wamp64/www/ludoEclipseGit</value>
 		</variable>
 	</variableList>
 </projectDescription>
