@@ -202,14 +202,14 @@ require_once("model/PDO/ManagerPDO.php");
             $readTypeJeu->execute(array(
                 "id" => $ficheJeu->id()));
             
-            $typeseDeJeu = [];
+            $typesDeJeu = [];
             
             while($typeJeu = $readTypeJeu->fetch())
             {
-                $typeseDeJeu[] = $typeJeu;
+                $typesDeJeu[] = $typeJeu;
             }
             
-            foreach($typeseDeJeu as $typeDeJeu)
+            foreach($typesDeJeu as $typeDeJeu)
             {
                 $ficheJeu->hydrate($typeDeJeu);
             }

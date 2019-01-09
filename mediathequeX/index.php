@@ -30,13 +30,18 @@ try
     {
         GestionAdherentsPage();
     }
-    else if(isset($_POST["PageCreerUtilisateur"]) && $_POST["PageCreerUtilisateur"] === "Page Creer Utilisateur")
+    else if(isset($_POST["PageCreerAdherent"]) && $_POST["PageCreerAdherent"] === "Page Creer Adherent")
     {
         PageFormulaireAdhesion();
+    }
+    else if(isset($_POST["ModifierAdherent"]) && $_POST["ModifierAdherent"] === "Modifier Adherent")
+    {
+        PageModifierAdherent();
     }
     else
     {
         ConnexionPage();
+        // require("view/AffichageAdherentView.php");
     }
     
 }

@@ -77,7 +77,7 @@
 							</div>
 
 							<form method="post">
-								<button type="submit" class="btn btn-primary" value="Creer Utilisateur" name="Creer Utilisateur">Creer Utilisateur</button>
+								<button type="submit" class="btn btn-success" value="Creer Utilisateur" name="Creer Utilisateur">Creer Utilisateur</button>
 							</form>
 
 						</form>
