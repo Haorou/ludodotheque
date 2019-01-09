@@ -1,15 +1,15 @@
 <?php // Julien
 class AlerteJeu
-{   
+{
     private $_id;
     
     private $_adherent = NULL;
     private $_date_emprunt = "";
-    private $_element_du_jeu = NULL;
+    private $_element_du_jeu = "";
     private $_probleme = "";
     private $_quantite = 0;
     private $_commentaire = "";
-
+    
     //--------------------------Constructeur---------------------------//
     
     public function __construct(array $donnes)
@@ -30,7 +30,7 @@ class AlerteJeu
         }
     }
     
-    //----------------------------Methodes-----------------------------//  
+    //----------------------------Methodes-----------------------------//
     
     //----------------------Getters and Setters------------------------//
     
@@ -41,7 +41,7 @@ class AlerteJeu
         $id = (int)$id;
         
         $this->_id = $id;
-    } 
+    }
     
     public function adherent() { return $this->_adherent; }
     
@@ -59,7 +59,7 @@ class AlerteJeu
     
     public function element_du_jeu() { return $this->_element_du_jeu; }
     
-    public function setElement_du_jeu(ElementsDuJeu $element_du_jeu)
+    public function setElement_du_jeu($element_du_jeu)
     {
         $this->_element_du_jeu = $element_du_jeu;
     }

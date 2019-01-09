@@ -43,7 +43,6 @@ try
         ConnexionPage();
         // require("view/AffichageAdherentView.php");
     }
-    
 }
 catch(Exception $e)
 {
