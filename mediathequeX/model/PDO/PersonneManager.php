@@ -201,7 +201,7 @@ require_once("model/PDO/ManagerPDO.php");
             }
             else
             {
-                $q = $this->_db->query('SELECT * FROM personne
+                $q = $this->_db->prepare('SELECT * FROM personne
                                         INNER JOIN adherent ON adherent.id_personne = personne.id
                                         INNER JOIN adhesion ON adhesion.id_adherent = adherent.id_personne
                                         INNER JOIN adresse ON adherent.id_adresse = adresse.id  WHERE personne.nom = :nom');
@@ -214,7 +214,7 @@ require_once("model/PDO/ManagerPDO.php");
         
         public function readAyantDroit(Adherent $perso)
         {    
-                $q = $this->_db->query('SELECT * FROM ayantdroit INNER JOIN adherent ON adherent.id = ayantdroit.id_adherent WHERE id = :id');
+                $q = $this->_db->prepare('SELECT * FROM ayantdroit INNER JOIN adherent ON adherent.id = ayantdroit.id_adherent WHERE id = :id');
                 $q->execute([':id' => $perso->id()]);
                 $donnees = $q->fetch(PDO::FETCH_ASSOC);
                 
