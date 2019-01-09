@@ -8,10 +8,7 @@
 
     <body>
 		<?php require("view/require/HeaderView.php");?>
-
 		<?php require("view/require/SearchBarView.php");?>
-
-		
 		<?php require("view/require/FooterView.php");?>
 				
     </body>

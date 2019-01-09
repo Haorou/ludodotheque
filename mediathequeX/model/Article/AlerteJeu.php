@@ -1,6 +1,6 @@
 <?php // Julien
 class AlerteJeu
-{   
+{
     private $_id;
     
     private $_adherent = NULL;
@@ -9,7 +9,7 @@ class AlerteJeu
     private $_probleme = "";
     private $_quantite = 0;
     private $_commentaire = "";
-
+    
     //--------------------------Constructeur---------------------------//
     
     public function __construct(array $donnes)
@@ -30,7 +30,7 @@ class AlerteJeu
         }
     }
     
-    //----------------------------Methodes-----------------------------//  
+    //----------------------------Methodes-----------------------------//
     
     //----------------------Getters and Setters------------------------//
     
@@ -41,7 +41,7 @@ class AlerteJeu
         $id = (int)$id;
         
         $this->_id = $id;
-    } 
+    }
     
     public function adherent() { return $this->_adherent; }
     
