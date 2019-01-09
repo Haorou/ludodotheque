@@ -5,7 +5,7 @@ class Adresse
     private $_numero = 0;
     private $_nom_voie = "";
     private $_type_voie = "";
-    private $_completement = "";
+    private $_complement = "";
     private $_code_postal = 0;
     private $_ville = "";
     private $_region = "";
@@ -66,11 +66,11 @@ class Adresse
         $this->_type_voie = $type_voie;
     }
     
-    public function completement() { return $this->_completement; }
+    public function complement() { return $this->_complement; }
     
-    public function setCompletement($completement)
+    public function setComplement($complement)
     {        
-        $this->_completement = $completement;
+        $this->_complement = $complement;
     }
     
     public function code_postal() { return $this->_code_postal; }

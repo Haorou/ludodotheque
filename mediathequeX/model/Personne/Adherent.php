@@ -70,8 +70,7 @@ class Adherent extends Personne
     
     public function set_date_adhesions($dateAdhesion)
     {
-        $dateAdhesion = (string)$dateAdhesion;
-        $this->_dateAdhesion = $dateAdhesion;
+        $this->_dateAdhesion[] = $dateAdhesion;
     }
     
     public function commentaire() { return $this->_commentaire; }
@@ -85,7 +84,17 @@ class Adherent extends Personne
     
     public function setAyant_droits(AyantDroit $ayantDroits)
     {
-        $this->_ayant_droits = $ayantDroits;
+        $this->_ayant_droits[] = $ayantDroits;
     }
     
+    function __toString() 
+    {
+        $rep = "";
+        foreach($this->ayant_droits() as $ayantdroit)
+        {
+            $rep .= "<div class=\"Adherent\">$ayantdroit</div>";
+        }
+        
+        return $rep;
+    }
 }

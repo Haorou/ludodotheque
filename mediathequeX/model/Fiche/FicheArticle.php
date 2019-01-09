@@ -81,6 +81,6 @@ abstract class FicheArticle
     
     public function setElements_duJeu(ElementsDuJeu $elementsDuJeu)
     {
-        $this->_elements_du_jeu = $elementsDuJeu;
+        $this->_elements_du_jeu[] = $elementsDuJeu;
     }
 }

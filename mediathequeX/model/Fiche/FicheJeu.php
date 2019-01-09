@@ -76,12 +76,12 @@ class FicheJeu extends FicheArticle
     public function elements_du_jeu() { return $this->_elements_du_jeu; }
     
     public function setElements_du_jeu(ElementsDuJeu $elementsDuJeu) {
-        $this->_elements_du_jeu = $elementsDuJeu;
+        $this->_elements_du_jeu[] = $elementsDuJeu;
     }
     
     public function types_de_jeu() { return $this->_types_de_jeu; }
     
     public function setTypes_de_jeu($typeDeJeu) {
-        $this->_types_de_jeu = $typeDeJeu;
+        $this->_types_de_jeu[] = $typeDeJeu;
     }
 }

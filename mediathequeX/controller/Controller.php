@@ -1,18 +1,70 @@
 <?php
 function chargerClasse($classname)
 {
-    // Voir si c'est possible d'�crire autant de require qui vont renvoyer dans le vide
-    require('model/PDO/'.$classname.'.php');
-    require('model/Article/'.$classname.'.php');
-    require('model/Fiche/'.$classname.'.php');
-    require('model/Mediatheque/'.$classname.'.php');
-    require('model/Personne/'.$classname.'.php');
+    if($classname == "EmpruntManager" || $classname == "FicheJeuManager" || 
+    $classname == "JeuManager" || $classname == "MediathequeManager" ||
+    $classname == "PersonneManager" ||$classname == "ManagerPDO" )
+    {
+        require('model/PDO/'.$classname.'.php');
+    }
+    else if($classname == "AlerteJeu" || $classname == "Article" ||
+    $classname == "Emprunt" || $classname == "Jeu")
+    {
+        require('model/Article/'.$classname.'.php');
+    }
+    else if($classname == "ElementsDuJeu" || $classname == "FicheArticle" ||
+    $classname == "FicheJeu")
+    {
+        require('model/Fiche/'.$classname.'.php');
+    }
+    else if($classname == "Mediatheque" || $classname == "Utilisateur")
+    {
+        require('model/Mediatheque/'.$classname.'.php');
+    }
+    else
+    {
+        require('model/Personne/'.$classname.'.php');
+    }
 }
 
 // SERT A CHARGER DES PAGES EN FONCTION DES OBJET CREER - VOIR SI SA FONCTION
 spl_autoload_register('chargerClasse');
 
 session_start();
+
+$ayantdroit1 = new AyantDroit(["civilite" => "madame",
+                                "nom" => "Morto",
+                                "prenom" => "Louis"]);
+
+$ayantdroit2 = new AyantDroit(["civilite" => "autre",
+                                "nom" => "Bourbi",
+                                "prenom" => "Babar"]);
+
+$persoManager  = new PersonneManager();
+
+$adherent = new Adherent(["civilite" => "monsieur",
+                       "nom" => "Grenec",
+                       "prenom" => "JEAN",
+                       "commentaire" => "a boire"]);
+
+
+$adresse = new Adresse(["numero" => 26,
+                        "nom_voie" => "dazdza",
+                        "type_voie" => "allée",
+                        "complement" => "c'est proche",
+                        "code_postal" => 56000,
+                        "ville" => "Vannes",
+                         "region" => "Bretagne"]);
+
+$dates_adhesion= ["2019-04-09"];
+$adherent->setAdresse($adresse);
+$adherent->set_date_adhesions($dates_adhesion);
+$adherent->setAyant_droits($ayantdroit1);
+$adherent->setAyant_droits($ayantdroit2);
+
+echo $adherent;
+$persoManager->createAdherent($adherent);
+
 
 // Variables utilis�s pour activer certaines composantes de la navbar
 // Utilisation de $GLOBALS par la suite pour utiliser ces variables qu'on d�finit � chaque fois par FALSE

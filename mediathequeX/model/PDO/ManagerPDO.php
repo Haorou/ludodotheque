@@ -3,10 +3,18 @@ class ManagerPDO
 {
     function dbConnect()
     {
-        // typeSQL : hote de la base de données (ici local) ; nom base de données ; 
+        $db = null;
+        // typeSQL : hote de la base de donnï¿½es (ici local) ; nom base de donnï¿½es ; 
         // type charset ; nom utilisateur ; mot de passe
-        $db = new PDO("mysql:host=localhost;dbname=mediatheque;charset=utf8","root","");
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); // On émet une alerte à chaque fois qu'une requête a échoué.
+        try 
+        {
+            $db = new PDO("mysql:host=localhost;port=3306;dbname=mediatheque;charset=utf8","root","");
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); // On ï¿½met une alerte ï¿½ chaque fois qu'une requï¿½te a ï¿½chouï¿½.
+        } 
+        catch (PDOException $e) 
+        {
+            echo 'Connexion Ã©chouÃ©e : ' . $e->getMessage();
+        }
         return $db;
     }
 }

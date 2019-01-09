@@ -24,4 +24,5 @@ class AyantDroit extends Personne
     //----------------------------Methodes-----------------------------//
     
     //----------------------Getters and Setters------------------------//
+
 }

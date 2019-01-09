@@ -33,6 +33,6 @@ class Jeu extends Article
     
     public function setAlertes(AlerteJeu $alerte)
     {
-        $this->_alertes = $alerte;
+        $this->_alertes[] = $alerte;
     }
 }

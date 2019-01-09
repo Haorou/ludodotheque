@@ -1,4 +1,5 @@
 <?php //Gaetan
+
 abstract class Personne
 {
     private $_id = 0;
@@ -41,7 +42,7 @@ abstract class Personne
         $this->_nom = $nom;
     }
     
-    public function prenom() { return $this->_nom; }
+    public function prenom() { return $this->_prenom; }
     
     public function setPrenom($prenom)
     {
