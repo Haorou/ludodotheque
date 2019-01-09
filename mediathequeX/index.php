@@ -32,8 +32,8 @@ try
     }
     else
     {
-        ConnexionPage();
-        //   require("view/AffichageAdherentView.php");
+        //ConnexionPage();
+          require("view/AffichageAdherentView.php");
     }
 
 }

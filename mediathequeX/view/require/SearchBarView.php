@@ -75,7 +75,7 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             	</div>
 
             	<div>
-            		<button type="submit" class="btn btn-lg btn-primary" value="Modifier utilisateur" name="ModifierUtilisateur">
+            		<button type="submit" class="btn btn-lg btn-warning" value="Modifier utilisateur" name="ModifierUtilisateur">
             		<span class="glyphicon glyphicon-cog"></span> Modifier utilisateur</button>
             	</div>
             	<div>
