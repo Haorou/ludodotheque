@@ -50,11 +50,11 @@ class AlerteJeu
         $this->_adherent = $adherent;
     }
     
-    public function dateEmprunt() { return $this->_dateEmprunt; }
+    public function date_emprunt() { return $this->_date_emprunt; }
     
-    public function setDateEmprunt($dateEmprunt)
+    public function setDate_emprunt($dateEmprunt)
     {
-        $this->_dateEmprunt = $dateEmprunt;
+        $this->_date_emprunt = $dateEmprunt;
     }
     
     public function element_du_jeu() { return $this->_element_du_jeu; }
@@ -83,5 +83,27 @@ class AlerteJeu
     public function setCommentaire($commentaire)
     {
         $this->_commentaire = $commentaire;
+    }
+    
+    private $_date_emprunt = "";
+    private $_element_du_jeu = "";
+    private $_probleme = "";
+    private $_quantite = 0;
+    private $_commentaire = "";
+    
+    function __toString()
+    {
+        $ale = "</br>Je suis une AlerteJeu</br>";
+        $ale .= "id = ".$this->id()."</br>";
+        
+        $ale .= $this->adherent();
+        
+        $ale .= "date_emprunt = ".$this->date_emprunt()."</br>";
+        $ale .= "element_du_jeu = ".$this->element_du_jeu()."</br>";
+        $ale .= "probleme = ".$this->probleme()."</br>";
+        $ale .= "quantite = ".$this->quantite()."</br>";
+        $ale .= "commentaire = ".$this->commentaire()."</br>";
+        
+        return $ale;
     }
 }

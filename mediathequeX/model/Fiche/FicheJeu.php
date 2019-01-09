@@ -85,7 +85,6 @@ class FicheJeu extends FicheArticle
         $this->_types_de_jeu[] = $typeDeJeu;
     }
     
-    private $_types_de_jeu = array();
     function __toString()
     {
         $fic = "</br>Je suis une FicheJeu</br>";

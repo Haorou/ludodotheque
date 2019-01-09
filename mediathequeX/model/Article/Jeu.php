@@ -35,4 +35,26 @@ class Jeu extends Article
     {
         $this->_alertes[] = $alerte;
     }
+ 
+    private $_fiche_article = NULL;
+    private $_alertes = array();
+    function __toString()
+    {
+        $jeu = "</br>Je suis un Jeu</br>";
+        $jeu .= "id = ".$this->id()."</br>";
+        $jeu .= "est_emprunte = ".$this->est_emprunte()."</br>";
+        $jeu .= "a_reparer = ".$this->a_reparer()."</br>";
+        $jeu .= "date_ajout = ".$this->date_ajout()."</br>";
+        $jeu .= "prix_achat = ".$this->prix_achat()."</br>";
+        $jeu .= "commentaire = ".$this->commentaire()."</br>";
+        
+        $jeu .= $this->fiche_article();
+        
+        foreach($this->alertes() as $alerte)
+        {
+            $jeu .= $alerte;
+        }
+        
+        return $jeu;
+    }
 }

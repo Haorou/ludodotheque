@@ -80,5 +80,21 @@ class Emprunt
         $this->_commentaire = $commentaire;
     }
     
+    private $_date_retour_effectif = "";
+    private $_commentaire = "";
+    private $_est_en_retard = false;
     
+    function __toString()
+    {
+        $emp = "</br>Je suis un Emprunt</br>";
+        
+        $emp .= $this->adherent();
+        
+        $emp .= $this->article();
+        
+        $emp .= "date_emprunt = ".$this->date_emprunt()."</br>";
+        $emp .= "commentaire = ".$this->commentaire()."</br>";
+        $emp .= "est_en_retard = ".$this->est_en_retard()."<br>";
+        return $emp;
+    }
 }
