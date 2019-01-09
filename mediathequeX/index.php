@@ -10,7 +10,7 @@ require("controller/controller.php");
 try
 {
     if((isset($_POST["connexion"]) && $_POST["connexion"] === "connexion") ||
-       (isset($_POST["menuPrincipal"]) && $_POST["menuPrincipal"] === "Menu Principal"))
+        (isset($_POST["menuPrincipal"]) && $_POST["menuPrincipal"] === "Menu Principal"))
     {
         MenuPrincipalPage();
     }
@@ -21,6 +21,10 @@ try
     else if(isset($_POST["gestionArticles"]) && $_POST["gestionArticles"] === "Gestion Articles")
     {
         GestionArticlesPage();
+    }
+    else if(isset($_POST["PageAjouterFiche"]) && $_POST["PageAjouterFiche"] === "Page Ajouter Fiche")
+    {
+        PageFormulaireFicheJeu();
     }
     else if(isset($_POST["gestionAdherents"]) && $_POST["gestionAdherents"] === "Gestion Adherents")
     {
@@ -34,7 +38,7 @@ try
     {
         ConnexionPage();
     }
-
+    
 }
 catch(Exception $e)
 {

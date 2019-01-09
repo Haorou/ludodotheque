@@ -1,4 +1,4 @@
-<?php 
+<?php
 $placeholder = "";
 
 if ($GLOBALS["isActiveAdherent"] == TRUE)
@@ -13,7 +13,6 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
 {
     $placeholder = "Rechercher un article avec une alerte";
 }
-
 ?>
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
@@ -82,6 +81,24 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             	<div>
             		<button type="submit" class="btn btn-lg btn-danger" value="Supprimer utilisateur" name="SupprimerUtilisateur">
             		<span class="glyphicon glyphicon-trash"></span> Supprimer utilisateur</button>
+            	</div>
+            </form>
+			<?php }?>
+			
+            <?php if ($GLOBALS["isActiveArticle"] == TRUE){?>
+            <form action="index.php" method="post">
+    			<div>
+            		<button type="submit" class="btn btn-lg btn-success" value="Page Ajouter Fiche" name="PageAjouterFiche">
+            		<span class="glyphicon glyphicon-user"></span> Ajouter fiche jeu</button>
+            	</div>
+
+            	<div>
+            		<button type="submit" class="btn btn-lg btn-primary" value="Modifier utilisateur" name="ModifierUtilisateur">
+            		<span class="glyphicon glyphicon-cog"></span> Modifier fiche jeu</button>
+            	</div>
+            	<div>
+            		<button type="submit" class="btn btn-lg btn-danger" value="Supprimer utilisateur" name="SupprimerUtilisateur">
+            		<span class="glyphicon glyphicon-trash"></span> Supprimer fiche jeu</button>
             	</div>
             </form>
 			<?php }?>

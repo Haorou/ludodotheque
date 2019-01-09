@@ -5,7 +5,7 @@ class AlerteJeu
     
     private $_adherent = NULL;
     private $_date_emprunt = "";
-    private $_element_du_jeu = NULL;
+    private $_element_du_jeu = "";
     private $_probleme = "";
     private $_quantite = 0;
     private $_commentaire = "";
@@ -59,7 +59,7 @@ class AlerteJeu
     
     public function element_du_jeu() { return $this->_element_du_jeu; }
     
-    public function setElement_du_jeu(ElementsDuJeu $element_du_jeu)
+    public function setElement_du_jeu($element_du_jeu)
     {
         $this->_element_du_jeu = $element_du_jeu;
     }

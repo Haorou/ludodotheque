@@ -55,3 +55,9 @@
         $GLOBALS["isActiveAdherent"] = TRUE;
         require("view/FormulaireAdhesion.php");
     }
+    
+    function PageFormulaireFicheJeu()
+    {
+        $GLOBALS["isActiveArticle"] = TRUE;
+        require("view/FormulaireFicheJeu.php");
+    }
