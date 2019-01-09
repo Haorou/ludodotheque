@@ -32,7 +32,11 @@ spl_autoload_register('chargerClasse');
 
 session_start();
 
+/*
+ // ================================   CREATION D'UNE FICHEJEU ET ELEMENTS DU JEU + CREATION DANS BASE DE DONNES =====================================
 
+A FAIIIIIIIIIIIIIIIIIIIRE
+*/
 
 /*
 // ================================   CREATION D'UN ADHERENT ET AYANTDROIT + CREATION DANS BASE DE DONNES =====================================
