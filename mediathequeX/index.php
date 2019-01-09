@@ -10,7 +10,7 @@ require("controller/controller.php");
 try
 {
     if((isset($_POST["connexion"]) && $_POST["connexion"] === "connexion") ||
-       (isset($_POST["menuPrincipal"]) && $_POST["menuPrincipal"] === "Menu Principal"))
+        (isset($_POST["menuPrincipal"]) && $_POST["menuPrincipal"] === "Menu Principal"))
     {
         MenuPrincipalPage();
     }
@@ -22,20 +22,28 @@ try
     {
         GestionArticlesPage();
     }
+    else if(isset($_POST["PageAjouterFiche"]) && $_POST["PageAjouterFiche"] === "Page Ajouter Fiche")
+    {
+        PageFormulaireFicheJeu();
+    }
     else if(isset($_POST["gestionAdherents"]) && $_POST["gestionAdherents"] === "Gestion Adherents")
     {
         GestionAdherentsPage();
     }
-    else if(isset($_POST["PageCreerUtilisateur"]) && $_POST["PageCreerUtilisateur"] === "Page Creer Utilisateur")
+    else if(isset($_POST["PageCreerAdherent"]) && $_POST["PageCreerAdherent"] === "Page Creer Adherent")
     {
         PageFormulaireAdhesion();
+    }
+    else if(isset($_POST["ModifierAdherent"]) && $_POST["ModifierAdherent"] === "Modifier Adherent")
+    {
+        PageModifierAdherent();
     }
     else
     {
         ConnexionPage();
-        //   require("view/AffichageAdherentView.php");
+        // require("view/AffichageAdherentView.php");
     }
-
+    
 }
 catch(Exception $e)
 {
