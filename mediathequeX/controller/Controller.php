@@ -55,3 +55,9 @@
         $GLOBALS["isActiveAdherent"] = TRUE;
         require("view/FormulaireAdhesion.php");
     }
+    
+    function PageModifierAdherent()
+    {
+        $GLOBALS["isActiveAdherent"] = TRUE;
+        require("view/AffichageAdherentView.php");
+    }

@@ -111,17 +111,17 @@ require_once("model/PDO/ManagerPDO.php");
             ));
             
             $updateAdresse = $this->_db->prepare("UPDATE adresse
-                                               SET nummero = numero, nom_voie = :nom_voie, type_voie = TYPE_VOIE, 
-                                               complet = :complement, code_postal = :CODE_POSTAL, ville = :VILLE
+                                               SET nummero = numero, nom_voie = :nom_voie, type_voie = :type_voie, 
+                                               complet = :complement, code_postal = :code_postal, ville = :ville
                                                WHERE id = :id");
             
             $updateAdresse->execute(array(
                 "numero" => $perso->adresse()->numero(),
                 "nom_voie" => $perso->adresse()->nom_voie(),
-                "TYPE_VOIE" => $perso->adresse()->type_voie(),
+                "type_voie" => $perso->adresse()->type_voie(),
                 "complement" => $perso->adresse()->completement(),
-                "CODE_POSTAL" => $perso->adresse()->code_postal(),
-                "VILLE" => $perso->adresse()->ville(),
+                "code_postal" => $perso->adresse()->code_postal(),
+                "ville" => $perso->adresse()->ville(),
                 "id" => $perso->adresse()->id()
             ));
             
@@ -214,7 +214,9 @@ require_once("model/PDO/ManagerPDO.php");
         
         public function readAyantDroit(Adherent $perso)
         {    
-                $q = $this->_db->prepare('SELECT * FROM ayantdroit INNER JOIN adherent ON adherent.id = ayantdroit.id_adherent WHERE id = :id');
+                $q = $this->_db->prepare('SELECT * FROM ayantdroit 
+                                          INNER JOIN adherent ON adherent.id = ayantdroit.id_adherent
+                                          INNER JOIN personne ON ayantdroit.id_personne = personne.id WHERE id = :id');
                 $q->execute([':id' => $perso->id()]);
                 $donnees = $q->fetch(PDO::FETCH_ASSOC);
                 
@@ -264,7 +266,9 @@ require_once("model/PDO/ManagerPDO.php");
         
         public function readAllAyantDroit()
         {
-            $selectPerso = $this->_db->query("SELECT * FROM ayantdroit INNER JOIN adherent ON adherent.id = ayantdroit.id_adherent");
+            $selectPerso = $this->_db->query("SELECT * FROM ayantdroit 
+                                              INNER JOIN adherent ON adherent.id = ayantdroit.id_adherent
+                                              INNER JOIN ayantdroit ON ayantdroit.id_personne = personne.id");
             $listeDePersonnages = [];
             
             while($perso = $selectPerso->fetch())
