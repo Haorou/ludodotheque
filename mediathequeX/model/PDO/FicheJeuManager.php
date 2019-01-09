@@ -25,9 +25,9 @@ require_once("model/PDO/ManagerPDO.php");
                 "titre" => $ficheJeu->titre(),
                 "auteur" => $ficheJeu->auteur(),
                 "editeur" => $ficheJeu->editeur(),
-                "age_min" => $ficheJeu->ageMin(),
-                "age_max" => $ficheJeu->ageMax(),
-                "date_de_publication" => $ficheJeu->dateDePublication()
+                "age_min" => $ficheJeu->age_min(),
+                "age_max" => $ficheJeu->age_max(),
+                "date_de_publication" => $ficheJeu->date_de_publication()
             ));
             
             $ficheJeu->hydrate(['id' => $this->_db->lastInsertId()]);
@@ -36,10 +36,10 @@ require_once("model/PDO/ManagerPDO.php");
                                         VALUES(:nombre_de_joueurs_min, :nombre_de_joueurs_max, :duree_min_de_jeu, :duree_max_de_jeu, :descriptif)");
         
             $addFicheJeu->execute(array(
-                "nombre_de_joueurs_min" => $ficheJeu->nbreJoueurMin(),
-                "nombre_de_joueurs_max" => $ficheJeu->nbreJoueurMax(),
-                "duree_min_de_jeu" => $ficheJeu->dureeMinDeJeu(),
-                "duree_max_de_jeu" => $ficheJeu->dureeMaxDeJeu(),
+                "nombre_de_joueurs_min" => $ficheJeu->nombre_de_joueurs_min(),
+                "nombre_de_joueurs_max" => $ficheJeu->nombre_de_joueurs_max(),
+                "duree_min_de_jeu" => $ficheJeu->duree_min_de_jeu(),
+                "duree_max_de_jeu" => $ficheJeu->duree_max_de_jeu(),
                 "descriptif" => $ficheJeu->descriptif()
             ));
                         
@@ -53,7 +53,7 @@ require_once("model/PDO/ManagerPDO.php");
                 ));
             }
             
-            foreach($ficheJeu->elementsDuJeu() as $elementDuJeu)
+            foreach($ficheJeu->elements_du_jeu() as $elementDuJeu)
             {
                 $addComptElementJeuFicheJeu = $this->_db->prepare("INSERT INTO comp_element_jeu_fiche_jeu(id_fiche_jeu, element_jeu, couleur, quantite)
                                                                VALUES(:id_fiche_jeu, :element_jeu, :couleur, :quantite)");
@@ -67,7 +67,7 @@ require_once("model/PDO/ManagerPDO.php");
             }
         }
         
-        public function updateJeu(Jeu $ficheJeu)
+        public function updateJeu(FicheJeu $ficheJeu)
         {
             $updateFicheArticle = $this->_db->prepare("UPDATE fiche_article SET 
                                                    SET titre = :titre, 
@@ -82,9 +82,9 @@ require_once("model/PDO/ManagerPDO.php");
                 "titre" => $ficheJeu->titre(),
                 "auteur" => $ficheJeu->auteur(),
                 "editeur" => $ficheJeu->editeur(),
-                "age_min" => $ficheJeu->ageMin(),
-                "age_max" => $ficheJeu->ageMax(),
-                "date_de_publication" => $ficheJeu->dateDePublication(),
+                "age_min" => $ficheJeu->age_min(),
+                "age_max" => $ficheJeu->age_max(),
+                "date_de_publication" => $ficheJeu->date_de_publication(),
                 "id" => $ficheJeu->id()
             ));
             
@@ -96,10 +96,10 @@ require_once("model/PDO/ManagerPDO.php");
                                                     descriptif = :descriptif,
                                                     WHERE id_fiche_article = :id)");
             $updateFicheJeu->execute(array(
-                "nombre_de_joueurs_min" => $ficheJeu->nbreJoueurMin(),
-                "nombre_de_joueurs_max" => $ficheJeu->nbreJoueurMax(),
-                "duree_min_de_jeu" => $ficheJeu->dureeMinDeJeu(),
-                "duree_max_de_jeu" => $ficheJeu->dureeMaxDeJeu(),
+                "nombre_de_joueurs_min" => $ficheJeu->nombre_de_joueurs_min(),
+                "nombre_de_joueurs_max" => $ficheJeu->nombre_de_joueurs_max(),
+                "duree_min_de_jeu" => $ficheJeu->duree_min_de_jeu(),
+                "duree_max_de_jeu" => $ficheJeu->duree_max_de_jeu(),
                 "descriptif" => $ficheJeu->descriptif(),
                 "id" => $ficheJeu->id()
             ));
@@ -183,9 +183,6 @@ require_once("model/PDO/ManagerPDO.php");
             
         }
         
-        
-        // OON EST ICICICICICICICICCICII
-        
         public function readFicheJeu($info)
         {
             $readJeu = $this->_db->prepare("SELECT * FROM fiche_jeu
@@ -214,12 +211,19 @@ require_once("model/PDO/ManagerPDO.php");
                 $ficheJeu->hydrate($typeDeJeu);
             }
             
-            // ICI READ ELEMENTS !!!
-            $readJeu = $this->_db->prepare("SELECT * FROM fiche_jeu
-                                        INNER JOIN fiche_article ON fiche_article.id = fiche_jeu.id_fiche_article
-                                        WHERE fiche_jeu.id_fiche_article= :id)");
-            $readJeu->execute(array(
-                "id" => $info));
+            $elementDeJeux = [];
+
+            $readElements = $this->_db->prepare("SELECT * FROM comp_element_jeu_fiche_jeu
+                                        WHERE id_fiche_jeu = :id)");
+            $readElements->execute(array(
+                "id" => $ficheJeu->id()));
+            
+            while($element = $readElements->fetch())
+            {
+                $elementDeJeux[] = ElementsDuJeu($element);
+            }
+            
+            
             
             $donnees = $readJeu->fetch(PDO::FETCH_ASSOC);
             $ficheJeu = new Jeu($donnees);    

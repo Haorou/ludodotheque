@@ -21,9 +21,9 @@ class JeuManager extends ManagerPDO
         $addArticle = $this->_db->prepare("INSERT INTO article(id_fiche_article, date_ajout, prix_achat)
                                         VALUES(:id_fiche_article, :date_ajout, :prix_achat)");
         $addArticle->execute(array(
-            "id_fiche_article" => $jeu->ficheArticle()->id(),
-            "date_ajout" => $jeu->dateAjout(),
-            "prix_achat" => $jeu->prixAchat()
+            "id_fiche_article" => $jeu->fiche_article()->id(),
+            "date_ajout" => $jeu->date_ajout(),
+            "prix_achat" => $jeu->prix_achat()
         ));
         
         $jeu->hydrate(['id' => $this->_db->lastInsertId()]);
@@ -38,9 +38,9 @@ class JeuManager extends ManagerPDO
                                                  WHERE id = :id)");
         
         $updateArticle->execute(array(
-            "id_fiche_article" => $jeu->ficheArticle()->id(),
-            "date_ajout" => $jeu->dateAjout(),
-            "prix_achat" => $jeu->prixAchat(),
+            "id_fiche_article" => $jeu->fiche_article()->id(),
+            "date_ajout" => $jeu->date_ajout(),
+            "prix_achat" => $jeu->prix_achat(),
             "id" => $jeu->id()
         ));
         // VOIR SI APPELLE AUTRE MANAGER

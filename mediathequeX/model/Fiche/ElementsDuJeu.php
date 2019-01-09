@@ -1,7 +1,7 @@
 <?php
 class ElementsDuJeu
 {        
-    private $_element_du_jeu = "";
+    private $_element_jeu = "";
     private $_couleur = "";
     private $_quantite = 0;
 
@@ -20,11 +20,11 @@ class ElementsDuJeu
         $this->_id = $id;
     }
     
-    public function element_du_jeu() { return $this->_element_du_jeu; }
+    public function element_jeu() { return $this->_element_jeu; }
     
-    public function setElement_du_jeu($element_du_jeu)
+    public function setElement_jeu($element_du_jeu)
     {
-        $this->_element_du_jeu = $element_du_jeu;
+        $this->_element_jeu = $element_du_jeu;
     }
     
     public function couleur() { return $this->_couleur; }

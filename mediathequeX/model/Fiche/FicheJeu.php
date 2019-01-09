@@ -1,17 +1,17 @@
 <?php
 
-// Designed by Mesguen Frédéric
+// Designed by Mesguen Frï¿½dï¿½ric
 
 class FicheJeu extends FicheArticle
 {    
-    private $_nbreJoueursMin = 0;
-    private $_nbreJoueursMax = 0;
-    private $_dureeMinDeJeu = 0;
-    private $_dureeMaxDeJeu = 0;
+    private $_nombre_de_joueurs_min = 0;
+    private $_nombre_de_joueurs_max = 0;
+    private $_duree_min_de_jeu = 0;
+    private $_duree_max_de_jeu = 0;
     private $_descriptif = "";
     
-    private $_elementsDuJeu = array();
-    private $_typesDeJeu = array();
+    private $_elements_du_jeu = array();
+    private $_types_de_jeu = array();
     
     
     //--------------------------Constructeur---------------------------//
@@ -38,32 +38,32 @@ class FicheJeu extends FicheArticle
     
     
     //----------------------Getters and Setters------------------------//
-    public function nbreJoueurMin() { return $this->_nbreJoueursMin; }
+    public function nombre_de_joueurs_min() { return $this->_nombre_de_joueurs_min; }
     
-    public function setNbreJoueurMin($_nbreJoueursMin){
+    public function setNombre_de_joueurs_min($_nbreJoueursMin){
         $_nbreJoueursMin = (int)$_nbreJoueursMin;
-        return $this->_nbreJoueursMin = $_nbreJoueursMin;
+        return $this->_nombre_de_joueurs_min = $_nbreJoueursMin;
     }
     
-    public function nbreJoueurMax() { return $this->_nbreJoueursMax; }
+    public function nombre_de_joueurs_max() { return $this->_nombre_de_joueurs_max; }
     
-    public function setNbreJoueurMax($_nbreJoueursMax) {
+    public function setNombre_de_joueurs_max($_nbreJoueursMax) {
         $_nbreJoueursMax = (int)$_nbreJoueursMax;
-        return $this->_nbreJoueursMax = $_nbreJoueursMax;
+        return $this->_nombre_de_joueurs_max = $_nbreJoueursMax;
     }
     
-    public function dureeMinDeJeu() { return $this->_dureeMinDeJeu; }
+    public function duree_min_de_jeu() { return $this->_duree_min_de_jeu; }
     
-    public function setNDureeMinDeJeu($dureeMinDeJeu){
+    public function setDuree_min_de_jeu($dureeMinDeJeu){
         $dureeMinDeJeu = (int)$dureeMinDeJeu;
-        return $this->_dureeMinDeJeu = $dureeMinDeJeu;
+        return $this->_duree_min_de_jeu = $dureeMinDeJeu;
     }
     
-    public function dureeMaxDeJeu() { return $this->_dureeMaxDeJeu; }
+    public function duree_max_de_jeu() { return $this->_duree_max_de_jeu; }
     
-    public function setDureeMaxDeJeu($dureeMaxDeJeu) {
+    public function setDuree_max_de_jeu($dureeMaxDeJeu) {
         $dureeMaxDeJeu = (int)$dureeMaxDeJeu;
-        return $this->_dureeMaxDeJeu = $dureeMaxDeJeu;
+        return $this->_duree_max_de_jeu = $dureeMaxDeJeu;
     }
     
     public function descriptif() { return $this->_descriptif; }
@@ -73,15 +73,15 @@ class FicheJeu extends FicheArticle
         $this->_descriptif = $descriptif;
     }
     
-    public function elementsDuJeu() { return $this->_elementsDuJeu; }
+    public function elements_du_jeu() { return $this->_elements_du_jeu; }
     
-    public function setElementsDuJeu(ElementsDuJeu $elementsDuJeu) {
-        $this->_elementsDuJeu = $elementsDuJeu;
+    public function setElements_du_jeu(ElementsDuJeu $elementsDuJeu) {
+        $this->_elements_du_jeu = $elementsDuJeu;
     }
     
-    public function typesDeJeu() { return $this->_typesDeJeu; }
+    public function types_de_jeu() { return $this->_types_de_jeu; }
     
-    public function setTypesDeJeu($typeDeJeu) {
-        $this->_typesDeJeu = $typeDeJeu;
+    public function setTypes_de_jeu($typeDeJeu) {
+        $this->_types_de_jeu = $typeDeJeu;
     }
 }

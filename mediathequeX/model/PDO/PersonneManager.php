@@ -59,7 +59,7 @@ require_once("model/PDO/ManagerPDO.php");
             
             $addDate->execute(array(
                 "id_adherent" => $perso->id(), 
-                "date_adhesion" => $perso->firstDateAdhesion()
+                "date_adhesion" => $perso->first_date_adhesion()
             ));
         }
         
@@ -90,7 +90,7 @@ require_once("model/PDO/ManagerPDO.php");
             
             $addAhession->execute(array(
                 "id_adherent" => $perso->id(),
-                "date_adhesion" => $perso->lastDateAdhesion()
+                "date_adhesion" => $perso->last_date_adhesion()
             ));
         }
         
