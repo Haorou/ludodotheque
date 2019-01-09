@@ -56,12 +56,11 @@ class PersonneManager extends ManagerPDO
         
         $addDate = $this->_db->prepare("INSERT INTO adhesion(id_adherent, date_adhesion)
                                         VALUES (:id_adherent, :date_adhesion)");
-        
-        $addDate->execute(array(
-            "id_adherent" => $perso->id(),
-            "date_adhesion" => $perso->firstDateAdhesion()
-        ));
-    }
+            $addDate->execute(array(
+                "id_adherent" => $perso->id(), 
+                "date_adhesion" => $perso->first_date_adhesion()
+            ));
+        }
     
     public function createAyantDroit(AyantDroit $perso, Adherent $referant)
     {
@@ -72,10 +71,8 @@ class PersonneManager extends ManagerPDO
             "nom" => $perso->nom(),
             "prenom" => $perso->prenom()
         ));
-        
         $addAyantDroit = $this->_db->prepare("INSERT INTO ayantdroit(id_personne,id_adherent)
                                           VALUES(:id_adherent)");
-        
         $addAyantDroit->execute(array(
             "id_adherent" => $referant->id()
         ));
@@ -87,12 +84,11 @@ class PersonneManager extends ManagerPDO
     {
         $addAhession = $this->_db->prepare("INSERT INTO adhesion(id_adherent,date_adhesion)
                                           VALUES(:id_adherent, :date_adhesion)");
-        
-        $addAhession->execute(array(
-            "id_adherent" => $perso->id(),
-            "date_adhesion" => $perso->lastDateAdhesion()
-        ));
-    }
+            $addAhession->execute(array(
+                "id_adherent" => $perso->id(),
+                "date_adhesion" => $perso->last_date_adhesion()
+            ));
+        }
     
     public function updateAdherent(Adherent $perso)
     {
@@ -114,7 +110,6 @@ class PersonneManager extends ManagerPDO
                                                SET nummero = numero, nom_voie = :nom_voie, type_voie = :type_voie,
                                                complet = :complement, code_postal = :code_postal, ville = :ville
                                                WHERE id = :id");
-        
         $updateAdresse->execute(array(
             "numero" => $perso->adresse()->numero(),
             "nom_voie" => $perso->adresse()->nom_voie(),
@@ -124,9 +119,7 @@ class PersonneManager extends ManagerPDO
             "ville" => $perso->adresse()->ville(),
             "id" => $perso->adresse()->id()
         ));
-        
         $updateAdherent = $this->_db->prepare("UPDATE adherent SET commentaire = :commentaire WHERE id = :id");
-        
         $updateAdherent->execute(array(
             "commentaire" => $perso->commentaire(),
             "id" => $perso->id()

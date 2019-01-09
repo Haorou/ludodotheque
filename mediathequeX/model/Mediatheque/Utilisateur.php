@@ -2,8 +2,8 @@
 class Utilisateur
 {
     private $_id = 0;
-    private $_pseduo = "";
-    private $_motDePasse = "";
+    private $_pseudo = "";
+    private $_mot_de_passe = "";
     private $_privilege = 0;
     
     //--------------------------Constructeur---------------------------//
@@ -48,13 +48,13 @@ class Utilisateur
         $this->_pseudo = $pseudo;
     }
     
-    public function motDePasse() { return $this->_motDePasse; }
+    public function mot_de_passe() { return $this->_mot_de_passe; }
     
-    public function setMotDePasse($motDePasse)
+    public function setMot_de_passe($motDePasse)
     {
         $motDePasse = (string)$motDePasse;
         
-        $this->_motDePasse = $motDePasse;
+        $this->_mot_de_passe = $motDePasse;
     }
     
     public function privilege() { return $this->_privilege; }

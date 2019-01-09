@@ -47,26 +47,26 @@ class FicheJeuManager extends ManagerPDO
         {
             $addFicheJeuTypeJeu = $this->_db->prepare("INSERT INTO comp_fiche_jeu_type_jeu(id_fiche_jeu, type_jeu)
                                                        VALUES(:id_fiche_jeu, :type_jeu)");
-            $addFicheJeuTypeJeu->execute(array(
-                "id_fiche_jeu" => $ficheJeu->id(),
-                "type_jeu" => $typeJeu
-            ));
+                $addFicheJeuTypeJeu->execute(array(
+                    "id_fiche_jeu" => $ficheJeu->id(),
+                    "type_jeu" => $typeJeu
+                ));
+            }
+            
+            foreach($ficheJeu->elements_du_jeu() as $elementDuJeu)
+            {
+                $addComptElementJeuFicheJeu = $this->_db->prepare("INSERT INTO comp_element_jeu_fiche_jeu(id_fiche_jeu, element_jeu, couleur, quantite)
+                                                               VALUES(:id_fiche_jeu, :element_jeu, :couleur, :quantite)");
+                
+                $addComptElementJeuFicheJeu->execute(array(
+                    "id_fiche_jeu" => $ficheJeu->id(),
+                    "element_jeu" => $elementDuJeu->element_du_jeu(),
+                    "couleur" => $elementDuJeu->couleur(),
+                    "quantite" => $elementDuJeu->quantite()
+                ));
+            }
         }
         
-        foreach($ficheJeu->elementsDuJeu() as $elementDuJeu)
-        {
-            $addComptElementJeuFicheJeu = $this->_db->prepare("INSERT INTO comp_element_jeu_fiche_jeu(id_fiche_jeu, element_jeu, couleur, quantite)
-                                                               VALUES(:id_fiche_jeu, :element_jeu, :couleur, :quantite)");
-            
-            $addComptElementJeuFicheJeu->execute(array(
-                "id_fiche_jeu" => $ficheJeu->id(),
-                "element_jeu" => $elementDuJeu->element_du_jeu(),
-                "couleur" => $elementDuJeu->couleur(),
-                "quantite" => $elementDuJeu->quantite()
-            ));
-        }
-    }
-    
     public function updateJeu(Jeu $ficheJeu)
     {
         $updateFicheArticle = $this->_db->prepare("UPDATE fiche_article SET
@@ -214,12 +214,19 @@ class FicheJeuManager extends ManagerPDO
             $ficheJeu->hydrate($typeDeJeu);
         }
         
-        // ICI READ ELEMENTS !!!
-        $readJeu = $this->_db->prepare("SELECT * FROM fiche_jeu
-                                        INNER JOIN fiche_article ON fiche_article.id = fiche_jeu.id_fiche_article
-                                        WHERE fiche_jeu.id_fiche_article= :id)");
-        $readJeu->execute(array(
-            "id" => $info));
+        $elementDeJeux = [];
+        
+        $readElements = $this->_db->prepare("SELECT * FROM comp_element_jeu_fiche_jeu
+                                        WHERE id_fiche_jeu = :id)");
+        $readElements->execute(array(
+            "id" => $ficheJeu->id()));
+        
+        while($element = $readElements->fetch())
+        {
+            $elementDeJeux[] = ElementsDuJeu($element);
+        }
+        
+        
         
         $donnees = $readJeu->fetch(PDO::FETCH_ASSOC);
         $ficheJeu = new Jeu($donnees);
@@ -248,4 +255,5 @@ class FicheJeuManager extends ManagerPDO
     {
         return $this->_db->query("SELECT COUNT(*) FROM adherent")->fetchColumn();
     }
+
 }

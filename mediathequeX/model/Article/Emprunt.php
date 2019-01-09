@@ -3,10 +3,10 @@ class Emprunt
 {
     private $_adherent = NULL;
     private $_article = NULL;
-    private $_dateEmprunt = "";
-    private $_dateRetourEffectif = "";
+    private $_date_emprunt = "";
+    private $_date_retour_effectif = "";
     private $_commentaire = "";
-    private $_estEnRetard = false;
+    private $_est_en_retard = false;
 
 
     
@@ -48,29 +48,29 @@ class Emprunt
         $this->_article = $article;
     }
     
-    public function dateEmprunt() { return $this->_dateEmprunt; }
+    public function date_emprunt() { return $this->_date_emprunt; }
     
-    public function setDateEmprunt($date)
+    public function setDate_emprunt($date)
     {
         // Verifier si DateEmprunt est valide (if $date === ???)
-        $this->_dateEmprunt = $date;
+        $this->_date_emprunt = $date;
     }
     
-    public function dateRetourEffectif() { return $this->_dateRetourEffectif; }
+    public function date_retour_effectif() { return $this->_date_retour_effectif; }
     
-    public function setDateRetourEffectif($date)
+    public function setDate_retour_effectif($date)
     {
         // Verifier si DateEmprunt est valide (if $date === ???)
-        $this->_dateRetourEffectif = $date;
+        $this->_date_retour_effectif = $date;
     }
     
-    public function estEnRetard() { return $this->_estEnRetard; }
+    public function est_en_retard() { return $this->_est_en_retard; }
     
-    public function setEstEnRetard($estEndRetard)
+    public function setEst_en_retard($estEndRetard)
     {
         $estEndRetard = (bool)$estEndRetard;
         
-        $this->_estEnRetard = $estEndRetard;
+        $this->_est_en_retard = $estEndRetard;
     }
 
     public function commentaire() { return $this->_commentaire; }

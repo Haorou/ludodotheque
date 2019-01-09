@@ -37,13 +37,13 @@ class MediathequeManager extends ManagerPDO
                                                  duree_retard = : duree_retard");
             
             $updateArticle->execute(array(
-                "cout_adhesion" => $mediatheque->coutAdhesion(),
-                "cout_caution" => $mediatheque->coutCaution(),
-                "duree_adhesion" => $mediatheque->dureeAdhesion(),
-                "nombre_emprunt_autorisee" => $mediatheque->nombreEmpruntAutorise(),
-                "nombre_ayantdroit_autorisee" => $mediatheque->nombreAyantdroitAutorise(),
-                "duree_emprunt" => $mediatheque->dureeEmprunt(),
-                "duree_retard" => $mediatheque->dureeRetard(),
+                "cout_adhesion" => $mediatheque->cout_adhesion(),
+                "cout_caution" => $mediatheque->cout_caution(),
+                "duree_adhesion" => $mediatheque->duree_adhesion(),
+                "nombre_emprunt_autorisee" => $mediatheque->nombre_emprunt_autorisee(),
+                "nombre_ayantdroit_autorisee" => $mediatheque->nombre_ayantdroit_autorisee(),
+                "duree_emprunt" => $mediatheque->duree_emprunt(),
+                "duree_retard" => $mediatheque->duree_retard()
                 
             ));
             // VOIR SI APPELLE AUTRE MANAGER

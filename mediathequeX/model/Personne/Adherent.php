@@ -1,12 +1,12 @@
 <?php //Gaetan
 class Adherent extends Personne
 {
-    private $_adhesionARenouveller = false;
-    private $_chequeEstDepose = false;
+    private $_adhesion_a_renouveller = false;
+    private $_cheque_est_depose = false;
     private $_adresse = NULL;
-    private $_dateAdhesions = array ();
+    private $_date_adhesions = array ();
     private $_commentaire = "";
-    private $_ayantDroits = array();
+    private $_ayant_droits = array();
     
     //--------------------------Constructeur---------------------------//
     
@@ -31,26 +31,26 @@ class Adherent extends Personne
     //----------------------------Methodes-----------------------------//
     
     function isChequeDepose() {
-        return $this->_chequeEstDepose = true;
+        return $this->_cheque_est_depose = true;
     }
     function isAdhesionARenouveller() {
-        return $this->_adhesionARenouveller = true;
+        return $this->_adhesion_a_renouveller = true;
     }
     
     //----------------------Getters and Setters------------------------//
   
-    public function adhesionARenouveller() { return $this->_adhesionARenouveller; }
+    public function adhesion_a_renouveller() { return $this->_adhesion_a_renouveller; }
     
-    public function setAdhesionARenouveller($adhesionARenouveller)
+    public function setAdhesion_a_renouveller($adhesionARenouveller)
     {
         $adhesionARenouveller = (bool)$adhesionARenouveller;
         
-        $this->_adhesionARenouveller = $adhesionARenouveller;
+        $this->_adhesion_a_renouveller = $adhesionARenouveller;
     }
     
-    public function chaqueEstDepose() { return $this->_chequeEstDepose; }
+    public function chaque_est_depose() { return $this->_cheque_est_depose; }
     
-    public function setChequeEstDepose($chequeEstDepose)
+    public function setCheque_est_depose($chequeEstDepose)
     {
         $chequeEstDepose = (bool)$chequeEstDepose;
         
@@ -64,11 +64,11 @@ class Adherent extends Personne
         $this->_adresse = $adresse;
     }
     
-    public function dateAdhesions() { return $this->_dateAdhesion; }
-    public function firstDateAdhesion() { return $this->_dateAdhesion[0]; }
-    public function lastDateAdhesion() { return $this->_dateAdhesion[count(_dateAdhesion)-1]; }
+    public function date_adhesions() { return $this->_dateAdhesion; }
+    public function first_date_adhesion() { return $this->_dateAdhesion[0]; }
+    public function last_date_adhesion() { return $this->_dateAdhesion[count(_dateAdhesion)-1]; }
     
-    public function setDateAdhesions($dateAdhesion)
+    public function set_date_adhesions($dateAdhesion)
     {
         $dateAdhesion = (string)$dateAdhesion;
         $this->_dateAdhesion = $dateAdhesion;
@@ -81,11 +81,11 @@ class Adherent extends Personne
         $this->_commentaire = $commentaire;
     }
     
-    public function ayantDroits() { return $this->_ayantDroits; }
+    public function ayant_droits() { return $this->_ayant_droits; }
     
-    public function setAyantDroits(AyantDroit $ayantDroits)
+    public function setAyant_droits(AyantDroit $ayantDroits)
     {
-        $this->_ayantDroits = $ayantDroits;
+        $this->_ayant_droits = $ayantDroits;
     }
     
 }

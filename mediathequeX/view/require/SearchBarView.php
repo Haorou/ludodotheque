@@ -67,7 +67,9 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             </div>
             
             <div class="col-md-2">
-            <?php if ($GLOBALS["isActiveAdherent"] == TRUE){?>
+            
+            <?php if ($GLOBALS["isActiveAdherent"] == TRUE) { ?>
+            
             <form action="index.php" method="post">
     			<div>
             		<button type="submit" class="btn btn-lg btn-success" value="Page Creer Adherent" name="PageCreerAdherent">
@@ -101,7 +103,27 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             		<span class="glyphicon glyphicon-trash"></span> Supprimer fiche jeu</button>
             	</div>
             </form>
-			<?php }?>
+            
+			<?php } else if ($GLOBALS["isActiveArticle"] == TRUE) { ?>
+			
+            <form action="index.php" method="post">
+    			<div>
+            		<button type="submit" class="btn btn-lg btn-success" value="Page Ajouter Fiche" name="PageAjouterFiche">
+            		<span class="glyphicon glyphicon-user"></span> Ajouter fiche jeu</button>
+            	</div>
+
+            	<div>
+            		<button type="submit" class="btn btn-lg btn-primary" value="Modifier utilisateur" name="ModifierUtilisateur">
+            		<span class="glyphicon glyphicon-cog"></span> Modifier fiche jeu</button>
+            	</div>
+            	<div>
+            		<button type="submit" class="btn btn-lg btn-danger" value="Supprimer utilisateur" name="SupprimerUtilisateur">
+            		<span class="glyphicon glyphicon-trash"></span> Supprimer fiche jeu</button>
+            	</div>
+            </form>
+
+			<?php } ?>
+
 			</div>
         </div>
     </div>

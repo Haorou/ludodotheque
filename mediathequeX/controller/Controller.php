@@ -66,3 +66,4 @@ function PageModifierAdherent()
     $GLOBALS["isActiveAdherent"] = TRUE;
     require("view/AffichageAdherentView.php");
 }
+

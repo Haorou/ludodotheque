@@ -6,10 +6,10 @@ abstract class FicheArticle
     private $_titre = "";
     private $_auteur = "";
     private $_editeur = "";
-    private $_ageMin = 0;
-    private $_ageMax = 0;
-    private $_dateDePublication = "";
-    private $_elementsDuJeu = array();
+    private $_age_min = 0;
+    private $_age_max = 0;
+    private $_date_de_publication = "";
+    private $_elements_du_jeu = array();
     
     //--------------------------Constructeur---------------------------//
 
@@ -53,34 +53,34 @@ abstract class FicheArticle
         $this->_editeur = $editeur;
     }
 
-    public function ageMin() { return $this->_ageMin; }
+    public function age_min() { return $this->_age_min; }
     
-    public function setAgeMin($ageMin)
+    public function setAge_min($ageMin)
     {
         $ageMin = (int)$ageMin;
-        $this->_ageMin = $ageMin;
+        $this->_age_min = $ageMin;
     }
 
-    public function ageMax() { return $this->_ageMax; }
+    public function age_max() { return $this->_age_max; }
 
-    public function setAgeMax($ageMax)
+    public function setAge_max($ageMax)
     {
         $ageMax = (int)$ageMax;
-        $this->_ageMax = $ageMax;
+        $this->_age_max = $ageMax;
     }
 
-    public function dateDePublication() { return $this->_dateDePublication; }
+    public function date_de_publication() { return $this->_date_de_publication; }
 
-    public function setDateDePublication($dateDePublication)
+    public function setDate_de_publication($dateDePublication)
     {
         $dateDePublication = (string)$dateDePublication;
-        $this->_dateDePublication = $dateDePublication;
+        $this->_date_de_publication = $dateDePublication;
     }
     
-    public function elementsDuJeu() { return $this->_elementsDuJeu; }
+    public function elements_du_jeu() { return $this->_elements_du_jeu; }
     
-    public function setElementsDuJeu(ElementsDuJeu $elementsDuJeu)
+    public function setElements_duJeu(ElementsDuJeu $elementsDuJeu)
     {
-        $this->_elementsDuJeu = $elementsDuJeu;
+        $this->_elements_du_jeu = $elementsDuJeu;
     }
 }

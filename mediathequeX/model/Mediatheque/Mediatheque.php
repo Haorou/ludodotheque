@@ -1,13 +1,13 @@
 <?php
 class Mediatheque
 {
-    private $_coutAdhesion = 0;
-    private $_coutCaution = 0;
-    private $_dureeAdhesion = 0;
-    private $_nombreEmpruntAutorise = 0;
-    private $_nombreAyantdroitAutorise = 0;
-    private $_dureeEmprunt = 0;
-    private $_dureeRetard = 0;
+    private $_cout_adhesion = 0;
+    private $_cout_caution = 0;
+    private $_duree_adhesion = 0;
+    private $_nombre_emprunt_autorisee = 0;
+    private $_nombre_ayantdroit_autorisee = 0;
+    private $_duree_emprunt = 0;
+    private $_duree_retard = 0;
     
     //--------------------------Constructeur---------------------------//
     
@@ -33,65 +33,65 @@ class Mediatheque
     
     //----------------------Getters and Setters------------------------//
     
-    public function coutAdhesion() { return $this->_coutAdhesion; }
+    public function cout_adhesion() { return $this->_cout_adhesion; }
     
-    public function setCountAdhesion($coutAdhesion)
+    public function setCount_adhesion($coutAdhesion)
     {
         $coutAdhesion = (int)$coutAdhesion;
         
-        $this->_coutAdhesion = $coutAdhesion;
+        $this->_cout_adhesion = $coutAdhesion;
     }
     
-    public function coutCaution() { return $this->_coutCaution; }
+    public function cout_caution() { return $this->_cout_caution; }
     
-    public function setCoutCaution($coutCaution)
+    public function setCout_caution($coutCaution)
     {
         $coutCaution = (int)$coutCaution;
         
-        $this->_coutCaution = $coutCaution;
+        $this->_cout_caution = $coutCaution;
     }
     
-    public function dureeAdhesion() { return $this->_dureeAdhesion; }
+    public function duree_adhesion() { return $this->_duree_adhesion; }
     
-    public function setDureeAdhesion($dureeAdhesion)
+    public function setDuree_adhesion($dureeAdhesion)
     {
         $dureeAdhesion = (int)$dureeAdhesion;
         
-        $this->_dureeAdhesion = $dureeAdhesion;
+        $this->_duree_adhesion = $dureeAdhesion;
     }
     
-    public function nombreEmpruntAutorise() { return $this->_nombreEmpruntAutorise; }
+    public function nombre_emprunt_autorisee() { return $this->_nombre_emprunt_autorisee; }
     
-    public function setNombreEmpruntAutorise($nombreEmpruntAutorise)
+    public function setNombre_emprunt_autorise($nombreEmpruntAutorise)
     {
         $nombreEmpruntAutorise = (int)$nombreEmpruntAutorise;
         
-        $this->_nombreEmpruntAutorise = $nombreEmpruntAutorise;
+        $this->_nombre_emprunt_autorisee = $nombreEmpruntAutorise;
     }
     
-    public function nombreAyantdroitAutorise() { return $this->_nombreAyantdroitAutorise; }
+    public function nombre_ayantdroit_autorisee() { return $this->_nombre_ayantdroit_autorisee; }
     
-    public function setNombreAyantdroitAutorise($nombreAyantdroitAutorise)
+    public function setNombre_ayantdroit_autorisee($nombreAyantdroitAutorise)
     {
         $nombreAyantdroitAutorise = (int)$nombreAyantdroitAutorise;
         
-        $this->_nombreAyantdroitAutorise = $nombreAyantdroitAutorise;
+        $this->_nombre_ayantdroit_autorisee = $nombreAyantdroitAutorise;
     }
     
-    public function dureeEmprunt() { return $this->_dureeEmprunt; }
+    public function duree_emprunt() { return $this->_duree_emprunt; }
     
-    public function setDureeEmprunt($dureeEmprunt)
+    public function setDuree_emprunt($dureeEmprunt)
     {
         $dureeEmprunt = (int)$dureeEmprunt;
-        $this->_dureeEmprunt = $dureeEmprunt;
+        $this->_duree_emprunt = $dureeEmprunt;
     }
     
-    public function dureeRetard() { return $this->_dureeRetard; }
+    public function duree_retard() { return $this->_duree_retard; }
     
-    public function setDureeRetard($dureeRetard)
+    public function setDuree_retard($dureeRetard)
     {
         $dureeRetard = (int)$dureeRetard;
         
-        $this->_dureeRetard = $dureeRetard;
+        $this->_duree_retard = $dureeRetard;
     }
 }

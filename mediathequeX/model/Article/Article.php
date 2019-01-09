@@ -2,14 +2,14 @@
 abstract class Article
 {
     private $_id = 0;
-    private $_estEmprunte = false;
-    private $_aReparer = false;
+    private $_est_emprunte = false;
+    private $_a_reparer = false;
 
-    private $_dateAjout = "";
-    private $_prixAchat = 0;
+    private $_date_ajout = "";
+    private $_prix_achat = 0;
     private $_commentaire = "";
     
-    private $_ficheArticle = NULL;
+    private $_fiche_article = NULL;
     
     //--------------------------Constructeur---------------------------//
     
@@ -28,37 +28,37 @@ abstract class Article
         $this->_id = $id;
     }
     
-    public function estEmprunte() { return $this->_estEmprunte; }
+    public function est_emprunte() { return $this->_est_emprunte; }
     
-    public function setEstEmprunte($estEmprunte)
+    public function set_est_emprunte($estEmprunte)
     {
         $estEmprunte = (bool)$estEmprunte;
         
-        $this->_estEmprunte = $estEmprunte;
+        $this->_est_emprunte = $estEmprunte;
     }
     
-    public function aReparer() { return $this->_aReparer; }
+    public function a_reparer() { return $this->_a_reparer; }
     
-    public function setAReparer($aReparer)
+    public function setA_reparer($aReparer)
     {
         $aReparer = (bool)$aReparer;
         
-        $this->_aReparer = $aReparer;
+        $this->_a_reparer = $aReparer;
     }
 
-    public function dateAjout() { return $this->_dateAjout; }
+    public function date_ajout() { return $this->_date_ajout; }
     
-    public function setDateAjout($dateAjout)
+    public function setDate_ajout($dateAjout)
     {
-        $this->_dateAjout = $dateAjout;
+        $this->_date_ajout = $dateAjout;
     }
     
     
-    public function prixAchat() { return $this->_prixAchat; }
+    public function prix_achat() { return $this->_prix_achat; }
     
-    public function setPrixAchat($prixAchat)
+    public function setPrix_achat($prixAchat)
     {
-        $this->_prixAchat = $prixAchat;
+        $this->_prix_achat = $prixAchat;
     }
     public function commentaire() { return $this->_commentaire; }
     
@@ -67,10 +67,10 @@ abstract class Article
         $this->_commentaire = $commentaire;
     }
     
-    public function ficheArticle() { return $this->_ficheArticle; }
+    public function fiche_article() { return $this->_fiche_article; }
     
-    public function setFicheArticle(FicheArticle $ficheArticle)
+    public function setFiche_article(FicheArticle $ficheArticle)
     {
-        $this->_ficheArticle = $ficheArticle;
+        $this->_fiche_article = $ficheArticle;
     }
 }
