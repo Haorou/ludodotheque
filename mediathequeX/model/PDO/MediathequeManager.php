@@ -46,9 +46,15 @@ class MediathequeManager extends ManagerPDO
                 "duree_retard" => $mediatheque->duree_retard()
                 
             ));
-            // VOIR SI APPELLE AUTRE MANAGER
        }
         
-        
+       public function readParametre()
+       {
+           $readParametres = $this->_db->query("SELECT * FROM parametres");
+           
+           $donnees = $readParametres->fetch(PDO::FETCH_ASSOC);
+           
+           return new Mediatheque($donnees);
+       }
        
     }

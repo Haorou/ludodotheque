@@ -40,4 +40,15 @@ class ElementsDuJeu
     {
         $this->_quantite = $quantite;
     }
+    
+    function __toString()
+    {
+        $edj = "</br>Je suis un ElementsDuJeu</br>";
+        $edj .= "id = ".$this->id()."</br>";
+        $edj .= "civilite = ".$this->element_jeu()."</br>";
+        $edj .= "nom = ".$this->couleur()."</br>";
+        $edj .= "prenom = ".$this->quantite()."</br>";
+        
+        return $edj;
+    }
 }

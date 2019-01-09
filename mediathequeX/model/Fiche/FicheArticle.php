@@ -9,7 +9,6 @@ abstract class FicheArticle
     private $_age_min = 0;
     private $_age_max = 0;
     private $_date_de_publication = "";
-    private $_elements_du_jeu = array();
     
     //--------------------------Constructeur---------------------------//
 
@@ -75,12 +74,5 @@ abstract class FicheArticle
     {
         $dateDePublication = (string)$dateDePublication;
         $this->_date_de_publication = $dateDePublication;
-    }
-    
-    public function elements_du_jeu() { return $this->_elements_du_jeu; }
-    
-    public function setElements_duJeu(ElementsDuJeu $elementsDuJeu)
-    {
-        $this->_elements_du_jeu[] = $elementsDuJeu;
     }
 }

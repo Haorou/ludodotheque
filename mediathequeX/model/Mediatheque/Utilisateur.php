@@ -65,4 +65,15 @@ class Utilisateur
         
         $this->_privilege = $privilege;
     }
+    
+    function __toString()
+    {
+        $uti = "</br>Je suis un Utilisateur</br>";
+        $uti .= "id = " .$this->id()."</br>";
+        $uti .= "pseudo = " .$this->pseudo()."</br>";
+        $uti .= "mot_de_passe = " .$this->mot_de_passe()."</br>";
+        $uti .= "privilege = " .$this->privilege()."</br>";
+        
+        return $uti;
+    }
 }

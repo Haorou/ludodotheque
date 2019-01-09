@@ -84,4 +84,33 @@ class FicheJeu extends FicheArticle
     public function setTypes_de_jeu($typeDeJeu) {
         $this->_types_de_jeu[] = $typeDeJeu;
     }
+    
+    private $_types_de_jeu = array();
+    function __toString()
+    {
+        $fic = "</br>Je suis une FicheJeu</br>";
+        $fic .= "id = ".$this->id()."</br>";
+        $fic .= "titre = ".$this->titre()."</br>";
+        $fic .= "auteur = ".$this->auteur()."</br>";
+        $fic .= "editeur = ".$this->editeur()."</br>";
+        $fic .= "age_min = ".$this->age_min()."</br>";
+        $fic .= "age_max = ".$this->age_max()."</br>";
+        $fic .= "nombre_de_joueurs_min = ".$this->nombre_de_joueurs_min()."</br>";
+        $fic .= "nombre_de_joueurs_max = ".$this->nombre_de_joueurs_max()."</br>";
+        $fic .= "duree_min_de_jeu = ".$this->duree_min_de_jeu()."</br>";
+        $fic .= "duree_max_de_jeu = ".$this->duree_max_de_jeu()."</br>";
+        $fic .= "descriptif = ".$this->descriptif()."</br>";
+        
+        foreach($this->elements_du_jeu() as $element_du_jeu)
+        {
+            $fic .= $element_du_jeu;
+        }
+
+        foreach($this->types_de_jeu() as $type_de_jeu)
+        {
+            $fic .= $type_de_jeu;
+        }
+        
+        return $fic;
+    }
 }

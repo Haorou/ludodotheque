@@ -93,4 +93,19 @@ class Adresse
     {   
         $this->_region = $region;
     }
+    
+    function __toString()
+    {
+        $adr = "</br>Je suis un Adresse</br>";
+        $adr .= "id = ".$this->id()."</br>";
+        $adr .= "numero = ".$this->numero()."</br>";
+        $adr .= "nom_voie = ".$this->nom_voie()."</br>";
+        $adr .= "type_voie = ".$this->type_voie()."</br>";
+        $adr .= "region = ".$this->region()."</br>";
+        $adr .= "code_postal = ".$this->code_postal()."</br>";
+        $adr .= "ville = ".$this->ville()."</br>";
+        $adr .= "complement = ".$this->complement()."</br>";
+        
+        return $adr;
+    }
 }

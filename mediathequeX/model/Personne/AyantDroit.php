@@ -25,4 +25,15 @@ class AyantDroit extends Personne
     
     //----------------------Getters and Setters------------------------//
 
+     function __toString()
+     {
+         $ay = "</br>Je suis un AyantDroit</br>";
+         $ay .= "id = ".$this->id()."</br>";
+         $ay .= "civilite = ".$this->civilite()."</br>";
+         $ay .= "nom = ".$this->nom()."</br>";
+         $ay .= "prenom = ".$this->prenom()."</br>";
+         
+         return $ay;
+     }
+     
 }

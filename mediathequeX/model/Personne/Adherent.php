@@ -54,7 +54,7 @@ class Adherent extends Personne
     {
         $chequeEstDepose = (bool)$chequeEstDepose;
         
-        $this->_prenom = $chequeEstDepose;
+        $this->_cheque_est_depose = $chequeEstDepose;
     }
     
     public function adresse() { return $this->_adresse; }
@@ -64,13 +64,13 @@ class Adherent extends Personne
         $this->_adresse = $adresse;
     }
     
-    public function date_adhesions() { return $this->_dateAdhesion; }
-    public function first_date_adhesion() { return $this->_dateAdhesion[0]; }
-    public function last_date_adhesion() { return $this->_dateAdhesion[count(_dateAdhesion)-1]; }
+    public function date_adhesions() { return $this->_date_adhesions; }
+    public function first_date_adhesion() { return $this->date_adhesions()[0]; }
+    public function last_date_adhesion() { return $this->date_adhesions()[count($this->date_adhesions())-1]; }
     
-    public function set_date_adhesions($dateAdhesion)
+    public function setDate_adhesions($date_adhesion)
     {
-        $this->_dateAdhesion[] = $dateAdhesion;
+        $this->_date_adhesions[] = $date_adhesion;
     }
     
     public function commentaire() { return $this->_commentaire; }
@@ -89,12 +89,24 @@ class Adherent extends Personne
     
     function __toString() 
     {
-        $rep = "";
+        $adh = "</br>Je suis un Adherent</br>";
+        $adh .= "id = ".$this->id()."</br>";
+        $adh .= "civilite = ".$this->civilite()."</br>";
+        $adh .= "nom = ".$this->nom()."</br>";
+        $adh .= "prenom = ".$this->prenom()."</br>";
+        $adh .= "commentaire = ".$this->commentaire()."</br>";
+        $adh .= "adhesion_a_renouveller = ".$this->adhesion_a_renouveller()."</br>";
+        $adh .= "cheque_est_depose = ".$this->chaque_est_depose()."</br>";
+        $adh .= "first_date_adhesion = ".$this->first_date_adhesion()."</br>";
+        $adh .= "last_date_adhesion = ".$this->last_date_adhesion()."</br>";
+        
         foreach($this->ayant_droits() as $ayantdroit)
-        {
-            $rep .= "<div class=\"Adherent\">$ayantdroit</div>";
+        {            
+            $adh .= $ayantdroit;
         }
         
-        return $rep;
+        $adh .= $this->adresse();
+
+        return $adh;
     }
 }

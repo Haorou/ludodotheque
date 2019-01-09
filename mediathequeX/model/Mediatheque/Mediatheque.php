@@ -94,4 +94,18 @@ class Mediatheque
         
         $this->_duree_retard = $dureeRetard;
     }
+    
+    function __toString()
+    {
+        $med = "</br>Je suis la Mediatheque</br>";
+        $med .= "cout_adhesion = " .$this->cout_adhesion()."</br>";
+        $med .= "cout_caution = " .$this->cout_caution()."</br>";
+        $med .= "duree_adhesion = " .$this->duree_adhesion()."</br>";
+        $med .= "nombre_emprunt_autorisee = " .$this->nombre_emprunt_autorisee()."</br>";
+        $med .= "nombre_ayantdroit_autorisee = " .$this->nombre_ayantdroit_autorisee()."</br>";
+        $med .= "duree_emprunt = " .$this->duree_emprunt()."</br>";
+        $med .= "duree_retard = " .$this->duree_retard()."</br>";
+        
+        return $med;
+    }
 }

@@ -32,6 +32,10 @@ spl_autoload_register('chargerClasse');
 
 session_start();
 
+
+
+/*
+// ================================   CREATION D'UN ADHERENT ET AYANTDROIT + CREATION DANS BASE DE DONNES =====================================
 $ayantdroit1 = new AyantDroit(["civilite" => "madame",
                                 "nom" => "Morto",
                                 "prenom" => "Louis"]);
@@ -56,18 +60,18 @@ $adresse = new Adresse(["numero" => 26,
                         "ville" => "Vannes",
                          "region" => "Bretagne"]);
 
-$dates_adhesion= ["2019-04-09"];
+$dates_adhesion= "2019-04-09";
 $adherent->setAdresse($adresse);
-$adherent->set_date_adhesions($dates_adhesion);
+$adherent->setDate_adhesions($dates_adhesion);
 $adherent->setAyant_droits($ayantdroit1);
 $adherent->setAyant_droits($ayantdroit2);
 
 echo $adherent;
-$persoManager->createAdherent($adherent);
+//$persoManager->createAdherent($adherent);
+*/
 
-
-// Variables utilisï¿½s pour activer certaines composantes de la navbar
-// Utilisation de $GLOBALS par la suite pour utiliser ces variables qu'on dï¿½finit ï¿½ chaque fois par FALSE
+// Variables utilisées pour activer certaines composantes de la navbar
+// Utilisation de $GLOBALS par la suite pour utiliser ces variables qu'on définit à chaque fois par FALSE
 $isActiveMenu = FALSE;
 $isActiveAdherent = FALSE;
 $isActiveArticle = FALSE;
