@@ -114,7 +114,7 @@ class PersonneManager extends ManagerPDO
                                                SET nummero = numero, nom_voie = :nom_voie, type_voie = :type_voie,
                                                complet = :complement, code_postal = :code_postal, ville = :ville
                                                WHERE id = :id");
-        
+      
         $updateAdresse->execute(array(
             "numero" => $perso->adresse()->numero(),
             "nom_voie" => $perso->adresse()->nom_voie(),
