@@ -33,6 +33,18 @@ spl_autoload_register('chargerClasse');
 session_start();
 
 /*
+ // ================================   CREATION D'UN JEU + CREATION DANS BASE DE DONNES =====================================
+ */
+
+/*
+ // ================================   CREATION D'UN EMPRUNT + CREATION DANS BASE DE DONNES =====================================
+ */
+
+/*
+ // ================================   READ + UPDATE MEDIATHEQUE + CREATION DANS BASE DE DONNES =====================================
+ */
+
+/*
  // ================================   CREATION D'UNE FICHEJEU ET ELEMENTS DU JEU + CREATION DANS BASE DE DONNES =====================================
 
 $ficheJeuManager  = new FicheJeuManager();
