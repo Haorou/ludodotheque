@@ -17,12 +17,13 @@ class MediathequeManager extends ManagerPDO
         }
     
     
-    public function readParametre()
-    {
-        $q = $this->_db->query('SELECT * FROM parametres');
-        $donnees = $q->fetch(PDO::FETCH_ASSOC);
-        
-      return new Mediatheque($donnees);}
+        public function readParametre()
+        {
+            $q = $this->_db->query('SELECT * FROM parametres');
+            $donnees = $q->fetch(PDO::FETCH_ASSOC);
+            
+          return new Mediatheque($donnees);
+        }
      
         
        public function updateParametre(Mediatheque $mediatheque)

@@ -34,12 +34,49 @@ session_start();
 
 
 /*
- // ================================   CREATION D'UN EMPRUNT + CREATION DANS BASE DE DONNES =====================================
- */
+=========================================   CODE QUI PERMET D'AVOIR LA DATE D'AUJOURD'HUI =============================================
+echo date_format(new DateTime('now'), 'Y-m-d H:i:s');
+*/
 
 /*
+ // ================================   CREATION D'UN EMPRUNT + CREATION DANS BASE DE DONNES (TODO base de données ) =====================================
+
+$adherentManager = new PersonneManager();
+$jeuManager = new JeuManager();
+$empruntManager = new EmpruntManager();
+
+// $adherent =  $adherentManager->readAdherent(5);
+// $jeu = $jeuManager->readJeu(5);
+
+$adherent = new Adherent(["civilite" => "monsieur",
+                        "nom" => "Grenec",
+                        "prenom" => "JEAN",
+                        "date_adhesions" => "2019-01-05",
+                        "commentaire" => "a boire"]);
+
+$jeu = new Jeu(["date_ajout" => "2019-01-12",
+    "prix_achat" => 40,
+    "commentaire" => "Que la guerre commence"]);
+
+$emprunt = new Emprunt(["date_emprunt" => "2019-01-12",
+                        "commentaire" => "Un bel emprunt !"]);
+
+$emprunt->setAdherent($adherent);
+$emprunt->setArticle($jeu);
+
+
+echo $emprunt;
+//$empruntManager->createEmprunt($empruntArticle);
+*/
+
+
+
+
  // ================================   READ + UPDATE MEDIATHEQUE + CREATION DANS BASE DE DONNES =====================================
- */
+$mediathequeManager = new MediathequeManager();
+$mediatheque = $mediathequeManager->readParametre();
+
+
 
 /*
  // ================================   CREATION D'UNE FICHEJEU ET ELEMENTS DU JEU + CREATION DANS BASE DE DONNES =====================================
@@ -87,10 +124,6 @@ $jeu = new Jeu(["date_ajout" => "2019-01-12",
                 "prix_achat" => 40,
                 "commentaire" => "Que la guerre commence"]);
 
-
-
-
-
 $alerte1 = new AlerteJeu(["element_du_jeu" => "pion",
                             "probleme" => "manquant" ,
                             "quantite" => 2,
@@ -124,6 +157,7 @@ $ayantdroit2 = new AyantDroit(["civilite" => "autre",
 $adherent = new Adherent(["civilite" => "monsieur",
                           "nom" => "Grenec",
                           "prenom" => "JEAN",
+                          "date_adhesions" => "2019-01-05",
                           "commentaire" => "a boire"]);
 
 
@@ -135,9 +169,7 @@ $adresse = new Adresse(["numero" => 26,
                         "ville" => "Vannes",
                          "region" => "Bretagne"]);
 
-$dates_adhesion= "2019-04-09";
 $adherent->setAdresse($adresse);
-$adherent->setDate_adhesions($dates_adhesion);
 $adherent->setAyant_droits($ayantdroit1);
 $adherent->setAyant_droits($ayantdroit2);
 
