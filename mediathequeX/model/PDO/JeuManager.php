@@ -27,6 +27,8 @@ class JeuManager extends ManagerPDO
         ));
         
         $jeu->hydrate(['id' => $this->_db->lastInsertId()]);
+        
+        
     }
     
     public function updateJeu(Jeu $jeu)
@@ -43,7 +45,28 @@ class JeuManager extends ManagerPDO
             "prix_achat" => $jeu->prix_achat(),
             "id" => $jeu->id()
         ));
-        // VOIR SI APPELLE AUTRE MANAGER
+        
+        foreach($jeu->alertes() as $alerte)
+        {
+            $updateAlerteJeu = $this->_db->prepare("UPDATE alerte
+                                                    SET couleur = :couleur,
+                                                    element_jeu = :element_jeu,
+                                                    probleme = :probleme,
+                                                    quantite = :quantite,
+                                                    commentaire = :commentaire,
+                                                    WHERE id = :id)");
+            
+            $updateAlerteJeu->execute(array(
+                "couleur" => $alerte->couleur(),
+                "element_jeu" => $alerte->element_jeu(),
+                "probleme" => $alerte->probleme(),
+                "quantite" => $alerte->quantite(),
+                "commentaire" => $alerte->commentaire(),
+                "id" => $alerte->id()
+            ));
+        }
+        
+        // emprunt
     }
     
     public function deleteJeu(Jeu $jeu) // A VOIR
