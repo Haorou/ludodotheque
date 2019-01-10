@@ -33,7 +33,7 @@ spl_autoload_register('chargerClasse');
 session_start();
 
 /*
- // ================================   CREATION D'UNE FICHEJEU ET ELEMENTS DU JEU + CREATION DANS BASE DE DONNES (TODO) =====================================
+ // ================================   CREATION D'UNE FICHEJEU ET ELEMENTS DU JEU + CREATION DANS BASE DE DONNES =====================================
 
 $ficheJeuManager  = new FicheJeuManager();
 
@@ -61,8 +61,8 @@ $ficheJeu->setElements_du_jeu($elementDeJeu2);
 $ficheJeu->setTypes_de_jeu("familial");
 $ficheJeu->setTypes_de_jeu("hasard");
 echo $ficheJeu;
+$ficheJeuManager->createFicheJeu($ficheJeu);
 */
-
 
 /*
 // ================================   CREATION D'UN ADHERENT ET AYANTDROIT + CREATION DANS BASE DE DONNES =====================================
