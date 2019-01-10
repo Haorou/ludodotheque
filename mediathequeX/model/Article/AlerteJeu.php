@@ -84,13 +84,7 @@ class AlerteJeu
     {
         $this->_commentaire = $commentaire;
     }
-    
-    private $_date_emprunt = "";
-    private $_element_du_jeu = "";
-    private $_probleme = "";
-    private $_quantite = 0;
-    private $_commentaire = "";
-    
+
     function __toString()
     {
         $ale = "</br>Je suis une AlerteJeu</br>";

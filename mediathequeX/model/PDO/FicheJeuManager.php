@@ -187,51 +187,35 @@ class FicheJeuManager extends ManagerPDO
     {
         $readJeu = $this->_db->prepare("SELECT * FROM fiche_jeu
                                         INNER JOIN fiche_article ON fiche_article.id = fiche_jeu.id_fiche_article
-                                        WHERE fiche_jeu.id_fiche_article = :id)");
+                                        WHERE fiche_jeu.id_fiche_article = :id");
         $readJeu->execute(array(
             "id" => $info));
         
         $donnees = $readJeu->fetch(PDO::FETCH_ASSOC);
+
         $ficheJeu = new FicheJeu($donnees);
         
-        $readTypeJeu = $this->_db->prepare("SELECT type_jeu FROM type_jeu
-                                        WHERE id_fiche_jeu = :id)");
+        $readTypeJeu = $this->_db->prepare("SELECT type_jeu FROM comp_fiche_jeu_type_jeu
+                                        WHERE id_fiche_jeu = :id");
         $readTypeJeu->execute(array(
             "id" => $ficheJeu->id()));
         
-        $typesDeJeu = [];
-        
         while($typeJeu = $readTypeJeu->fetch())
         {
-            $typesDeJeu[] = $typeJeu;
+            $ficheJeu->setTypes_de_jeu($typeJeu[0]);
         }
-        
-        foreach($typesDeJeu as $typeDeJeu)
-        {
-            $ficheJeu->setTypes_de_jeu($typeDeJeu);
-        }
-        
-        $elementsDeJeux = [];
-        
+
         $readElements = $this->_db->prepare("SELECT * FROM comp_element_jeu_fiche_jeu
-                                        WHERE id_fiche_jeu = :id)");
+                                        WHERE id_fiche_jeu = :id");
         $readElements->execute(array(
             "id" => $ficheJeu->id()));
         
         while($element = $readElements->fetch())
         {
-            $elementsDeJeux[] = ElementsDuJeu($element);
+            $ficheJeu->setElements_du_jeu(new ElementsDuJeu($element));
         }
         
-        foreach($elementsDeJeux as $elementDeJeux)
-        {
-            $ficheJeu->setElements_du_jeu($elementDeJeux);
-        }
-        
-        
-        
-        $donnees = $readJeu->fetch(PDO::FETCH_ASSOC);
-        $ficheJeu = new Jeu($donnees);
+        return $ficheJeu;
     }
     
     public function jeuExists($info)

@@ -32,9 +32,6 @@ spl_autoload_register('chargerClasse');
 
 session_start();
 
-/*
- // ================================   CREATION D'UN JEU + CREATION DANS BASE DE DONNES =====================================
- */
 
 /*
  // ================================   CREATION D'UN EMPRUNT + CREATION DANS BASE DE DONNES =====================================
@@ -72,9 +69,44 @@ $ficheJeu->setElements_du_jeu($elementDeJeu1);
 $ficheJeu->setElements_du_jeu($elementDeJeu2);
 $ficheJeu->setTypes_de_jeu("familial");
 $ficheJeu->setTypes_de_jeu("hasard");
-echo $ficheJeu;
-$ficheJeuManager->createFicheJeu($ficheJeu);
+// echo $ficheJeu;
+// $ficheJeuManager->createFicheJeu($ficheJeu);
+
 */
+
+/*
+ // ================================   CREATION D'UN JEU + CREATION DANS BASE DE DONNES =====================================
+
+
+$ficheJeuManager  = new FicheJeuManager();
+
+$jeuManager= new JeuManager();
+
+$jeu = new Jeu(["date_ajout" => "2019-01-12",
+                "prix_achat" => 40,
+                "commentaire" => "Que la guerre commence"]);
+
+
+
+
+
+$alerte1 = new AlerteJeu(["element_du_jeu" => "pion",
+                            "probleme" => "manquant" ,
+                            "quantite" => 2,
+                            "commentaire" => "a retrouver"]);
+
+$alerte2 = new AlerteJeu(["element_du_jeu" => "carte",
+                        "probleme" => "degradé",
+                        "quantite" => 1,
+                        "commentaire" => "pas grave"]);
+
+$jeu->setFiche_article($ficheJeuManager->readFicheJeu(5));
+$jeu->setAlertes($alerte1);
+$jeu->setAlertes($alerte2);
+echo $jeu;
+$jeuManager->createJeu($jeu);
+*/
+
 
 /*
 // ================================   CREATION D'UN ADHERENT ET AYANTDROIT + CREATION DANS BASE DE DONNES =====================================

@@ -36,8 +36,6 @@ class Jeu extends Article
         $this->_alertes[] = $alerte;
     }
  
-    private $_fiche_article = NULL;
-    private $_alertes = array();
     function __toString()
     {
         $jeu = "</br>Je suis un Jeu</br>";
