@@ -107,7 +107,7 @@ class FicheJeu extends FicheArticle
 
         foreach($this->types_de_jeu() as $type_de_jeu)
         {
-            $fic .= $type_de_jeu;
+            $fic .= "types_de_jeu = ". $type_de_jeu ."</br>";
         }
         
         return $fic;

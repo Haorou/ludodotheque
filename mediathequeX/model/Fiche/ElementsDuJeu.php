@@ -1,23 +1,42 @@
 <?php
 class ElementsDuJeu
-{        
+{   
+    private $_id_fiche_jeu = 0;
     private $_element_jeu = "";
     private $_couleur = "";
     private $_quantite = 0;
 
     //--------------------------Constructeur---------------------------//
     
+    public function __construct(array $donnes)
+    {
+        $this->hydrate($donnes);
+    }
+    
+    public function hydrate(array $donnes)
+    {
+        foreach($donnes as $cles => $values)
+        {
+            $method = "set" .ucfirst($cles);
+            
+            if(method_exists($this,$method))
+            {
+                $this->$method($values);
+            }
+        }
+    }
+    
     //----------------------------Methodes-----------------------------//
 
     //----------------------Getters and Setters------------------------//
     
-    public function id() { return $this->_id; }
+    public function id_fiche_jeu() { return $this->_id_fiche_jeu; }
     
-    public function setId($id)
+    public function setId_fiche_jeu($id)
     {
         $id = (int)$id;
         
-        $this->_id = $id;
+        $this->_id_fiche_jeu = $id;
     }
     
     public function element_jeu() { return $this->_element_jeu; }
@@ -44,10 +63,10 @@ class ElementsDuJeu
     function __toString()
     {
         $edj = "</br>Je suis un ElementsDuJeu</br>";
-        $edj .= "id = ".$this->id()."</br>";
-        $edj .= "civilite = ".$this->element_jeu()."</br>";
-        $edj .= "nom = ".$this->couleur()."</br>";
-        $edj .= "prenom = ".$this->quantite()."</br>";
+        $edj .= "id_fiche_jeu = ".$this->id_fiche_jeu()."</br>";
+        $edj .= "element_jeu = ".$this->element_jeu()."</br>";
+        $edj .= "couleur = ".$this->couleur()."</br>";
+        $edj .= "quantite = ".$this->quantite()."</br>";
         
         return $edj;
     }

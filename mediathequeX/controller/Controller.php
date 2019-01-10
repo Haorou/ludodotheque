@@ -33,13 +33,41 @@ spl_autoload_register('chargerClasse');
 session_start();
 
 /*
- // ================================   CREATION D'UNE FICHEJEU ET ELEMENTS DU JEU + CREATION DANS BASE DE DONNES =====================================
+ // ================================   CREATION D'UNE FICHEJEU ET ELEMENTS DU JEU + CREATION DANS BASE DE DONNES (TODO) =====================================
 
-A FAIIIIIIIIIIIIIIIIIIIRE
+$ficheJeuManager  = new FicheJeuManager();
+
+$ficheJeu = new FicheJeu(["titre" => "Monopoly Game of Thrones",
+                          "auteur" => "Elizabeth Magie Charles Darrow",
+                          "editeur" => "Usaopoly",
+                          "age_min" => 8,
+                          "date_de_publication" => "2015-10-15",
+                          "nombre_de_joueurs_min" => 2,
+                          "nombre_de_joueurs_max" => 6,
+                          "duree_min_de_jeu" => 1,
+                          "duree_max_de_jeu" => 12,
+                          "descriptif" => "Quel jeu !"]);
+
+$elementDeJeu1 = new ElementsDuJeu(["element_jeu" => "pion",
+                                    "couleur" => "blanc",
+                                    "quantite" => 6]);
+
+$elementDeJeu2 = new ElementsDuJeu(["element_jeu" => "carte",
+                                    "couleur" => "blanc",
+                                    "quantite" => 6]);
+
+$ficheJeu->setElements_du_jeu($elementDeJeu1);
+$ficheJeu->setElements_du_jeu($elementDeJeu2);
+$ficheJeu->setTypes_de_jeu("familial");
+$ficheJeu->setTypes_de_jeu("hasard");
+echo $ficheJeu;
 */
+
 
 /*
 // ================================   CREATION D'UN ADHERENT ET AYANTDROIT + CREATION DANS BASE DE DONNES =====================================
+$persoManager  = new PersonneManager();
+
 $ayantdroit1 = new AyantDroit(["civilite" => "madame",
                                 "nom" => "Morto",
                                 "prenom" => "Louis"]);
@@ -48,12 +76,10 @@ $ayantdroit2 = new AyantDroit(["civilite" => "autre",
                                 "nom" => "Bourbi",
                                 "prenom" => "Babar"]);
 
-$persoManager  = new PersonneManager();
-
 $adherent = new Adherent(["civilite" => "monsieur",
-                       "nom" => "Grenec",
-                       "prenom" => "JEAN",
-                       "commentaire" => "a boire"]);
+                          "nom" => "Grenec",
+                          "prenom" => "JEAN",
+                          "commentaire" => "a boire"]);
 
 
 $adresse = new Adresse(["numero" => 26,
@@ -74,8 +100,8 @@ echo $adherent;
 //$persoManager->createAdherent($adherent);
 */
 
-// Variables utilisées pour activer certaines composantes de la navbar
-// Utilisation de $GLOBALS par la suite pour utiliser ces variables qu'on définit à chaque fois par FALSE
+// Variables utilisï¿½es pour activer certaines composantes de la navbar
+// Utilisation de $GLOBALS par la suite pour utiliser ces variables qu'on dï¿½finit ï¿½ chaque fois par FALSE
 $isActiveMenu = FALSE;
 $isActiveAdherent = FALSE;
 $isActiveArticle = FALSE;
