@@ -4,9 +4,10 @@ class AlerteJeu
     private $_id;
     
     private $_adherent = NULL;
-    private $_date_emprunt = "";
-    private $_element_du_jeu = "";
+    private $_date_emprunt = NULL;
+    private $_element_jeu = "";
     private $_probleme = "";
+    private $_couleur = "";
     private $_quantite = 0;
     private $_commentaire = "";
     
@@ -57,11 +58,11 @@ class AlerteJeu
         $this->_date_emprunt = $dateEmprunt;
     }
     
-    public function element_du_jeu() { return $this->_element_du_jeu; }
+    public function element_jeu() { return $this->_element_jeu; }
     
-    public function setElement_du_jeu($element_du_jeu)
+    public function setElement_jeu($element_jeu)
     {
-        $this->_element_du_jeu = $element_du_jeu;
+        $this->_element_jeu = $element_jeu;
     }
     
     public function probleme() { return $this->_probleme; }
@@ -69,6 +70,13 @@ class AlerteJeu
     public function setProbleme($probleme)
     {
         $this->_probleme = $probleme;
+    }
+    
+    public function couleur() { return $this->_couleur; }
+    
+    public function setCouleur($couleur)
+    {
+        $this->_couleur = $couleur;
     }
     
     public function quantite() { return $this->_quantite; }
@@ -91,10 +99,11 @@ class AlerteJeu
         $ale .= "id = ".$this->id()."</br>";
         
         $ale .= $this->adherent();
-        
+
         $ale .= "date_emprunt = ".$this->date_emprunt()."</br>";
-        $ale .= "element_du_jeu = ".$this->element_du_jeu()."</br>";
+        $ale .= "element_jeu = ".$this->element_jeu()."</br>";
         $ale .= "probleme = ".$this->probleme()."</br>";
+        $ale .= "couleur = ".$this->couleur()."</br>";
         $ale .= "quantite = ".$this->quantite()."</br>";
         $ale .= "commentaire = ".$this->commentaire()."</br>";
         

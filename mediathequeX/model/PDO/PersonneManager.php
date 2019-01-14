@@ -158,63 +158,114 @@ require_once("model/PDO/ManagerPDO.php");
         
         public function deleteAdherent(Adherent $perso)
         {
-            $deleteAdresse = $this->_db->prepare("DELETE FROM adresse
-                                        WHERE id = :id)");
-            $deleteAdresse->execute(array(
-                "id" => $perso->adresse()->id()));
-            
             $deleteAdhesion = $this->_db->prepare("DELETE FROM adhesion
-                                        WHERE id = :id)");
+                                        WHERE id_adherent = :id");
             $deleteAdhesion->execute(array(
                 "id" => $perso->id()));
             
             $deleteAdherent = $this->_db->prepare("DELETE FROM adherent
-                                        WHERE id = :id)");
+                                        WHERE id_personne = :id");
             $deleteAdherent->execute(array(
                 "id" => $perso->id()));
+         
+            $deleteAdresse = $this->_db->prepare("DELETE FROM adresse
+                                        WHERE id = :id");
+            $deleteAdresse->execute(array(
+                "id" => $perso->adresse()->id()));
+            
             
             $deletePersonne = $this->_db->prepare("DELETE FROM personne
-                                        WHERE id = :id)");
+                                        WHERE id = :id");
+            
             $deletePersonne->execute(array(
                 "id" => $perso->id()));
+            
+            foreach($perso->ayant_droits() as $ayantdroit)
+            {
+                $deleteAyantdroit = $this->_db->prepare("DELETE FROM ayantdroit
+                                        WHERE id_adherent = :id");
+                $deleteAyantdroit->execute(array(
+                    "id" => $perso->id()));
+                
+                $deletePersonne = $this->_db->prepare("DELETE FROM personne
+                                        WHERE id = :id");
+                
+                $deletePersonne->execute(array(
+                    "id" => $ayantdroit->id()));
+            }
         }
         
         public function deleteAyantDroit(AyantDroit $perso)
         {
             $deleteAyantDroit = $this->_db->prepare("DELETE FROM ayantdroit
-                                        WHERE id = :id)");
+                                        WHERE id_adherent = :id");
             $deleteAyantDroit->execute(array(
                 "id" => $perso->id()));
             
             $deletePersonne = $this->_db->prepare("DELETE FROM personne
-                                        WHERE id = :id)");
+                                        WHERE id = :id");
             $deletePersonne->execute(array(
                 "id" => $perso->id()));
         }
         
         public function readAdherent($info)
         {   
-            $adherent = null;
-            if (is_int($info))
+            // ============== ICI ON PEUPLE DE :      PERSONNE / ADHERENT   =========================== //
+            
+            $readAdherent = $this->_db->prepare('SELECT * FROM personne
+                                    INNER JOIN adherent ON adherent.id_personne = personne.id 
+                                    WHERE personne.id = :id');
+            
+            $readAdherent->execute(array(
+                "id" => $info));
+            
+            $donneesAdherent = $readAdherent->fetch(PDO::FETCH_ASSOC);
+
+            $adherent = new Adherent($donneesAdherent);
+
+            // ============== ICI ON PEUPLE DE :      ADRESSE   =========================== //
+            
+            $readAdresse = $this->_db->prepare('SELECT * FROM adherent 
+                                    INNER JOIN adresse ON adherent.id_adresse = adresse.id
+                                    WHERE adherent.id_personne = :id');
+            
+            $readAdresse->execute(array(
+                "id" => $info));
+            
+            $donneesAdresse = $readAdresse->fetch(PDO::FETCH_ASSOC);
+            
+            $adresse = new Adresse($donneesAdresse);
+            
+            $adherent->setAdresse($adresse);
+            
+            // ============== ICI ON PEUPLE DE :      DATE ADHESIONS  =========================== //
+            
+            $readAdhesion = $this->_db->prepare('SELECT * FROM adherent
+                                    INNER JOIN adhesion ON adhesion.id_adherent = adherent.id_personne
+                                    WHERE adherent.id_personne = :id');
+            
+            $readAdhesion->execute(array(
+                "id" => $info));
+            
+            while($dateAdhesion = $readAdhesion->fetch())
             {
-                $q = $this->_db->query('SELECT * FROM personne 
-                                        INNER JOIN adherent ON adherent.id_personne = personne.id 
-                                        INNER JOIN adhesion ON adhesion.id_adherent = adherent.id_personne
-                                        INNER JOIN adresse ON adherent.id_adresse = adresse.id  WHERE personne.id = '.$info);
-                $donnees = $q->fetch(PDO::FETCH_ASSOC);
-                
-                $adherent = new Adherent($donnees);
+                $adherent->setDate_adhesions($dateAdhesion["date_adhesion"]);
             }
-            else
+            
+            $readAyantdroit = $this->_db->prepare('SELECT * FROM ayantdroit 
+                                          INNER JOIN adherent ON adherent.id_personne = ayantdroit.id_adherent
+                                          INNER JOIN personne ON ayantdroit.id_personne = personne.id WHERE adherent.id_personne = :id');
+            
+            // ============== ICI ON PEUPLE DE :      AYANT DROITS   =========================== //
+            
+            $readAyantdroit->execute(array(
+                "id" => $info));
+            
+            while($ayantdroit = $readAyantdroit->fetch())
             {
-                $q = $this->_db->prepare('SELECT * FROM personne
-                                        INNER JOIN adherent ON adherent.id_personne = personne.id
-                                        INNER JOIN adhesion ON adhesion.id_adherent = adherent.id_personne
-                                        INNER JOIN adresse ON adherent.id_adresse = adresse.id  WHERE personne.nom = :nom');
-                $q->execute([':nom' => $info]);
-                
-                $adherent = new Adherent($q->fetch(PDO::FETCH_ASSOC));
+                $adherent->setAyant_droits(new AyantDroit($ayantdroit));
             }
+            
             return $adherent;
         }
         

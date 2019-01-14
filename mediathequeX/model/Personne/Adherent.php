@@ -2,7 +2,6 @@
 class Adherent extends Personne
 {
     private $_adhesion_a_renouveller = false;
-    private $_cheque_est_depose = false;
     private $_adresse = NULL;
     private $_date_adhesions = array ();
     private $_commentaire = "";
@@ -30,9 +29,7 @@ class Adherent extends Personne
     
     //----------------------------Methodes-----------------------------//
     
-    function isChequeDepose() {
-        return $this->_cheque_est_depose = true;
-    }
+
     function isAdhesionARenouveller() {
         return $this->_adhesion_a_renouveller = true;
     }
@@ -46,15 +43,6 @@ class Adherent extends Personne
         $adhesionARenouveller = (bool)$adhesionARenouveller;
         
         $this->_adhesion_a_renouveller = $adhesionARenouveller;
-    }
-    
-    public function chaque_est_depose() { return $this->_cheque_est_depose; }
-    
-    public function setCheque_est_depose($chequeEstDepose)
-    {
-        $chequeEstDepose = (bool)$chequeEstDepose;
-        
-        $this->_cheque_est_depose = $chequeEstDepose;
     }
     
     public function adresse() { return $this->_adresse; }
@@ -96,7 +84,6 @@ class Adherent extends Personne
         $adh .= "prenom = ".$this->prenom()."</br>";
         $adh .= "commentaire = ".$this->commentaire()."</br>";
         $adh .= "adhesion_a_renouveller = ".$this->adhesion_a_renouveller()."</br>";
-        $adh .= "cheque_est_depose = ".$this->chaque_est_depose()."</br>";
         $adh .= "first_date_adhesion = ".$this->first_date_adhesion()."</br>";
         $adh .= "last_date_adhesion = ".$this->last_date_adhesion()."</br>";
         

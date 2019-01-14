@@ -28,6 +28,28 @@ class JeuManager extends ManagerPDO
         
         $jeu->hydrate(['id' => $this->_db->lastInsertId()]);
         
+        foreach($jeu->alertes() as $alerte)
+        {
+            $addAlerteJeu = $this->_db->prepare("INSERT INTO alerte(couleur,element_jeu,probleme,quantite,commentaire)
+                                                    VALUES(:couleur,:element_jeu,:probleme,:quantite,:commentaire)");
+            
+            $addAlerteJeu->execute(array(
+                "couleur" => $alerte->couleur(),
+                "element_jeu" => $alerte->element_jeu(),
+                "probleme" => $alerte->probleme(),
+                "quantite" => $alerte->quantite(),
+                "commentaire" => $alerte->commentaire(),
+            ));
+            
+            $addCompAlerteJeu = $this->_db->prepare("INSERT INTO comp_alerte_jeu(id_alerte,id_article)
+                                                    VALUES(:id_alerte,:id_article)");
+            
+            $addCompAlerteJeu->execute(array(
+                "id_alerte" => $this->_db->lastInsertId(),
+                "id_article" => $jeu->id()
+            ));
+        }
+        
         
     }
     
@@ -105,8 +127,7 @@ class JeuManager extends ManagerPDO
     
     public function readJeu($info)
     {
-        $ficheJeuManager = new FicheJeuManager();
-
+        // ==================== ON PEUPLE AVEC : INFOS DE BASE DU JEU =========================//
         
         $resultJeu = $this->_db->query('SELECT * FROM article
                                 INNER JOIN fiche_article ON fiche_article.id = article.id_fiche_article
@@ -116,10 +137,42 @@ class JeuManager extends ManagerPDO
         $donnees = $resultJeu->fetch(PDO::FETCH_ASSOC);
 
         $jeu = new Jeu($donnees);
+        
+        // ==================== ON PEUPLE AVEC : UNE FICHE JEU ================================//
+        
+        $ficheJeuManager = new FicheJeuManager();
         $ficheJeu = $ficheJeuManager->readFicheJeu($donnees["id_fiche_article"]);
 
         $jeu->setFiche_article($ficheJeu);
         
+        // ==================== ON PEUPLE AVEC : DES ALERTES ================================//
+       
+        $resultAlerte = $this->_db->prepare('SELECT * FROM alerte
+                                           INNER JOIN comp_alerte_jeu ON comp_alerte_jeu.id_alerte = alerte.id
+                                           WHERE comp_alerte_jeu.id_article = :id_article');
+        $resultAlerte->execute(array(
+                              "id_article" => $info));
+        
+        while($alerte = $resultAlerte->fetch())
+        {
+            $alerte  = new AlerteJeu($alerte);
+            
+            if($alerte->date_emprunt() != NULL)
+            {
+                $adherentManager = new PersonneManager();
+                $resultAdherentAlerte = $this->_db->prepare('SELECT * FROM emprunt
+                                                     WHERE date_emprunt = :date_emprunt');
+                $resultAdherentAlerte->execute(array(
+                    "date_emprunt" => $alerte->date_emprunt()));
+                
+                $donnesResultAdherentAlerte = $resultAdherentAlerte->fetch(PDO::FETCH_ASSOC);
+                
+                $alerte->setAdherent($adherentManager->readAdherent($donnesResultAdherentAlerte["id_adherent"]));
+            }
+            
+            $jeu->setAlertes($alerte);
+        }
+
         return $jeu;
     }
     

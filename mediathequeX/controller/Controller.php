@@ -38,17 +38,16 @@ session_start();
 echo date_format(new DateTime('now'), 'Y-m-d H:i:s');
 */
 
-
+/*
  // ================================   CREATION D'UN EMPRUNT + CREATION DANS BASE DE DONNES (TODO base de donn�es ) =====================================
 
 $adherentManager = new PersonneManager();
 $jeuManager = new JeuManager();
 $empruntManager = new EmpruntManager();
 
-$adherent =  $adherentManager->readAdherent(6);
+$adherent =  $adherentManager->readAdherent(20);
 $jeu = $jeuManager->readJeu(5);
-echo $jeu;
-/*
+
 $adherent = new Adherent(["civilite" => "monsieur",
                         "nom" => "Grenec",
                         "prenom" => "JEAN",
@@ -58,7 +57,7 @@ $adherent = new Adherent(["civilite" => "monsieur",
 $jeu = new Jeu(["date_ajout" => "2019-01-12",
     "prix_achat" => 40,
     "commentaire" => "Que la guerre commence"]);
-*/
+
 
 $emprunt = new Emprunt(["date_emprunt" => "2019-01-12",
                         "commentaire" => "Un bel emprunt !"]);
@@ -70,7 +69,7 @@ echo $adherent;
 
 //echo $emprunt;
 //$empruntManager->createEmprunt($empruntArticle);
-
+*/
 
 
 
@@ -81,11 +80,12 @@ $mediatheque = $mediathequeManager->readParametre();
 echo $mediatheque;
 */
 
-/*
+
  // ================================   CREATION D'UNE FICHEJEU ET ELEMENTS DU JEU + CREATION DANS BASE DE DONNES =====================================
 
 $ficheJeuManager  = new FicheJeuManager();
 
+/*
 $ficheJeu = new FicheJeu(["titre" => "Monopoly Game of Thrones",
                           "auteur" => "Elizabeth Magie Charles Darrow",
                           "editeur" => "Usaopoly",
@@ -110,15 +110,15 @@ $ficheJeu->setElements_du_jeu($elementDeJeu2);
 $ficheJeu->setTypes_de_jeu("familial");
 $ficheJeu->setTypes_de_jeu("hasard");
 
-// echo $ficheJeu;
+
+$ficheJeu = $ficheJeuManager->readFicheJeu(5);
+echo $ficheJeu;
 // $ficheJeuManager->createFicheJeu($ficheJeu);
-
-
+*/
 
 
 /*
  // ================================   CREATION D'UN JEU + CREATION DANS BASE DE DONNES =====================================
-
 
 $ficheJeuManager  = new FicheJeuManager();
 
@@ -128,13 +128,15 @@ $jeu = new Jeu(["date_ajout" => "2019-01-12",
                 "prix_achat" => 40,
                 "commentaire" => "Que la guerre commence"]);
 
-$alerte1 = new AlerteJeu(["element_du_jeu" => "pion",
+$alerte1 = new AlerteJeu(["element_jeu" => "pion",
                             "probleme" => "manquant" ,
+                            "couleur" => "blanc",
                             "quantite" => 2,
                             "commentaire" => "a retrouver"]);
 
-$alerte2 = new AlerteJeu(["element_du_jeu" => "carte",
+$alerte2 = new AlerteJeu(["element_jeu" => "carte",
                         "probleme" => "degradé",
+                        "couleur" => "noir",
                         "quantite" => 1,
                         "commentaire" => "pas grave"]);
 
@@ -142,11 +144,18 @@ $jeu->setFiche_article($ficheJeuManager->readFicheJeu(5));
 $jeu->setAlertes($alerte1);
 $jeu->setAlertes($alerte2);
 echo $jeu;
+
 $jeuManager->createJeu($jeu);
+
+
+$jeuManager= new JeuManager();
+$jeu = $jeuManager->readJeu(9);
+echo $jeu;
 */
 
 
-/*
+
+
 // ================================   CREATION D'UN ADHERENT ET AYANTDROIT + CREATION DANS BASE DE DONNES =====================================
 $persoManager  = new PersonneManager();
 
@@ -177,9 +186,10 @@ $adherent->setAdresse($adresse);
 $adherent->setAyant_droits($ayantdroit1);
 $adherent->setAyant_droits($ayantdroit2);
 
-echo $adherent;
+$adherent = $persoManager->readAdherent(20);
+$persoManager->deleteAdherent($adherent);
 //$persoManager->createAdherent($adherent);
-*/
+
 
 // Variables utilis�es pour activer certaines composantes de la navbar
 // Utilisation de $GLOBALS par la suite pour utiliser ces variables qu'on d�finit � chaque fois par FALSE
