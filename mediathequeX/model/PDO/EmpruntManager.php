@@ -43,12 +43,13 @@ require_once("model/PDO/ManagerPDO.php");
         }
 
         
-        public function readEmpruntsAdherent(Adherent $perso)
+        public function readAllEmpruntsAdherent(Adherent $perso)
         {
-            $requeteEmprunts = $this->_db->prepare('SELECT * FROM adhrent
+            $requeteEmprunts = $this->_db->prepare('SELECT * FROM adherent
                                       INNER JOIN emprunt ON emprunt.id_adherent = adherent.id_personne
                                       WHERE emprunt.id_adherent = :id');
-            $requeteEmprunts->execute([':id' => $perso->id()]);
+            
+            $requeteEmprunts->execute(['id' => $perso->id()]);
             
             $listeEmprunts = [];
             
@@ -59,6 +60,46 @@ require_once("model/PDO/ManagerPDO.php");
             
             return $listeEmprunts;
         }
+        
+        public function readCurrentEmpruntsAdherent(Adherent $perso)
+        {
+            $requeteEmprunts = $this->_db->prepare('SELECT * FROM adherent
+                                      INNER JOIN emprunt ON emprunt.id_adherent = adherent.id_personne
+                                      WHERE emprunt.id_adherent = :id AND emprunt.date_retour_effectif IS NULL');
+            
+            $requeteEmprunts->execute(['id' => $perso->id()]);
+            
+            $listeEmprunts = [];
+            
+            while($requeteEmprunt = $requeteEmprunts->fetch())
+            {
+                $listeEmprunts = new Emprunt($requeteEmprunt);
+            }
+            
+            return $listeEmprunts;
+        }
+        
+        
+        public function deleteEmprunts(Emprunt $emprunt)
+        {
+            $requeteEmprunts = $this->_db->prepare('DELETE FROM emprunt
+                                      WHERE emprunt.id_article = :id AND emprunt.date_emprunt = :date_emprunt');
+            
+            $requeteEmprunts->execute([
+                'id' => $emprunt->id(),
+                'date_emprunt' => $emprunt->date_emprunt()
+            ]);
+            
+            $listeEmprunts = [];
+            
+            while($requeteEmprunt = $requeteEmprunts->fetch())
+            {
+                $listeEmprunts = new Emprunt($requeteEmprunt);
+            }
+            
+            return $listeEmprunts;
+        }
+        
         
         public function countEmprunt()
         {

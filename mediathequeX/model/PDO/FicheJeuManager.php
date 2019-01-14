@@ -122,6 +122,7 @@ class FicheJeuManager extends ManagerPDO
         $deleteFicheArticle->execute(array(
             "id_article" => $ficheJeu->id()));
         
+        
         $deleteComptElementJeuFicheJeu = $this->_db->prepare("DELETE FROM comp_element_jeu_fiche_jeu
                                                                  WHERE id_fiche_jeu = :id)");
         $deleteComptElementJeuFicheJeu->execute(array(
@@ -136,18 +137,20 @@ class FicheJeuManager extends ManagerPDO
             "id" => $ficheJeu->id()
         ));
         
+        $resultatRequetAlerte = $this->_db->prepare('SELECT * FROM alerte
+                                                INNER JOIN comp_alerte_jeu ON comp_alerte_jeu.id_alerte = alerte.id
+                                                INNER JOIN article ON article.id = comp_alerte_jeu.id_article
+                                                WHERE article.id_fiche_article = :id');
+        
+        $resultatRequetAlerte->execute(array(
+            "id" => $ficheJeu->id()
+        ));
+        
         while($unJeu = $resultatRequetJeu->fetch())
         {
             $listeDeJeux[] = new Jeu($unJeu);
         }
         
-        $resultatRequetAlerte = $this->_db->prepare('SELECT * FROM alerte
-                                                INNER JOIN comp_alerte_jeu ON comp_alerte_jeu.id_alerte = alerte.id
-                                                WHERE comp_alerte_jeu.id_article = :id');
-        
-        $resultatRequetAlerte->execute(array(
-            "id" => $ficheJeu->id()
-        ));
         
         while($uneAlerte = $resultatRequetAlerte->fetch())
         {
