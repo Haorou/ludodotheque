@@ -158,20 +158,28 @@ require_once("model/PDO/ManagerPDO.php");
         
         public function deleteAdherent(Adherent $perso)
         {
+            // ============== ICI ON SUPPRIME :   SA DATE ADHESION   =========================== //
+            
             $deleteAdhesion = $this->_db->prepare("DELETE FROM adhesion
                                         WHERE id_adherent = :id");
             $deleteAdhesion->execute(array(
                 "id" => $perso->id()));
             
+            // ============== ICI ON SUPPRIME :   ADHERENT   ================================ //
+            
             $deleteAdherent = $this->_db->prepare("DELETE FROM adherent
                                         WHERE id_personne = :id");
             $deleteAdherent->execute(array(
                 "id" => $perso->id()));
+            
+            // ============== ICI ON SUPPRIME :   SON ADRESSE   ================================ //
          
             $deleteAdresse = $this->_db->prepare("DELETE FROM adresse
                                         WHERE id = :id");
             $deleteAdresse->execute(array(
                 "id" => $perso->adresse()->id()));
+            
+            // ============== ICI ON SUPPRIME :   LA PERSONNE   ================================ //
             
             
             $deletePersonne = $this->_db->prepare("DELETE FROM personne
@@ -179,6 +187,8 @@ require_once("model/PDO/ManagerPDO.php");
             
             $deletePersonne->execute(array(
                 "id" => $perso->id()));
+            
+            // ============== ICI ON SUPPRIME :   SES AYANTDROITS   ================================ //
             
             foreach($perso->ayant_droits() as $ayantdroit)
             {
@@ -252,11 +262,11 @@ require_once("model/PDO/ManagerPDO.php");
                 $adherent->setDate_adhesions($dateAdhesion["date_adhesion"]);
             }
             
+            // ============== ICI ON PEUPLE DE :      AYANT DROITS   =========================== //
+            
             $readAyantdroit = $this->_db->prepare('SELECT * FROM ayantdroit 
                                           INNER JOIN adherent ON adherent.id_personne = ayantdroit.id_adherent
                                           INNER JOIN personne ON ayantdroit.id_personne = personne.id WHERE adherent.id_personne = :id');
-            
-            // ============== ICI ON PEUPLE DE :      AYANT DROITS   =========================== //
             
             $readAyantdroit->execute(array(
                 "id" => $info));

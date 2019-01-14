@@ -91,36 +91,33 @@ class JeuManager extends ManagerPDO
         // emprunt
     }
     
-    public function deleteJeu(Jeu $jeu) // A VOIR
+    public function deleteJeu(Jeu $jeu)
     {
-        $resultatsRequete = $this->_db->query('SELECT id_alerte FROM comp_alerte_jeu WHERE id_article = :id_article');
+        $resultatsRequete = $this->_db->prepare('SELECT id_alerte FROM comp_alerte_jeu WHERE id_article = :id_article');
         $resultatsRequete->execute(array(
             "id_article" => $jeu->id()));
         
-        $donneesIdAlerte = [];
-        
-        while($unResultat = $resultatsRequete->fetch())
-        {
-            $donneesIdAlerte[] = new AlerteJeu($unResultat);
-        }
-        
         $deleteCompAlerteJeu = $this->_db->prepare("DELETE FROM comp_alerte_jeu
-                                        WHERE id_article = :id_article)");
+                                        WHERE id_article = :id_article");
         $deleteCompAlerteJeu->execute(array(
             "id_article" => $jeu->id()));
         
         $deleteEmprunt = $this->_db->prepare("DELETE FROM emprunt
-                                        WHERE id_article = :id_article)");
+                                        WHERE id_article = :id_article");
         $deleteEmprunt->execute(array(
             "id_article" => $jeu->id()));
         
-        $deleteAlerte = $this->_db->prepare("DELETE FROM alerte
-                                        WHERE id_article = :id_article)");
-        $deleteAlerte->execute(array(
-            "id_article" => $jeu->id()));
+        foreach($jeu->alertes() as $alerte)
+        {
+            $deleteAlerte = $this->_db->prepare("DELETE FROM alerte
+                                        WHERE id = :id");
+            $deleteAlerte->execute(array(
+                "id" => $alerte->id()));
+        }
+
         
         $deleteArticle = $this->_db->prepare("DELETE FROM article
-                                        WHERE id = :id)");
+                                        WHERE id = :id");
         $deleteArticle->execute(array(
             "id" => $jeu->id()));
     }
@@ -129,7 +126,8 @@ class JeuManager extends ManagerPDO
     {
         // ==================== ON PEUPLE AVEC : INFOS DE BASE DU JEU =========================//
         
-        $resultJeu = $this->_db->query('SELECT * FROM article
+        $resultJeu = $this->_db->query('SELECT article.date_ajout, article.prix_achat, article.id, article.commentaire,
+                                article.id_fiche_article FROM article
                                 INNER JOIN fiche_article ON fiche_article.id = article.id_fiche_article
                                 INNER JOIN fiche_jeu ON fiche_jeu.id_fiche_article = fiche_article.id
                                 WHERE article.id = '.$info);

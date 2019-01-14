@@ -80,12 +80,12 @@ $mediatheque = $mediathequeManager->readParametre();
 echo $mediatheque;
 */
 
-
+/*
  // ================================   CREATION D'UNE FICHEJEU ET ELEMENTS DU JEU + CREATION DANS BASE DE DONNES =====================================
 
 $ficheJeuManager  = new FicheJeuManager();
 
-/*
+
 $ficheJeu = new FicheJeu(["titre" => "Monopoly Game of Thrones",
                           "auteur" => "Elizabeth Magie Charles Darrow",
                           "editeur" => "Usaopoly",
@@ -115,6 +115,7 @@ $ficheJeu = $ficheJeuManager->readFicheJeu(5);
 echo $ficheJeu;
 // $ficheJeuManager->createFicheJeu($ficheJeu);
 */
+
 
 
 /*
@@ -147,15 +148,15 @@ echo $jeu;
 
 $jeuManager->createJeu($jeu);
 
-
 $jeuManager= new JeuManager();
-$jeu = $jeuManager->readJeu(9);
+$jeu = $jeuManager->readJeu(11);
+$jeuManager->deleteJeu($jeu);
 echo $jeu;
-*/
 
 
 
 
+/*
 // ================================   CREATION D'UN ADHERENT ET AYANTDROIT + CREATION DANS BASE DE DONNES =====================================
 $persoManager  = new PersonneManager();
 
@@ -186,10 +187,10 @@ $adherent->setAdresse($adresse);
 $adherent->setAyant_droits($ayantdroit1);
 $adherent->setAyant_droits($ayantdroit2);
 
-$adherent = $persoManager->readAdherent(20);
-$persoManager->deleteAdherent($adherent);
+//$adherent = $persoManager->readAdherent(20);
+//$persoManager->deleteAdherent($adherent);
 //$persoManager->createAdherent($adherent);
-
+*/
 
 // Variables utilis�es pour activer certaines composantes de la navbar
 // Utilisation de $GLOBALS par la suite pour utiliser ces variables qu'on d�finit � chaque fois par FALSE
