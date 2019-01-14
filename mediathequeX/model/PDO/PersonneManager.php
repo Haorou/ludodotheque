@@ -21,7 +21,6 @@ require_once("model/PDO/ManagerPDO.php");
         public function createAdherent(Adherent $perso)
         {
             
-            
             $addPersonne = $this->_db->prepare("INSERT INTO personne(civilite, nom, prenom)
                                         VALUES(:civilite, :nom, :prenom)");
             $addPersonne->execute(array(

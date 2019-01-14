@@ -79,7 +79,7 @@ class JeuManager extends ManagerPDO
         
         while($unResultat = $resultatsRequete->fetch())
         {
-            $donneesIdAlerte[] = new AlerteJeu($perso);
+            $donneesIdAlerte[] = new AlerteJeu($unResultat);
         }
         
         $deleteCompAlerteJeu = $this->_db->prepare("DELETE FROM comp_alerte_jeu
@@ -105,13 +105,22 @@ class JeuManager extends ManagerPDO
     
     public function readJeu($info)
     {
-        $q = $this->_db->query('SELECT * FROM article
-                                    INNER JOIN fiche_article ON fiche_article.id = article.id_fiche_article
-                                    WHERE article.id = '.$info);
-        $donnees = $q->fetch(PDO::FETCH_ASSOC);
+        $ficheJeuManager = new FicheJeuManager();
+
         
+        $resultJeu = $this->_db->query('SELECT * FROM article
+                                INNER JOIN fiche_article ON fiche_article.id = article.id_fiche_article
+                                INNER JOIN fiche_jeu ON fiche_jeu.id_fiche_article = fiche_article.id
+                                WHERE article.id = '.$info);
+        
+        $donnees = $resultJeu->fetch(PDO::FETCH_ASSOC);
+
         $jeu = new Jeu($donnees);
+        $ficheJeu = $ficheJeuManager->readFicheJeu($donnees["id_fiche_article"]);
+
+        $jeu->setFiche_article($ficheJeu);
         
+        return $jeu;
     }
     
     public function jeuExists($info)

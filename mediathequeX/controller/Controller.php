@@ -38,16 +38,17 @@ session_start();
 echo date_format(new DateTime('now'), 'Y-m-d H:i:s');
 */
 
-/*
- // ================================   CREATION D'UN EMPRUNT + CREATION DANS BASE DE DONNES (TODO base de données ) =====================================
+
+ // ================================   CREATION D'UN EMPRUNT + CREATION DANS BASE DE DONNES (TODO base de donnï¿½es ) =====================================
 
 $adherentManager = new PersonneManager();
 $jeuManager = new JeuManager();
 $empruntManager = new EmpruntManager();
 
-// $adherent =  $adherentManager->readAdherent(5);
-// $jeu = $jeuManager->readJeu(5);
-
+$adherent =  $adherentManager->readAdherent(6);
+$jeu = $jeuManager->readJeu(5);
+echo $jeu;
+/*
 $adherent = new Adherent(["civilite" => "monsieur",
                         "nom" => "Grenec",
                         "prenom" => "JEAN",
@@ -57,6 +58,7 @@ $adherent = new Adherent(["civilite" => "monsieur",
 $jeu = new Jeu(["date_ajout" => "2019-01-12",
     "prix_achat" => 40,
     "commentaire" => "Que la guerre commence"]);
+*/
 
 $emprunt = new Emprunt(["date_emprunt" => "2019-01-12",
                         "commentaire" => "Un bel emprunt !"]);
@@ -64,19 +66,20 @@ $emprunt = new Emprunt(["date_emprunt" => "2019-01-12",
 $emprunt->setAdherent($adherent);
 $emprunt->setArticle($jeu);
 
+echo $adherent;
 
-echo $emprunt;
+//echo $emprunt;
 //$empruntManager->createEmprunt($empruntArticle);
-*/
 
 
 
 
+/*
  // ================================   READ + UPDATE MEDIATHEQUE + CREATION DANS BASE DE DONNES =====================================
 $mediathequeManager = new MediathequeManager();
 $mediatheque = $mediathequeManager->readParametre();
-
-
+echo $mediatheque;
+*/
 
 /*
  // ================================   CREATION D'UNE FICHEJEU ET ELEMENTS DU JEU + CREATION DANS BASE DE DONNES =====================================
@@ -106,10 +109,11 @@ $ficheJeu->setElements_du_jeu($elementDeJeu1);
 $ficheJeu->setElements_du_jeu($elementDeJeu2);
 $ficheJeu->setTypes_de_jeu("familial");
 $ficheJeu->setTypes_de_jeu("hasard");
+
 // echo $ficheJeu;
 // $ficheJeuManager->createFicheJeu($ficheJeu);
 
-*/
+
 
 
 /*

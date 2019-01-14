@@ -35,7 +35,7 @@ class Mediatheque
     
     public function cout_adhesion() { return $this->_cout_adhesion; }
     
-    public function setCount_adhesion($coutAdhesion)
+    public function setCout_adhesion($coutAdhesion)
     {
         $coutAdhesion = (int)$coutAdhesion;
         
@@ -62,7 +62,7 @@ class Mediatheque
     
     public function nombre_emprunt_autorisee() { return $this->_nombre_emprunt_autorisee; }
     
-    public function setNombre_emprunt_autorise($nombreEmpruntAutorise)
+    public function setNombre_emprunt_autorisee($nombreEmpruntAutorise)
     {
         $nombreEmpruntAutorise = (int)$nombreEmpruntAutorise;
         
