@@ -19,8 +19,7 @@ require_once("model/PDO/ManagerPDO.php");
         }
         
         public function createAdherent(Adherent $perso)
-        {
-            
+        {            
             $addPersonne = $this->_db->prepare("INSERT INTO personne(civilite, nom, prenom)
                                         VALUES(:civilite, :nom, :prenom)");
             $addPersonne->execute(array(
@@ -101,14 +100,13 @@ require_once("model/PDO/ManagerPDO.php");
         }
         
         public function updateAdherent(Adherent $perso)
-        {
-            
+        {            
             $updatePersonne = $this->_db->prepare("UPDATE personne
                                                  SET civile = :civilite,
                                                  nom = :nom,
                                                  prenom = :prenom
                                                  WHERE id = :id)");
-                                
+            
             $updatePersonne->execute(array(
                 "civilite" => $perso->civilite(),
                 "nom" => $perso->nom(),
@@ -117,7 +115,7 @@ require_once("model/PDO/ManagerPDO.php");
             ));
             
             $updateAdresse = $this->_db->prepare("UPDATE adresse
-                                               SET nummero = numero, nom_voie = :nom_voie, type_voie = :type_voie, 
+                                               SET nummero = numero, nom_voie = :nom_voie, type_voie = :type_voie,
                                                complet = :complement, code_postal = :code_postal, ville = :ville
                                                WHERE id = :id");
             
@@ -131,12 +129,33 @@ require_once("model/PDO/ManagerPDO.php");
                 "id" => $perso->adresse()->id()
             ));
             
-            $updateAdherent = $this->_db->prepare("UPDATE adherent SET commentaire = :commentaire WHERE id = :id");
+            
+            $updateAdherent = $this->_db->prepare("UPDATE adherent SET
+                                                   commentaire = :commentaire,
+                                                   id_adresse = :id_adresse
+                                                   WHERE id = :id");
             
             $updateAdherent->execute(array(
                 "commentaire" => $perso->commentaire(),
+                "id_adresse" => $perso->adresse()->id(),
                 "id" => $perso->id()
             ));
+            
+            
+            
+            $addDate = $this->_db->prepare("INSERT INTO adhesion(id_adherent, date_adhesion)
+                                        VALUES (:id_adherent, :date_adhesion)");
+            
+            $addDate->execute(array(
+                "id_adherent" => $perso->id(),
+                "date_adhesion" => $perso->first_date_adhesion()
+            ));
+            
+            foreach($perso->ayant_droits() as $ayantdroit)
+            {
+                $this->createAyantDroit($ayantdroit, $perso);
+            }
+            
         }
         
         

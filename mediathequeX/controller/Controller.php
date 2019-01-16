@@ -33,6 +33,8 @@ spl_autoload_register('chargerClasse');
 session_start();
 
 
+
+
 /*
 =========================================   CODE QUI PERMET D'AVOIR LA DATE D'AUJOURD'HUI =============================================
 echo date_format(new DateTime('now'), 'Y-m-d H:i:s');
