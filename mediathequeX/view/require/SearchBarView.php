@@ -85,9 +85,9 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             		<span class="glyphicon glyphicon-trash"></span> Supprimer Adherent</button>
             	</div>
             </form>
-			<?php }?>
-			
-            <?php if ($GLOBALS["isActiveArticle"] == TRUE){?>
+
+			<?php } else if ($GLOBALS["isActiveArticle"] == TRUE) { ?>
+
             <form action="index.php" method="post">
     			<div>
             		<button type="submit" class="btn btn-lg btn-success" value="Page Ajouter Fiche" name="PageAjouterFiche">
@@ -104,21 +104,21 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             	</div>
             </form>
             
-			<?php } else if ($GLOBALS["isActiveArticle"] == TRUE) { ?>
+			<?php } else if ($GLOBALS["isActiveAlerte"] == TRUE) { ?>
 			
             <form action="index.php" method="post">
     			<div>
             		<button type="submit" class="btn btn-lg btn-success" value="Page Ajouter Fiche" name="PageAjouterFiche">
-            		<span class="glyphicon glyphicon-user"></span> Ajouter fiche jeu</button>
+            		<span class="glyphicon glyphicon-user"></span> Ajazdzadzar fiche jeu</button>
             	</div>
 
             	<div>
             		<button type="submit" class="btn btn-lg btn-primary" value="Modifier utilisateur" name="ModifierUtilisateur">
-            		<span class="glyphicon glyphicon-cog"></span> Modifier fiche jeu</button>
+            		<span class="glyphicon glyphicon-cog"></span> Modifier azdzafiche jeu</button>
             	</div>
             	<div>
             		<button type="submit" class="btn btn-lg btn-danger" value="Supprimer utilisateur" name="SupprimerUtilisateur">
-            		<span class="glyphicon glyphicon-trash"></span> Supprimer fiche jeu</button>
+            		<span class="glyphicon glyphicon-trash"></span> Supprimazdzaer fiche jeu</button>
             	</div>
             </form>
 

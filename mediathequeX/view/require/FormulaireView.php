@@ -29,11 +29,11 @@
 
 							<div class="form-row">
 								<div class="form-group col-md-3">
-									<label>Nom</label> <input type="text" class="form-control"
+									<label>Nom</label> <input name="Nom" type="text" class="form-control"
 										placeholder="Nom">
 								</div>
 								<div class="form-group col-md-3">
-									<label>Prenom</label> <input type="text" class="form-control"
+									<label>Prénom</label> <input name="Prenom" type="text" class="form-control"
 										placeholder="Prenom">
 								</div>
 							</div>
@@ -41,12 +41,12 @@
 
 							<div class="form-row">
 								<div class="form-group col-md-1">
-									<label>Numero</label> <input type="text" class="form-control"
+									<label>N°</label> <input name="Numero" type="text" class="form-control"
 										placeholder="Numero">
 								</div>
 
 								<div class="form-group col-md-2">
-									<label for="inputState">Voie</label> <select id="inputState"
+									<label for="inputState">Voie</label> <select name="Voie" id="inputState"
 										class="form-control">
 										<option selected>Choisir</option>
 										<option>Rue</option>
@@ -59,27 +59,25 @@
 								</div>
 
 								<div class="form-group col-md-3">
-									<label>Nom de la voie</label> <input type="text"
+									<label>Nom de la voie</label> <input name="NomVoie" type="text"
 										class="form-control" placeholder="Nom de la voie">
 								</div>
 							</div>
 
 							<div class="form-row">
 								<div class="form-group col-md-2">
-									<label>Code Postal</label> <input type="text"
+									<label>Code Postal</label> <input name="CodePostal" type="text"
 										class="form-control" placeholder="Code Postal">
 								</div>
 
 								<div class="form-group col-md-3">
-									<label>Ville</label> <input type="text" class="form-control"
+									<label>Ville</label> <input name="Ville" type="text" class="form-control"
 										placeholder="Ville">
 								</div>
 							</div>
 
-							<form method="post">
-								<button type="submit" class="btn btn-success" value="Creer Utilisateur" name="Creer Utilisateur">Creer Utilisateur</button>
-							</form>
-
+								<button type="submit" class="btn btn-success" value="Creer Adherent" name="Creer Adherent">Créer Adhérent</button>
+								
 						</form>
 					</div>
 				</div>
