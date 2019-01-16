@@ -67,7 +67,7 @@ $emprunt = new Emprunt(["date_emprunt" => "2019-01-12",
 $emprunt->setAdherent($adherent);
 $emprunt->setArticle($jeu);
 
-*/
+
 
 //echo $emprunt;
 //$empruntManager->createEmprunt($empruntArticle);
@@ -221,6 +221,29 @@ function PageFormulaireFicheJeu()
 }
 function PageModifierAdherent()
 {
+    $GLOBALS["isActiveAdherent"] = TRUE;
+    require("view/AffichageAdherentView.php");
+}
+
+////////////////////////////////////////////////////////////////////////////
+
+function CreateAdherent()
+{
+    $PersonManager = new PersonneManager();
+    
+    $perso = new Adherent([
+        "civilite" => $_POST["civilite"],
+        "nom" => $_POST["nom"],
+        "prenom" => $_POST["prenom"]
+    ]);
+    
+    $adresse = new Adresse(
+        );
+    
+    $perso->setAdresse($adresse);
+    
+    $PersonManager->createAdherent($perso);
+    
     $GLOBALS["isActiveAdherent"] = TRUE;
     require("view/AffichageAdherentView.php");
 }
