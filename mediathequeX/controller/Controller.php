@@ -27,7 +27,7 @@ function chargerClasse($classname)
     }
 }
 
-// SERT A CHARGER DES PAGES EN FONCTION DES OBJET CREER - VOIR SI SA FONCTION
+// SERT A CHARGER DES PAGES EN FONCTION DES OBJET CREER 
 spl_autoload_register('chargerClasse');
 
 session_start();
