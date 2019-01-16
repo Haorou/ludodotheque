@@ -6,7 +6,7 @@ class Adresse
     private $_nom_voie = "";
     private $_type_voie = "";
     private $_complement = "";
-    private $_code_postal = 0;
+    private $_code_postal = "";
     private $_ville = "";
     private $_region = "";
     

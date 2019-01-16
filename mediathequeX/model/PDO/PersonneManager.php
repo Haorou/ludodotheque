@@ -143,6 +143,7 @@ require_once("model/PDO/ManagerPDO.php");
             
             
             
+            
             $addDate = $this->_db->prepare("INSERT INTO adhesion(id_adherent, date_adhesion)
                                         VALUES (:id_adherent, :date_adhesion)");
             
@@ -222,6 +223,14 @@ require_once("model/PDO/ManagerPDO.php");
                 $deletePersonne->execute(array(
                     "id" => $ayantdroit->id()));
             }
+            
+            // ============== ICI ON SUPPRIME :   SES EMPRUNTS   ================================ //
+            
+            $deleteEmprunt = $this->_db->prepare("DELETE FROM emprunt
+                                        WHERE id_adherent = :id");
+            
+            $deleteEmprunt->execute(array(
+                "id" => $perso->id()));
         }
         
         public function deleteAyantDroit(AyantDroit $perso)

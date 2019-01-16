@@ -67,11 +67,22 @@ $emprunt = new Emprunt(["date_emprunt" => "2019-01-12",
 $emprunt->setAdherent($adherent);
 $emprunt->setArticle($jeu);
 
-echo $adherent;
+*/
 
 //echo $emprunt;
 //$empruntManager->createEmprunt($empruntArticle);
-*/
+$adherentManager = new PersonneManager();
+$articleManager = new JeuManager();
+
+$empruntManager = new EmpruntManager();
+
+$monEmprunt = $empruntManager->readCurrentEmpruntsAdherent($adherentManager->readAdherent(15));
+echo $monEmprunt;
+
+echo "=========================================================";
+
+$newEmprunt = $empruntManager->readAllEmpruntsArticle($articleManager->readJeu(15));
+echo $newEmprunt;
 
 
 
@@ -88,42 +99,15 @@ echo $mediatheque;
 $ficheJeuManager  = new FicheJeuManager();
 
 
-$ficheJeu = new FicheJeu(["titre" => "Monopoly Game of Thrones",
-                          "auteur" => "Elizabeth Magie Charles Darrow",
-                          "editeur" => "Usaopoly",
-                          "age_min" => 8,
-                          "date_de_publication" => "2015-10-15",
-                          "nombre_de_joueurs_min" => 2,
-                          "nombre_de_joueurs_max" => 6,
-                          "duree_min_de_jeu" => 1,
-                          "duree_max_de_jeu" => 12,
-                          "descriptif" => "Quel jeu !"]);
-
-$elementDeJeu1 = new ElementsDuJeu(["element_jeu" => "pion",
-                                    "couleur" => "blanc",
-                                    "quantite" => 6]);
-
-$elementDeJeu2 = new ElementsDuJeu(["element_jeu" => "carte",
-                                    "couleur" => "blanc",
-                                    "quantite" => 6]);
-
-$ficheJeu->setElements_du_jeu($elementDeJeu1);
-$ficheJeu->setElements_du_jeu($elementDeJeu2);
-$ficheJeu->setTypes_de_jeu("familial");
-$ficheJeu->setTypes_de_jeu("hasard");
-
-
-$ficheJeu = $ficheJeuManager->readFicheJeu(5);
-echo $ficheJeu;
-// $ficheJeuManager->createFicheJeu($ficheJeu);
+$ficheJeu = $ficheJeuManager->readFicheJeu(6);
+$ficheJeuManager->deleteFicheJeu($ficheJeu);
 */
-
-
 
 /*
  // ================================   CREATION D'UN JEU + CREATION DANS BASE DE DONNES =====================================
+$ficheJeuManager = new FicheJeuManager();
 
-$ficheJeuManager  = new FicheJeuManager();
+//$ficheJeuManager->deleteFicheJeu($fiche);
 
 $jeuManager= new JeuManager();
 
@@ -143,20 +127,13 @@ $alerte2 = new AlerteJeu(["element_jeu" => "carte",
                         "quantite" => 1,
                         "commentaire" => "pas grave"]);
 
-$jeu->setFiche_article($ficheJeuManager->readFicheJeu(5));
+$jeu->setFiche_article($ficheJeuManager->readFicheJeu(4));
 $jeu->setAlertes($alerte1);
 $jeu->setAlertes($alerte2);
-echo $jeu;
-
 $jeuManager->createJeu($jeu);
-
-$jeuManager= new JeuManager();
-$jeu = $jeuManager->readJeu(11);
-$jeuManager->deleteJeu($jeu);
+echo "ICI LE JEU CREE ";
 echo $jeu;
-
-
-
+*/
 
 /*
 // ================================   CREATION D'UN ADHERENT ET AYANTDROIT + CREATION DANS BASE DE DONNES =====================================
@@ -196,6 +173,7 @@ $adherent->setAyant_droits($ayantdroit2);
 
 // Variables utilis�es pour activer certaines composantes de la navbar
 // Utilisation de $GLOBALS par la suite pour utiliser ces variables qu'on d�finit � chaque fois par FALSE
+
 $isActiveMenu = FALSE;
 $isActiveAdherent = FALSE;
 $isActiveArticle = FALSE;

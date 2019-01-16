@@ -18,12 +18,13 @@ class JeuManager extends ManagerPDO
     
     public function createJeu(Article $jeu)
     {
-        $addArticle = $this->_db->prepare("INSERT INTO article(id_fiche_article, date_ajout, prix_achat)
-                                        VALUES(:id_fiche_article, :date_ajout, :prix_achat)");
+        $addArticle = $this->_db->prepare("INSERT INTO article(id_fiche_article, date_ajout, prix_achat, commentaire)
+                                        VALUES(:id_fiche_article, :date_ajout, :prix_achat, :commentaire)");
         $addArticle->execute(array(
             "id_fiche_article" => $jeu->fiche_article()->id(),
             "date_ajout" => $jeu->date_ajout(),
-            "prix_achat" => $jeu->prix_achat()
+            "prix_achat" => $jeu->prix_achat(),
+            "commentaire" => $jeu->commentaire()
         ));
         
         $jeu->hydrate(['id' => $this->_db->lastInsertId()]);
@@ -40,6 +41,8 @@ class JeuManager extends ManagerPDO
                 "quantite" => $alerte->quantite(),
                 "commentaire" => $alerte->commentaire(),
             ));
+            
+            $alerte->hydrate([ 'id' => $this->_db->lastInsertId() ]);
             
             $addCompAlerteJeu = $this->_db->prepare("INSERT INTO comp_alerte_jeu(id_alerte,id_article)
                                                     VALUES(:id_alerte,:id_article)");
@@ -93,19 +96,19 @@ class JeuManager extends ManagerPDO
     
     public function deleteJeu(Jeu $jeu)
     {
-        $resultatsRequete = $this->_db->prepare('SELECT id_alerte FROM comp_alerte_jeu WHERE id_article = :id_article');
-        $resultatsRequete->execute(array(
-            "id_article" => $jeu->id()));
-        
+        // ==================== ON SUPPRIME : LE LIEN QUI LIE L'ARTICLE / EMPRUNT AU ALERTE  =========================//        
         $deleteCompAlerteJeu = $this->_db->prepare("DELETE FROM comp_alerte_jeu
                                         WHERE id_article = :id_article");
         $deleteCompAlerteJeu->execute(array(
             "id_article" => $jeu->id()));
         
+        // ==================== ON SUPPRIME : LES EMPRUNTS DU JEU  =========================//
         $deleteEmprunt = $this->_db->prepare("DELETE FROM emprunt
                                         WHERE id_article = :id_article");
         $deleteEmprunt->execute(array(
             "id_article" => $jeu->id()));
+        
+        // ==================== ON SUPPRIME : LES ALERTES DU JEU  =========================//
         
         foreach($jeu->alertes() as $alerte)
         {
@@ -115,7 +118,7 @@ class JeuManager extends ManagerPDO
                 "id" => $alerte->id()));
         }
 
-        
+        // ==================== ON SUPPRIME : L'ARTICLE   =========================//
         $deleteArticle = $this->_db->prepare("DELETE FROM article
                                         WHERE id = :id");
         $deleteArticle->execute(array(
@@ -153,22 +156,22 @@ class JeuManager extends ManagerPDO
         
         while($alerte = $resultAlerte->fetch())
         {
-            $alerte  = new AlerteJeu($alerte);
+            $alerteInstance  = new AlerteJeu($alerte);
             
-            if($alerte->date_emprunt() != NULL)
+            if($alerteInstance->date_emprunt() != NULL)
             {
                 $adherentManager = new PersonneManager();
                 $resultAdherentAlerte = $this->_db->prepare('SELECT * FROM emprunt
                                                      WHERE date_emprunt = :date_emprunt');
                 $resultAdherentAlerte->execute(array(
-                    "date_emprunt" => $alerte->date_emprunt()));
+                    "date_emprunt" => $alerteInstance->date_emprunt()));
                 
                 $donnesResultAdherentAlerte = $resultAdherentAlerte->fetch(PDO::FETCH_ASSOC);
                 
-                $alerte->setAdherent($adherentManager->readAdherent($donnesResultAdherentAlerte["id_adherent"]));
+                $alerteInstance->setAdherent($adherentManager->readAdherent($donnesResultAdherentAlerte["id_adherent"]));
             }
             
-            $jeu->setAlertes($alerte);
+            $jeu->setAlertes($alerteInstance);
         }
 
         return $jeu;

@@ -69,16 +69,15 @@ class FicheJeuManager extends ManagerPDO
         
     public function updateJeu(FicheJeu $ficheJeu)
     {
-        $updateFicheArticle = $this->_db->prepare("UPDATE fiche_article SET
+        $updateFicheArticle = $this->_db->prepare("UPDATE fiche_article
                                                    SET titre = :titre,
                                                    auteur = :auteur,
                                                    editeur = :editeur,
                                                     age_min = :age_min,
                                                     age_max = :age_max,
                                                     date_de_publication = :date_de_publication
-                                                    WHERE id = :id)");
+                                                    WHERE id = :id");
         $updateFicheArticle->execute(array(
-            "id" => $ficheJeu->id(),
             "titre" => $ficheJeu->titre(),
             "auteur" => $ficheJeu->auteur(),
             "editeur" => $ficheJeu->editeur(),
@@ -88,13 +87,13 @@ class FicheJeuManager extends ManagerPDO
             "id" => $ficheJeu->id()
         ));
         
-        $updateFicheJeu = $this->_db->prepare("UPDATE fiche_jeu SET
-                                                   SET nombre_de_joueurs_min = :nombre_de_joueurs_min,
-                                                   nombre_de_joueurs_max = :nombre_de_joueurs_max,
-                                                   duree_min_de_jeu = :duree_min_de_jeu,
-                                                    duree_max_de_jeu = :duree_max_de_jeu,
-                                                    descriptif = :descriptif,
-                                                    WHERE id_fiche_article = :id)");
+        $updateFicheJeu = $this->_db->prepare("UPDATE fiche_jeu
+                                              SET nombre_de_joueurs_min = :nombre_de_joueurs_min,
+                                              nombre_de_joueurs_max = :nombre_de_joueurs_max,
+                                              duree_min_de_jeu = :duree_min_de_jeu,
+                                              duree_max_de_jeu = :duree_max_de_jeu,
+                                              descriptif = :descriptif,
+                                              WHERE id_fiche_article = :id");
         $updateFicheJeu->execute(array(
             "nombre_de_joueurs_min" => $ficheJeu->nombre_de_joueurs_min(),
             "nombre_de_joueurs_max" => $ficheJeu->nombre_de_joueurs_max(),
@@ -106,84 +105,74 @@ class FicheJeuManager extends ManagerPDO
     }
     
     public function deleteFicheJeu(FicheJeu $ficheJeu) // A VOIR
-    {
+    {        
+        $resultatRequeteJeu = $this->_db->prepare('SELECT article.id FROM article
+                                        WHERE id_fiche_article = :id');
+        $resultatRequeteJeu->execute(array(
+            "id" => $ficheJeu->id()
+        ));
+        
+        $resultatRequeteAlerteJeu = $this->_db->prepare("SELECT alerte.id FROM alerte
+                                                 INNER JOIN comp_alerte_jeu ON alerte.id = comp_alerte_jeu.id_alerte
+                                                 INNER JOIN article ON article.id = comp_alerte_jeu.id_article
+                                                 WHERE article.id_fiche_article = :id");
+        
+        $resultatRequeteAlerteJeu->execute(array(
+            "id" => $ficheJeu->id()
+        ));
+
+        while($idArticle = $resultatRequeteJeu->fetch())
+        {   
+            $deleteCompAlerteJeu = $this->_db->prepare("DELETE FROM comp_alerte_jeu
+                                                     WHERE id_article = :id");
+
+            $deleteCompAlerteJeu->execute(array(
+                "id" => $idArticle["id"]
+            ));
+            
+            $deleteEmprunt = $this->_db->prepare("DELETE FROM emprunt
+                                                 WHERE id_article = :id");
+            
+            $deleteEmprunt->execute(array(
+                "id" => $idArticle["id"]
+            ));
+        }
+        
+        while($idAlerte = $resultatRequeteAlerteJeu->fetch())
+        {
+            $deleteAlerte = $this->_db->prepare("DELETE FROM alerte
+                                                     WHERE id = :id");
+            
+            $deleteAlerte->execute(array(
+                "id" => $idAlerte["id"]
+            ));
+        }
+       
         $deleteArticles = $this->_db->prepare("DELETE FROM article
-                                        WHERE id_fiche_article= :id)");
+                                        WHERE id_fiche_article = :id");
         $deleteArticles->execute(array(
             "id" => $ficheJeu->id()));
         
+        $deleteComptElementJeuFicheJeu = $this->_db->prepare("DELETE FROM comp_element_jeu_fiche_jeu
+                                                                 WHERE id_fiche_jeu = :id");
+        $deleteComptElementJeuFicheJeu->execute(array(
+            "id" => $ficheJeu->id()));
+        
+        $deleteComptFicheJeuTypeJeu = $this->_db->prepare("DELETE FROM comp_fiche_jeu_type_jeu
+                                                                 WHERE id_fiche_jeu = :id");
+        $deleteComptFicheJeuTypeJeu->execute(array(
+            "id" => $ficheJeu->id()));
+        
+        
         $deleteFicheJeu = $this->_db->prepare("DELETE FROM fiche_jeu
-                                        WHERE id_fiche_article = :id_article)");
+                                        WHERE id_fiche_article = :id_article");
         $deleteFicheJeu->execute(array(
             "id_article" => $ficheJeu->id()));
         
         $deleteFicheArticle = $this->_db->prepare("DELETE FROM fiche_article
-                                        WHERE id = :id_article)");
+                                        WHERE id = :id_article");
         $deleteFicheArticle->execute(array(
             "id_article" => $ficheJeu->id()));
-        
-        
-        $deleteComptElementJeuFicheJeu = $this->_db->prepare("DELETE FROM comp_element_jeu_fiche_jeu
-                                                                 WHERE id_fiche_jeu = :id)");
-        $deleteComptElementJeuFicheJeu->execute(array(
-            "id_fiche_jeu" => $ficheJeu->id()));
-        
-        $listeDeJeux = [];
-        $listeAlertes = [];
-        
-        $resultatRequetJeu = $this->_db->prepare('SELECT * FROM article
-                                    WHERE fiche_article_id = :id');
-        $resultatRequetJeu->execute(array(
-            "id" => $ficheJeu->id()
-        ));
-        
-        $resultatRequetAlerte = $this->_db->prepare('SELECT * FROM alerte
-                                                INNER JOIN comp_alerte_jeu ON comp_alerte_jeu.id_alerte = alerte.id
-                                                INNER JOIN article ON article.id = comp_alerte_jeu.id_article
-                                                WHERE article.id_fiche_article = :id');
-        
-        $resultatRequetAlerte->execute(array(
-            "id" => $ficheJeu->id()
-        ));
-        
-        while($unJeu = $resultatRequetJeu->fetch())
-        {
-            $listeDeJeux[] = new Jeu($unJeu);
-        }
-        
-        
-        while($uneAlerte = $resultatRequetAlerte->fetch())
-        {
-            $listeAlertes[] = new AlerteJeu($uneAlerte);
-        }
-        
-        
-        foreach($listeDeJeux as $jeu)
-        {
-            $deleteCompAlerteJeu = $this->_db->prepare("DELETE FROM comp_alerte_jeu
-                                                     WHERE id_article = :id)");
-            
-            $deleteEmprunt = $this->_db->prepare("DELETE FROM emprunt
-                                                 WHERE id_article = :id)");
-            
-            $deleteCompAlerteJeu->execute(array(
-                "id" => $jeu->id()
-            ));
-            $deleteEmprunt->execute(array(
-                "id" => $jeu->id()
-            ));
-        }
-        
-        foreach($listeAlertes as $alerte)
-        {
-            $deleteAlerteJeu = $this->_db->prepare("DELETE FROM alerte
-                                                 WHERE id_article = :id)");
-            
-            $deleteAlerteJeu->execute(array(
-                "id" => $alerte->id()
-            ));
-        }
-        
     }
     
     public function readFicheJeu($info)
