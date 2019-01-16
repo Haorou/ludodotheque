@@ -38,6 +38,10 @@ try
     {
         PageModifierAdherent();
     }
+    else if(isset($_POST["CreerAdherent"]) )
+    {
+        CreateAdherent();
+    }
     else
     {
         ConnexionPage();
