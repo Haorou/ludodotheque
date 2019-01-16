@@ -77,12 +77,12 @@ $articleManager = new JeuManager();
 $empruntManager = new EmpruntManager();
 
 $monEmprunt = $empruntManager->readCurrentEmpruntsAdherent($adherentManager->readAdherent(15));
-echo $monEmprunt;
+echo $monEmprunt[0];
 
 echo "=========================================================";
 
 $newEmprunt = $empruntManager->readAllEmpruntsArticle($articleManager->readJeu(15));
-echo $newEmprunt;
+echo $newEmprunt[0];
 
 
 

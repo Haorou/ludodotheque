@@ -69,9 +69,14 @@ require_once("model/PDO/ManagerPDO.php");
             
             $listeEmprunts = [];
             
+            $jeuManager = new JeuManager();
             while($requeteEmprunt = $requeteEmprunts->fetch())
             {
-                $listeEmprunts = new Emprunt($requeteEmprunt);
+                $emprunt = new Emprunt($requeteEmprunt);
+                $emprunt->setAdherent($perso);
+                $emprunt->setArticle($jeuManager->readJeu($requeteEmprunt["id_article"]));
+                
+                $listeEmprunts[] = $emprunt;
             }
             
             return $listeEmprunts;
@@ -86,9 +91,14 @@ require_once("model/PDO/ManagerPDO.php");
             
             $listeEmprunts = [];
             
+            $adherentManager = new PersonneManager();
             while($requeteEmprunt = $requeteEmprunts->fetch())
             {
-                $listeEmprunts = new Emprunt($requeteEmprunt);
+                $emprunt = new Emprunt($requeteEmprunt);
+                $emprunt->setAdherent($adherentManager->readAdherent($requeteEmprunt["id_adherent"]));
+                $emprunt->setArticle($article);
+                
+                $listeEmprunts[] = $emprunt;
             }
             
             return $listeEmprunts;
