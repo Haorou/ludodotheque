@@ -229,6 +229,20 @@ class FicheJeuManager extends ManagerPDO
         return $listeDeJeux;
     }
     
+    public function readAllFicheJeux()
+    {
+        $resultatRequeteFicheJeu = $this->_db->query('SELECT DISTINCT fiche_article.titre FROM article
+                                    INNER JOIN fiche_article ON fiche_article.id = article.id_fiche_article');
+        
+        $listeDeFicheJeux = [];
+        
+        while($uneFicheJeu = $resultatRequeteFicheJeu->fetch())
+        {
+            $listeDeFicheJeux[] = new FicheJeu($uneFicheJeu);
+        }
+        return $listeDeFicheJeux;
+    }
+    
     public function countJeux()
     {
         return $this->_db->query("SELECT COUNT(*) FROM adherent")->fetchColumn();

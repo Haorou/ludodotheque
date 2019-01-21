@@ -43,13 +43,15 @@ class JeuManager extends ManagerPDO
             ));
             
             $alerte->hydrate([ 'id' => $this->_db->lastInsertId() ]);
+            $alerte->setDate($jeu->date_ajout());
             
-            $addCompAlerteJeu = $this->_db->prepare("INSERT INTO comp_alerte_jeu(id_alerte,id_article)
-                                                    VALUES(:id_alerte,:id_article)");
+            $addCompAlerteJeu = $this->_db->prepare("INSERT INTO comp_alerte_jeu(id_alerte,id_article,date)
+                                                    VALUES(:id_alerte,:id_article,:date)");
             
             $addCompAlerteJeu->execute(array(
                 "id_alerte" => $this->_db->lastInsertId(),
-                "id_article" => $jeu->id()
+                "id_article" => $jeu->id(),
+                "date" => $alerte->date()
             ));
         }
         
@@ -158,13 +160,13 @@ class JeuManager extends ManagerPDO
         {
             $alerteInstance  = new AlerteJeu($alerte);
             
-            if($alerteInstance->date_emprunt() != NULL)
+            if($alerteInstance->date() != NULL)
             {
                 $adherentManager = new PersonneManager();
                 $resultAdherentAlerte = $this->_db->prepare('SELECT * FROM emprunt
                                                      WHERE date_emprunt = :date_emprunt');
                 $resultAdherentAlerte->execute(array(
-                    "date_emprunt" => $alerteInstance->date_emprunt()));
+                    "date_emprunt" => $alerteInstance->date()));
                 
                 $donnesResultAdherentAlerte = $resultAdherentAlerte->fetch(PDO::FETCH_ASSOC);
                 
@@ -194,6 +196,23 @@ class JeuManager extends ManagerPDO
             $listeDeJeux[] = new Jeu($unJeu);
         }
         return $listeDeJeux;
+    }
+    
+    public function readCountJeux($id_fiche_jeu)
+    {
+        $resultatRequeteCountJeu = $this->_db->query('SELECT COUNT(*) as count_article FROM article 
+                                                      WHERE id_fiche_article = ' + $id_fiche_jeu);
+        $nombreDeJeu = $resultatRequeteCountJeu->fetch();
+        return $nombreDeJeu["count_article"];
+    }
+    
+    public function readAllCountJeux()
+    {
+        $resultatRequeteCountJeu = $this->_db->query('SELECT COUNT(id_fiche_article) as count_article FROM article');
+        $nombreDeJeu = $resultatRequeteCountJeu->fetch();
+        echo $nombreDeJeu["COUNT(id_fiche_article)"];
+        
+        //return $nombreDeJeu["count_article"];
     }
     
     public function countJeux()

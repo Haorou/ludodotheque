@@ -56,15 +56,38 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
         			<select class="custom-select" size="15" name="persoSelect">
                   		<?php 
                   		if ($GLOBALS["isActiveAdherent"] == TRUE) 
-                  		{ 
-                  		    $persoManager = new PersonneManager();
-                  		    $listeDeAdherent = $persoManager->readAllAdherent();
-                  		    foreach($listeDeAdherent as $adherent)
-                  		    {
+                  		    { 
+                      		    $persoManager = new PersonneManager();
+                      		    $listeDeAdherent = $persoManager->readAllAdherent();
+                      		    
+                      		    foreach($listeDeAdherent as $adherent)
+                  		        {
                   		?>
                      
-                      <option value=<?= $adherent->id() ?>> <?= $adherent->nom() ?> </option>
-                      <?php }} ?>
+                      	<option value=<?= $adherent->id() ?>> <?= $adherent->nom() ?> </option>
+                      
+                      <?php }} else if ($GLOBALS["isActiveArticle"] == TRUE) 
+                            { 
+                                $ficheManager = new FicheJeuManager();
+                                $jeuManager = new JeuManager();
+                                
+                                $listeDeFiche = $ficheManager->readAllFicheJeux();
+                                $jeuManager->readAllCountJeux();
+                                
+                                foreach($listeDeFiche as $fiche)
+                                {
+                       ?>
+	                      <option value=<?= $fiche->id() ?>> <?= $fiche->titre() ?> </option>
+                      
+                      
+                      <?php }} else if ($GLOBALS["isActiveAlerte"] == TRUE) 
+                            { 
+                            
+                                
+                      ?>
+                      
+                      <?php } ?>
+                      
                     </select>
 
     			

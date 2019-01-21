@@ -4,7 +4,7 @@ class AlerteJeu
     private $_id;
     
     private $_adherent = NULL;
-    private $_date_emprunt = NULL;
+    private $_date = NULL;
     private $_element_jeu = "";
     private $_probleme = "";
     private $_couleur = "";
@@ -51,11 +51,11 @@ class AlerteJeu
         $this->_adherent = $adherent;
     }
     
-    public function date_emprunt() { return $this->_date_emprunt; }
+    public function date() { return $this->_date; }
     
-    public function setDate_emprunt($dateEmprunt)
+    public function setDate($dateEmprunt)
     {
-        $this->_date_emprunt = $dateEmprunt;
+        $this->_date = $dateEmprunt;
     }
     
     public function element_jeu() { return $this->_element_jeu; }
@@ -100,7 +100,7 @@ class AlerteJeu
         
         $ale .= $this->adherent();
 
-        $ale .= "date_emprunt = ".$this->date_emprunt()."</br>";
+        $ale .= "date_emprunt = ".$this->date()."</br>";
         $ale .= "element_jeu = ".$this->element_jeu()."</br>";
         $ale .= "probleme = ".$this->probleme()."</br>";
         $ale .= "couleur = ".$this->couleur()."</br>";
