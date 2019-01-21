@@ -5,7 +5,7 @@
 		
 		<div class="col-md-8" style="text-align: center">
 			<div>
-				<h1 class="form-heading">Formulaire d'adhesion</h1>
+				<h1 class="form-heading">Formulaire d'adhésion</h1>
 				<div>
 					<div>
                         <form action="index.php?action=creerUtilisateur" method="post">
@@ -17,7 +17,7 @@
                         	
                         	<div class="form-check form-check-inline">
                         		<input class="form-check-input" type="radio" name="civilite" id="inlineRadio2" value="monsieur"> 
-                        		<label class="form-check-label" for="inlineRadio2">Mr</label>
+                        		<label class="form-check-label" for="inlineRadio2">M.</label>
                         	</div>
                         	
                         	<div class="form-check form-check-inline">
@@ -47,7 +47,7 @@
                         				class="form-control">
                         				<option selected>Voie</option>
                         				<option>Rue</option>
-                        				<option>Allee</option>
+                        				<option>Allée</option>
                         				<option>Avenue</option>
                         				<option>Boulevard</option>
                         				<option>Impasse</option>

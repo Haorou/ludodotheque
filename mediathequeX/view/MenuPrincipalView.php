@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Mediatheque : MenuPrincipal</title>
+    <title>Mediathèque : MenuPrincipal</title>
     
  	<?php require("view/require/HeadReferenceView.php");?>
  

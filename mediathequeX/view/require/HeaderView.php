@@ -8,7 +8,7 @@
     
         <a class="nav-item nav-link <?=$GLOBALS["isActiveAdherent"]==TRUE?"active":""; ?>" href="#">
             <form action="index.php?action=gestionAdherents" method="post">
-            	<button type="submit" class="btn <?=$GLOBALS["isActiveAdherent"]==TRUE?"btn-primary":""; ?> btn-block" value="Gestion Adherents" name="gestionAdherents">Gestion Adherents</button>
+            	<button type="submit" class="btn <?=$GLOBALS["isActiveAdherent"]==TRUE?"btn-primary":""; ?> btn-block" value="Gestion Adherents" name="gestionAdherents">Gestion Adhérents</button>
             </form>
         </a>
         
@@ -26,7 +26,7 @@
         
         <a class="navbar-brand" href="#">
             <form action="index.php?action=seDeconnecter" method="post">
-            	<button type="submit" class="btn btn-danger btn-block" value="deconnexion" name="deconnexion">Deconnexion</button>
+            	<button type="submit" class="btn btn-danger btn-block" value="deconnexion" name="deconnexion">Déconnexion</button>
             </form>
         </a>
     </nav>

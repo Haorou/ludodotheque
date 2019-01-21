@@ -2,39 +2,39 @@
 
 // ON CHARGE LE CONTROLLER DANS L'INDEX
 
-require("controller/controller.php");
+//include("./controller/controller.php");
+include("./controller/Controller.php");
 
 // PAGE INDEX OU ON REVIENT CONTINUELLEMENT ON SE DEPLACE EN FONCTION DES $_POST[]
 // SI AUCUN $_POST[] ON ARRIVE A LA PAGE CONNEXION
 
 try
 {
-    if((isset($_POST["connexion"]) && $_POST["connexion"] === "connexion") ||
-        (isset($_POST["menuPrincipal"]) && $_POST["menuPrincipal"] === "Menu Principal"))
+    if((isset($_POST["connexion"])) || isset($_POST["menuPrincipal"]))
     {
         MenuPrincipalPage();
     }
-    else if(isset($_POST["gestionAlerte"]) && $_POST["gestionAlerte"] === "Gestion Alerte")
+    else if(isset($_POST["gestionAlerte"]))
     {
         GestionAlertePage();
     }
-    else if(isset($_POST["gestionArticles"]) && $_POST["gestionArticles"] === "Gestion Articles")
+    else if(isset($_POST["gestionArticles"]))
     {
         GestionArticlesPage();
     }
-    else if(isset($_POST["PageAjouterFiche"]) && $_POST["PageAjouterFiche"] === "Page Ajouter Fiche")
+    else if(isset($_POST["PageAjouterFiche"]))
     {
         PageFormulaireFicheJeu();
     }
-    else if(isset($_POST["gestionAdherents"]) && $_POST["gestionAdherents"] === "Gestion Adherents")
+    else if(isset($_POST["gestionAdherents"]))
     {
         GestionAdherentsPage();
     }
-    else if(isset($_POST["PageCreerAdherent"]) && $_POST["PageCreerAdherent"] === "Page Creer Adherent")
+    else if(isset($_POST["PageCreerAdherent"]))
     {
         PageFormulaireAdhesion();
     }
-    else if(isset($_POST["ModifierAdherent"]) && $_POST["ModifierAdherent"] === "Modifier Adherent")
+    else if(isset($_POST["ModifierAdherent"]))
     {
         PageModifierAdherent();
     }

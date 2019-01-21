@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-sm">
 			<div class="list-group">
-  				<button type="button" class="list-group-item list-group-item-action active">Adhesions</button>
+  				<button type="button" class="list-group-item list-group-item-action active">Adhésions</button>
   				
   				<?php foreach($perso->date_adhesions() as $date) {?>			
 	  				<button type="button" class="list-group-item list-group-item-action"><?= $date; ?></button>
@@ -10,14 +10,14 @@
 			</div>
 			
 			<br>
-			<button type="button" class="btn btn-success" style="text-align: bottom">Renouveller Adhesion</button>
+			<button type="button" class="btn btn-success" style="text-align: bottom">Renouveller Adhésion</button>
 			
 		</div>			
 		<div class="col-sm">
 			<div class="p-3 mb-2 bg-primary text-white">Adhérent</div>
 			<div class="p-3 mb-2 bg-light text-dark"> Nom : <?= $perso->nom(); ?> </div>
 			<div class="p-3 mb-2 bg-light text-dark"> Prénom : <?= $perso->prenom(); ?> </div>
-			<div class="p-3 mb-2 bg-light text-dark">Coordonnees : <?= $perso->adresse()->code_postal(); ?></div>			
+			<div class="p-3 mb-2 bg-light text-dark">Coordonnées : <?= $perso->adresse()->code_postal(); ?></div>			
 			<div class="p-3 mb-2 bg-light text-dark">Nombre d'emprunt : </div>
 			<br>
 			<button type="button" class="btn btn-success">Emprunter un nouvel article</button>
@@ -30,7 +30,7 @@
 			<div class="p-3 mb-2 bg-primary text-white">Nouveau Ayant droit</div>
 			<div class="input-group">
   				<div class="input-group-prepend">
-    				<span class="input-group-text">Nom et Prenom</span>
+    				<span class="input-group-text">Nom et Prénom</span>
   				</div>
   				
     			<input type="text" aria-label="First name" class="form-control">
