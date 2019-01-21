@@ -64,7 +64,7 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
                   		        {
                   		?>
                      
-                      	<option value=<?= $adherent->id() ?>> <?= $adherent->nom() ?> </option>
+                      <option value=<?= $adherent->id() ?>> <?= $adherent->nom() ?> </option>
                       
                       <?php }} else if ($GLOBALS["isActiveArticle"] == TRUE) 
                             { 
