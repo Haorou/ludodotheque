@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>  
     <head>
-        <title>Médiatheque : Connexion</title>
+        <title>Médiathèque : Connexion</title>
  		<?php require("view/require/HeadReferenceView.php");?>
     </head>
 
@@ -26,7 +26,7 @@
                 </div>
                         
                 <div class="forgot">
-                	<a href="reset.html">Recuperer son mot de passe</a>
+                	<a href="reset.html">Recupérer son mot de passe</a>
                 </div>
                 <button type="submit" class="btn btn-primary" value="connexion" name="connexion">Se connecter</button>
         

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Mediatheque : Formulaire Adherent</title>
+        <title>Mediathèque : Formulaire Adhérent</title>
  	
  		<?php require("view/require/HeadReferenceView.php");?>
     </head>

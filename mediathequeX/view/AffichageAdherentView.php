@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Mediatheque : Adherent</title> 		
+        <title>Mediathèque : Adhérent</title> 		
  		<?php require("view/require/HeadReferenceView.php");?>
     </head>
 

@@ -33,7 +33,7 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
                         
                         <!--end of col-->
                         <div class="col-auto">
-                        	<button class="btn btn-lg btn-success" type="submit">Search</button>
+                        	<button class="btn btn-lg btn-success" type="submit">Rechercher</button>
                         </div>
                         <!--end of col-->
                     
@@ -104,16 +104,16 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
 
     			<div>
             		<button type="submit" class="btn btn-lg btn-success" value="Page Creer Adherent" name="PageCreerAdherent">
-            		<span class="glyphicon glyphicon-user"></span> Créer Adherent</button>
+            		<span class="glyphicon glyphicon-user"></span> Créer Adhérent</button>
             	</div>
 
             	<div>
             		<button type="submit" class="btn btn-lg btn-warning" value="Modifier Adherent" name="ModifierAdherent">
-            		<span class="glyphicon glyphicon-cog"></span> Modifier Adherent</button>
+            		<span class="glyphicon glyphicon-cog"></span> Modifier Adhérent</button>
             	</div>
             	<div>
             		<button type="submit" class="btn btn-lg btn-danger" value="Supprimer utilisateur" name="SupprimerUtilisateur">
-            		<span class="glyphicon glyphicon-trash"></span> Supprimer Adherent</button>
+            		<span class="glyphicon glyphicon-trash"></span> Supprimer Adhérent</button>
             	</div>
             </form>
 
