@@ -12,28 +12,28 @@
 
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio"
-									name="inlineRadioOptions" id="inlineRadio1" value="option1"> 
+									name="civilite" id="inlineRadio1" value="option1"> 
 									<label class="form-check-label" for="inlineRadio1">Mme</label>
 							</div>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio"
-									name="inlineRadioOptions" id="inlineRadio2" value="option2"> 
+									name="civilite" id="inlineRadio2" value="option2"> 
 									<label class="form-check-label" for="inlineRadio2">Mr</label>
 							</div>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio"
-									name="inlineRadioOptions" id="inlineRadio3" value="option3">
+									name="civilite" id="inlineRadio3" value="option3">
 								<label class="form-check-label" for="inlineRadio3">Autre</label>
 							</div>
 
 
 							<div class="form-row">
 								<div class="form-group col-md-3">
-									<label>Nom</label> <input name="Nom" type="text" class="form-control"
+									<label>Nom</label> <input name="nom" type="text" class="form-control"
 										placeholder="Nom">
 								</div>
 								<div class="form-group col-md-3">
-									<label>Prénom</label> <input name="Prenom" type="text" class="form-control"
+									<label>Prénom</label> <input name="prenom" type="text" class="form-control"
 										placeholder="Prenom">
 								</div>
 							</div>
@@ -41,12 +41,12 @@
 
 							<div class="form-row">
 								<div class="form-group col-md-1">
-									<label>N°</label> <input name="Numero" type="text" class="form-control"
+									<label>N°</label> <input name="numero" type="text" class="form-control"
 										placeholder="Numero">
 								</div>
 
 								<div class="form-group col-md-2">
-									<label for="inputState">Voie</label> <select name="Voie" id="inputState"
+									<label for="inputState">Voie</label> <select name="type_voie" id="inputState"
 										class="form-control">
 										<option selected>Choisir</option>
 										<option>Rue</option>
@@ -59,19 +59,19 @@
 								</div>
 
 								<div class="form-group col-md-3">
-									<label>Nom de la voie</label> <input name="NomVoie" type="text"
+									<label>Nom de la voie</label> <input name="nom_voie" type="text"
 										class="form-control" placeholder="Nom de la voie">
 								</div>
 							</div>
 
 							<div class="form-row">
 								<div class="form-group col-md-2">
-									<label>Code Postal</label> <input name="CodePostal" type="text"
+									<label>Code Postal</label> <input name="code_postal" type="text"
 										class="form-control" placeholder="Code Postal">
 								</div>
 
 								<div class="form-group col-md-3">
-									<label>Ville</label> <input name="Ville" type="text" class="form-control"
+									<label>Ville</label> <input name="ville" type="text" class="form-control"
 										placeholder="Ville">
 								</div>
 							</div>

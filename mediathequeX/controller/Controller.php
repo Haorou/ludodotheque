@@ -237,8 +237,14 @@ function CreateAdherent()
         "prenom" => $_POST["prenom"]
     ]);
     
-    $adresse = new Adresse(
-        );
+    $adresse = new Adresse([
+        "numero" => $_POST["numero"],
+        "type_voie" => $_POST["type_voie"],
+        "nom_voie" => $_POST["nom_voie"],
+        "region" => $_POST["region"],
+        "code_postal" => $_POST["code_postal"],
+        "ville" => $_POST["ville"],
+        ]);
     
     $perso->setAdresse($adresse);
     
