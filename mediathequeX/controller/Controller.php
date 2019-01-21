@@ -221,6 +221,9 @@ function PageFormulaireFicheJeu()
 }
 function PageModifierAdherent()
 {
+    $PersonManager = new PersonneManager();
+    $perso = $PersonManager->readAdherent($_POST["persoSelect"]);
+
     $GLOBALS["isActiveAdherent"] = TRUE;
     require("view/AffichageAdherentView.php");
 }
@@ -241,10 +244,13 @@ function CreateAdherent()
         "numero" => $_POST["numero"],
         "type_voie" => $_POST["type_voie"],
         "nom_voie" => $_POST["nom_voie"],
-        "region" => $_POST["region"],
         "code_postal" => $_POST["code_postal"],
         "ville" => $_POST["ville"],
         ]);
+    
+    $adresse->setRegion($PersonManager->readRegion($adresse->code_postal()));
+    
+    $perso->setDate_adhesions(date_format(new DateTime('now'), 'Y-m-d H:i:s'));
     
     $perso->setAdresse($adresse);
     

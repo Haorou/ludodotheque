@@ -51,13 +51,22 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             <!-- IL FAUT PEUPLER CECI EN FONCTION D'UNE REQUETE INITAL GENERAL "SELECT * FROM ... " -->
 	        <!-- PUIS PRECISER LA REQUETE EN FONCTION DES MOTS TAPPER DANS LE CHAMPS DE RECHERCE "SELECT * FROM ... WHERE = "champs de recherche" " -->
 	        <!-- POUR ACTUALISER : UTILISATION JAVASCRIPT -->
-        		<form>
-        			<select class="custom-select" size="15">
-                      <option selected="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+            <form action="index.php" method="post">
+            
+        			<select class="custom-select" size="15" name="persoSelect">
+                  		<?php 
+                  		if ($GLOBALS["isActiveAdherent"] == TRUE) 
+                  		{ 
+                  		    $persoManager = new PersonneManager();
+                  		    $listeDeAdherent = $persoManager->readAllAdherent();
+                  		    foreach($listeDeAdherent as $adherent)
+                  		    {
+                  		?>
+                     
+                      <option value=<?= $adherent->id() ?>> <?= $adherent->nom() ?> </option>
+                      <?php }} ?>
                     </select>
-				</form>
+
     			
                 <div class="row">
                     <div class="col-md-6">.col-md-6</div>
@@ -69,8 +78,7 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             <div class="col-md-2">
             
             <?php if ($GLOBALS["isActiveAdherent"] == TRUE) { ?>
-            
-            <form action="index.php" method="post">
+
     			<div>
             		<button type="submit" class="btn btn-lg btn-success" value="Page Creer Adherent" name="PageCreerAdherent">
             		<span class="glyphicon glyphicon-user"></span> Créer Adherent</button>
@@ -88,7 +96,6 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
 
 			<?php } else if ($GLOBALS["isActiveArticle"] == TRUE) { ?>
 
-            <form action="index.php" method="post">
     			<div>
             		<button type="submit" class="btn btn-lg btn-success" value="Page Ajouter Fiche" name="PageAjouterFiche">
             		<span class="glyphicon glyphicon-user"></span> Ajouter fiche jeu</button>
@@ -106,7 +113,6 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             
 			<?php } else if ($GLOBALS["isActiveAlerte"] == TRUE) { ?>
 			
-            <form action="index.php" method="post">
     			<div>
             		<button type="submit" class="btn btn-lg btn-success" value="Page Ajouter Fiche" name="PageAjouterFiche">
             		<span class="glyphicon glyphicon-user"></span> Ajazdzadzar fiche jeu</button>

@@ -100,12 +100,12 @@ require_once("model/PDO/ManagerPDO.php");
         }
         
         public function updateAdherent(Adherent $perso)
-        {            
+        {                        
             $updatePersonne = $this->_db->prepare("UPDATE personne
-                                                 SET civile = :civilite,
+                                                 SET civilite = :civilite,
                                                  nom = :nom,
                                                  prenom = :prenom
-                                                 WHERE id = :id)");
+                                                 WHERE id = :id");
             
             $updatePersonne->execute(array(
                 "civilite" => $perso->civilite(),
@@ -115,8 +115,8 @@ require_once("model/PDO/ManagerPDO.php");
             ));
             
             $updateAdresse = $this->_db->prepare("UPDATE adresse
-                                               SET nummero = numero, nom_voie = :nom_voie, type_voie = :type_voie,
-                                               complet = :complement, code_postal = :code_postal, ville = :ville
+                                               SET numero = :numero, nom_voie = :nom_voie, type_voie = :type_voie,
+                                               complement = :complement, code_postal = :code_postal, ville = :ville
                                                WHERE id = :id");
             
             $updateAdresse->execute(array(
@@ -129,21 +129,18 @@ require_once("model/PDO/ManagerPDO.php");
                 "id" => $perso->adresse()->id()
             ));
             
-            
             $updateAdherent = $this->_db->prepare("UPDATE adherent SET
                                                    commentaire = :commentaire,
                                                    id_adresse = :id_adresse
-                                                   WHERE id = :id");
+                                                   WHERE id_personne = :id_personne");
             
             $updateAdherent->execute(array(
                 "commentaire" => $perso->commentaire(),
                 "id_adresse" => $perso->adresse()->id(),
-                "id" => $perso->id()
+                "id_personne" => $perso->id()
             ));
             
-            
-            
-            
+            /*
             $addDate = $this->_db->prepare("INSERT INTO adhesion(id_adherent, date_adhesion)
                                         VALUES (:id_adherent, :date_adhesion)");
             
@@ -151,22 +148,22 @@ require_once("model/PDO/ManagerPDO.php");
                 "id_adherent" => $perso->id(),
                 "date_adhesion" => $perso->first_date_adhesion()
             ));
+            */
             
             foreach($perso->ayant_droits() as $ayantdroit)
             {
-                $this->createAyantDroit($ayantdroit, $perso);
+                $this->updateAyantDroit($ayantdroit);
             }
-            
         }
         
         
         public function updateAyantDroit(AyantDroit $perso)
         {
             $updatePersonne = $this->_db->prepare("UPDATE personne
-                                                 SET civile = :civilite,
+                                                 SET civilite = :civilite,
                                                  nom = :nom,
                                                  prenom = :prenom
-                                                 WHERE id = :id)");
+                                                 WHERE id = :id");
             
             $updatePersonne->execute(array(
                 "civilite" => $perso->civilite(),
@@ -183,6 +180,15 @@ require_once("model/PDO/ManagerPDO.php");
             $deleteAdhesion = $this->_db->prepare("DELETE FROM adhesion
                                         WHERE id_adherent = :id");
             $deleteAdhesion->execute(array(
+                "id" => $perso->id()));
+            
+            
+            // ============== ICI ON SUPPRIME :   SES EMPRUNTS   ================================ //
+            
+            $deleteEmprunt = $this->_db->prepare("DELETE FROM emprunt
+                                        WHERE id_adherent = :id");
+            
+            $deleteEmprunt->execute(array(
                 "id" => $perso->id()));
             
             // ============== ICI ON SUPPRIME :   ADHERENT   ================================ //
@@ -223,14 +229,6 @@ require_once("model/PDO/ManagerPDO.php");
                 $deletePersonne->execute(array(
                     "id" => $ayantdroit->id()));
             }
-            
-            // ============== ICI ON SUPPRIME :   SES EMPRUNTS   ================================ //
-            
-            $deleteEmprunt = $this->_db->prepare("DELETE FROM emprunt
-                                        WHERE id_adherent = :id");
-            
-            $deleteEmprunt->execute(array(
-                "id" => $perso->id()));
         }
         
         public function deleteAyantDroit(AyantDroit $perso)
@@ -347,9 +345,7 @@ require_once("model/PDO/ManagerPDO.php");
         public function readAllAdherent()
         {
             $selectPerso = $this->_db->query("SELECT * FROM personne
-                                        INNER JOIN adherent ON adherent.id_personne = personne.id
-                                        INNER JOIN adhesion ON adhesion.id_adherent = adherent.id_personne
-                                        INNER JOIN adresse ON adherent.id_adresse = adresse.id");
+                                        INNER JOIN adherent ON adherent.id_personne = personne.id");
             $listeDePersonnages = [];
             
             while($perso = $selectPerso->fetch())
@@ -371,6 +367,19 @@ require_once("model/PDO/ManagerPDO.php");
                 $listeDePersonnages[] = new AyantDroit($perso);
             }
             return $listeDePersonnages;
+        }
+        
+        public function readRegion($code_postal)
+        {
+            $selectPerso = $this->_db->prepare("SELECT region FROM region_code_postal_ville
+                                              WHERE code_postal = :code_postal");
+            $selectPerso->execute(array(
+               "code_postal" => $code_postal
+            ));
+            
+            $region = $selectPerso->fetch();
+            
+            return $region["region"];
         }
         
         public function countAdherent()
