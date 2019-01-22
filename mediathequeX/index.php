@@ -42,6 +42,26 @@ try
     {
         CreateAdherent();
     }
+    else if(isset($_POST["SupprimerUtilisateur"]))
+    {
+        DeleteAdherent();
+    }
+    else if(isset($_POST["creerAyantDroit"]))
+    {
+        CreateAyantDroit();
+    }
+    else if(isset($_POST["ayantdroit_a_supprimer"]))
+    {
+        DeleteAyandroit();
+    }
+    else if(isset($_POST["renouveller_adhesion"]))
+    {
+        RenouvellerAdhesion();
+    }
+    else if(isset($_POST["ajouterFicheJeu"]))
+    {
+        createFicheJeu();
+    }
     else
     {
         ConnexionPage();

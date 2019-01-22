@@ -55,16 +55,16 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             
         			<select class="custom-select" size="15" name="persoSelect">
                   		<?php 
-                  		if ($GLOBALS["isActiveAdherent"] == TRUE) 
-                  		    { 
-                      		    $persoManager = new PersonneManager();
+                  		echo "CHINOIS 0 ! ";
+                  		if ($GLOBALS["isActiveAdherent"] == TRUE)
+                  		    {
+                  		        $persoManager = new PersonneManager();
                       		    $listeDeAdherent = $persoManager->readAllAdherent();
-                      		    
                       		    foreach($listeDeAdherent as $adherent)
                   		        {
                   		?>
                      
-                      <option value=<?= $adherent->id() ?>> <?= $adherent->nom() ?> </option>
+                      <option value=<?= $adherent->id() ?>> <?="{$adherent->nom()} {$adherent->prenom()}" ?> </option>
                       
                       <?php }} else if ($GLOBALS["isActiveArticle"] == TRUE) 
                             { 
@@ -72,12 +72,13 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
                                 $jeuManager = new JeuManager();
                                 
                                 $listeDeFiche = $ficheManager->readAllFicheJeux();
-                                $jeuManager->readAllCountJeux();
+                                $nombreDeJeux = "";
                                 
                                 foreach($listeDeFiche as $fiche)
                                 {
+                                    $nombreDeJeux = $jeuManager->readCountJeux($fiche->id());
                        ?>
-	                      <option value=<?= $fiche->id() ?>> <?= $fiche->titre() ?> </option>
+	                      <option value=<?= $fiche->id() ?>> <?php echo "{$fiche->titre()} - $nombreDeJeux jeux" ?> </option>
                       
                       
                       <?php }} else if ($GLOBALS["isActiveAlerte"] == TRUE) 
@@ -90,11 +91,19 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
                       
                     </select>
 
+    			<?php if ($GLOBALS["isActiveAdherent"] == TRUE) { ?>
     			
+    			
+    			
+    			
+    			<?php } else { ?>
+                
                 <div class="row">
                     <div class="col-md-6">.col-md-6</div>
                     <div class="col-md-6">.col-md-6</div>
                 </div>
+                
+                <?php }?>
                 
             </div>
             
@@ -104,16 +113,16 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
 
     			<div>
             		<button type="submit" class="btn btn-lg btn-success" value="Page Creer Adherent" name="PageCreerAdherent">
-            		<span class="glyphicon glyphicon-user"></span> Créer Adhérent</button>
+            		<span class="glyphicon glyphicon-user"></span> Créer adhérent</button>
             	</div>
 
             	<div>
             		<button type="submit" class="btn btn-lg btn-warning" value="Modifier Adherent" name="ModifierAdherent">
-            		<span class="glyphicon glyphicon-cog"></span> Modifier Adhérent</button>
+            		<span class="glyphicon glyphicon-cog"></span> Gérer adhérent</button>
             	</div>
             	<div>
             		<button type="submit" class="btn btn-lg btn-danger" value="Supprimer utilisateur" name="SupprimerUtilisateur">
-            		<span class="glyphicon glyphicon-trash"></span> Supprimer Adhérent</button>
+            		<span class="glyphicon glyphicon-trash"></span> Supprimer adhérent</button>
             	</div>
             </form>
 
@@ -135,19 +144,24 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             </form>
             
 			<?php } else if ($GLOBALS["isActiveAlerte"] == TRUE) { ?>
+
+    			<div>
+            		<button type="submit" class="btn btn-lg btn-success" value="Page Ajouter Fiche" name="PageAjouterFiche">
+            		<span class="glyphicon glyphicon-user"></span> Ajouter un article</button>
+            	</div>
 			
     			<div>
             		<button type="submit" class="btn btn-lg btn-success" value="Page Ajouter Fiche" name="PageAjouterFiche">
-            		<span class="glyphicon glyphicon-user"></span> Ajazdzadzar fiche jeu</button>
+            		<span class="glyphicon glyphicon-user"></span> Ajouter alerte a l'article</button>
             	</div>
 
             	<div>
             		<button type="submit" class="btn btn-lg btn-primary" value="Modifier utilisateur" name="ModifierUtilisateur">
-            		<span class="glyphicon glyphicon-cog"></span> Modifier azdzafiche jeu</button>
+            		<span class="glyphicon glyphicon-cog"></span> Afficher les alertes</button>
             	</div>
             	<div>
             		<button type="submit" class="btn btn-lg btn-danger" value="Supprimer utilisateur" name="SupprimerUtilisateur">
-            		<span class="glyphicon glyphicon-trash"></span> Supprimazdzaer fiche jeu</button>
+            		<span class="glyphicon glyphicon-trash"></span>Alertes de l'article réglées</button>
             	</div>
             </form>
 

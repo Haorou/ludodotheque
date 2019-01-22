@@ -231,7 +231,7 @@ class FicheJeuManager extends ManagerPDO
     
     public function readAllFicheJeux()
     {
-        $resultatRequeteFicheJeu = $this->_db->query('SELECT DISTINCT fiche_article.titre FROM article
+        $resultatRequeteFicheJeu = $this->_db->query('SELECT DISTINCT fiche_article.titre, fiche_article.id FROM article
                                     INNER JOIN fiche_article ON fiche_article.id = article.id_fiche_article');
         
         $listeDeFicheJeux = [];

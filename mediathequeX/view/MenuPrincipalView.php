@@ -11,7 +11,7 @@
     <body> 
 		<?php require("view/require/HeaderView.php");?>
 		
-		<h1>Bienvenue gestionnaire / administrateur</h1>
+		<h1 class="form-heading" style="text-align: center">Bienvenue gestionnaire / administrateur</h1>
 
 		<?php require("view/require/FooterView.php");?>
 		

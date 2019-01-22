@@ -7,8 +7,6 @@ class Emprunt
     private $_date_retour_effectif = "";
     private $_commentaire = "";
     private $_est_en_retard = false;
-
-
     
     //--------------------------Constructeur---------------------------//
     

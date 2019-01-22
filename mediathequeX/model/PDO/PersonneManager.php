@@ -155,7 +155,7 @@ require_once("model/PDO/ManagerPDO.php");
                 $this->updateAyantDroit($ayantdroit);
             }
         }
-        
+
         
         public function updateAyantDroit(AyantDroit $perso)
         {
@@ -234,7 +234,7 @@ require_once("model/PDO/ManagerPDO.php");
         public function deleteAyantDroit(AyantDroit $perso)
         {
             $deleteAyantDroit = $this->_db->prepare("DELETE FROM ayantdroit
-                                        WHERE id_adherent = :id");
+                                        WHERE id_personne = :id");
             $deleteAyantDroit->execute(array(
                 "id" => $perso->id()));
             
@@ -305,15 +305,15 @@ require_once("model/PDO/ManagerPDO.php");
             return $adherent;
         }
         
-        public function readAyantDroit(Adherent $perso)
-        {    
-                $q = $this->_db->prepare('SELECT * FROM ayantdroit 
-                                          INNER JOIN adherent ON adherent.id = ayantdroit.id_adherent
-                                          INNER JOIN personne ON ayantdroit.id_personne = personne.id WHERE id = :id');
-                $q->execute([':id' => $perso->id()]);
-                $donnees = $q->fetch(PDO::FETCH_ASSOC);
-                
-                return new AyantDroit($donnees);
+        public function readAyantDroitById($id)
+        {
+            $q = $this->_db->prepare('SELECT * FROM ayantdroit
+                                      INNER JOIN adherent ON adherent.id_personne = ayantdroit.id_adherent
+                                      INNER JOIN personne ON ayantdroit.id_personne = personne.id WHERE personne.id = :id');
+            $q->execute([':id' => $id]);
+            $donnees = $q->fetch(PDO::FETCH_ASSOC);
+            
+            return new AyantDroit($donnees);
         }
         
         public function adherentExists($info)

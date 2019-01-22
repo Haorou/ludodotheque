@@ -221,11 +221,18 @@ function PageFormulaireFicheJeu()
 }
 function PageModifierAdherent()
 {
-    $PersonManager = new PersonneManager();
-    $perso = $PersonManager->readAdherent($_POST["persoSelect"]);
-
     $GLOBALS["isActiveAdherent"] = TRUE;
-    require("view/AffichageAdherentView.php");
+    
+    if(isset($_POST["persoSelect"]))
+    {
+        $PersonManager = new PersonneManager();
+        $perso = $PersonManager->readAdherent($_POST["persoSelect"]);
+        require("view/AffichageAdherentView.php");
+    }
+    else
+    {
+        require("view/GestionAdherentView.php");
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -258,5 +265,97 @@ function CreateAdherent()
     
     $GLOBALS["isActiveAdherent"] = TRUE;
     require("view/AffichageAdherentView.php");
+}
+
+function DeleteAdherent()
+{
+    $GLOBALS["isActiveAdherent"] = TRUE;
+    
+    if(isset($_POST["persoSelect"]))
+    {
+        $personneManager = new PersonneManager();
+        $perso = $personneManager->readAdherent($_POST["persoSelect"]);
+        $personneManager->deleteAdherent($perso);
+        
+        require("view/GestionAdherentView.php");
+    }
+    else
+    {
+        require("view/GestionAdherentView.php");
+    }
+}
+
+function CreateAyantDroit()
+{
+    $personneManager = new PersonneManager();
+    
+    $ayantdroit = new AyantDroit([
+        "civilite" => $_POST["civilite"],
+        "nom" => $_POST["nom"],
+        "prenom"=> $_POST["prenom"]
+    ]);
+
+    $personneManager->createAyantDroit($ayantdroit, $personneManager->readAdherent($_SESSION["id_adherent"]));
+    
+    $perso = $personneManager->readAdherent($_SESSION["id_adherent"]);
+    
+    $GLOBALS["isActiveAdherent"] = TRUE;
+    require("view/AffichageAdherentView.php");
+}
+
+function DeleteAyandroit()
+{
+    $personneManager = new PersonneManager();
+    
+    $ayantdroit = $personneManager->readAyantDroitById($_POST["ayantdroit_a_supprimer"]);
+
+    $personneManager->deleteAyantDroit($ayantdroit);
+     
+    $perso = $personneManager->readAdherent($_SESSION["id_adherent"]);
+    
+    $GLOBALS["isActiveAdherent"] = TRUE;
+    require("view/AffichageAdherentView.php");
+
+}
+
+function RenouvellerAdhesion()
+{
+    $personneManager = new PersonneManager();
+    
+    $perso = $personneManager->readAdherent($_SESSION["id_adherent"]);
+    $perso->setDate_adhesions(date_format(new DateTime('now'), 'Y-m-d H:i:s'));
+    $personneManager->addAdhesion($perso);
+    
+    $GLOBALS["isActiveAdherent"] = TRUE;
+    require("view/AffichageAdherentView.php");
+}
+
+function createFicheJeu()
+{
+    $ficheJeuManager = new FicheJeuManager();
+    
+    $ficheJeu = new FicheJeu([
+        "nombre_de_joueurs_min" => $_POST["nbrejoueurmin"],
+        "nombre_de_joueurs_max" => $_POST["nbrejoueurmax"],
+        "duree_min_de_jeu" => $_POST["dureemin"],
+        "duree_max_de_jeu" => $_POST["dureemax"],
+        "titre" =>$_POST["nomdujeu"],
+        "editeur" => $_POST["editeurdujeu"],
+        "age_min" => $_POST["agemin"],
+        "age_max" => $_POST["agemax"],
+        "date_de_publication" => $_POST["date"],
+        "descriptif" => $_POST["descriptif"]
+    ]);
+    
+    $ficheJeu->setTypes_de_jeu($_POST["type_jeu_1"]);
+
+    if($_POST["type_jeu_1"] != $_POST["type_jeu_2"])
+    {
+        $ficheJeu->setTypes_de_jeu($_POST["type_jeu_2"]);
+    }
+    $ficheJeuManager->createFicheJeu($ficheJeu);
+    
+    $GLOBALS["isActiveArticle"] = TRUE;
+    require("view/FormulaireFicheJeu.php");
 }
 

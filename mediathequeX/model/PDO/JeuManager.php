@@ -200,9 +200,13 @@ class JeuManager extends ManagerPDO
     
     public function readCountJeux($id_fiche_jeu)
     {
-        $resultatRequeteCountJeu = $this->_db->query('SELECT COUNT(*) as count_article FROM article 
-                                                      WHERE id_fiche_article = ' + $id_fiche_jeu);
+        $resultatRequeteCountJeu = $this->_db->prepare('SELECT COUNT(*) as count_article FROM article 
+                                                      WHERE id_fiche_article = :id_fiche_article');
+        
+        $resultatRequeteCountJeu->execute(["id_fiche_article" => $id_fiche_jeu]);
+        
         $nombreDeJeu = $resultatRequeteCountJeu->fetch();
+        
         return $nombreDeJeu["count_article"];
     }
     
@@ -210,7 +214,8 @@ class JeuManager extends ManagerPDO
     {
         $resultatRequeteCountJeu = $this->_db->query('SELECT COUNT(id_fiche_article) as count_article FROM article');
         $nombreDeJeu = $resultatRequeteCountJeu->fetch();
-        echo $nombreDeJeu["COUNT(id_fiche_article)"];
+        // echo "la" + $nombreDeJeu;
+        echo "ici" + $nombreDeJeu["count_article"];
         
         //return $nombreDeJeu["count_article"];
     }

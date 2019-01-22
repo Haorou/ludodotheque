@@ -10,43 +10,34 @@
 					<div>
                         <form action="index.php?action=creerUtilisateur" method="post">
                         
-                        	<div class="form-check form-check-inline">
-                        		<input class="form-check-input" type="radio" name="civilite" id="inlineRadio1" value="madame"> 
-                        		<label class="form-check-label" for="inlineRadio1">Mme</label>
-                        	</div>
-                        	
-                        	<div class="form-check form-check-inline">
-                        		<input class="form-check-input" type="radio" name="civilite" id="inlineRadio2" value="monsieur"> 
-                        		<label class="form-check-label" for="inlineRadio2">M.</label>
-                        	</div>
-                        	
-                        	<div class="form-check form-check-inline">
-                        		<input class="form-check-input" type="radio" name="civilite" id="inlineRadio3" value="autre">
-                        		<label class="form-check-label" for="inlineRadio3">Autre</label>
-                        	</div>
-                        
-                        
                         	<div class="form-row justify-content-center">
+                        		<div class="form-group col-md-2">
+                        			<select name="civilite" id="inputState" class="form-control">
+                        				<option selected>monsieur</option>
+                        				<option>madame</option>
+                        				<option>autre</option>
+                        			</select>
+                        		</div>
+                        	
+                        	
                         		<div class="form-group col-md-3">
-                        			<input name="nom" type="text" class="form-control" placeholder="Nom">
+                        			<input name="nom" type="text" class="form-control" placeholder="Nom" required>
                         		</div>
                         		
                         		<div class="form-group col-md-3">
-                        			<input name="prenom" type="text" class="form-control" placeholder="Prénom">
+                        			<input name="prenom" type="text" class="form-control" placeholder="Prénom" required>
                         		</div>
                         	</div>
                         
                         
                         	<div class="form-row justify-content-center">
                         		<div class="form-group col-md-1">
-                        			<input name="numero" type="text" class="form-control" placeholder="N°">
+                        			<input name="numero" type="text" class="form-control" placeholder="N°" required>
                         		</div>
                         
                         		<div class="form-group col-md-2">
-                        			<select name="type_voie" id="inputState"
-                        				class="form-control">
-                        				<option selected>Voie</option>
-                        				<option>Rue</option>
+                        			<select name="type_voie" id="inputState" class="form-control">
+                        				<option selected>Rue</option>
                         				<option>Allée</option>
                         				<option>Avenue</option>
                         				<option>Boulevard</option>
@@ -56,17 +47,17 @@
                         		</div>
                         
                         		<div class="form-group col-md-3">
-                        			<input name="nom_voie" type="text" class="form-control" placeholder="Nom de la voie">
+                        			<input name="nom_voie" type="text" class="form-control" placeholder="Nom de la voie" required>
                         		</div>
                         	</div>
                         
                         	<div class="form-row justify-content-center">
                         		<div class="form-group col-md-2">
-                        			<input name="code_postal" type="text" class="form-control" placeholder="Code Postal">
+                        			<input name="code_postal" type="text" class="form-control" placeholder="Code Postal" required>
                         		</div>
                         
                         		<div class="form-group col-md-3">
-                        			<input name="ville" type="text" class="form-control" placeholder="Ville">
+                        			<input name="ville" type="text" class="form-control" placeholder="Ville" required>
                         		</div>
                         	</div>
                         
