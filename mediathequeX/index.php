@@ -60,7 +60,11 @@ try
     }
     else if(isset($_POST["ajouterFicheJeu"]))
     {
-        createFicheJeu();
+        CreateFicheJeu();
+    }
+    else if(isset($_POST["SupprimerFicherJeu"]))
+    {
+        DeleteFicheJeu();
     }
     else
     {

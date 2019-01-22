@@ -53,9 +53,8 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
 	        <!-- POUR ACTUALISER : UTILISATION JAVASCRIPT -->
             <form action="index.php" method="post">
             
-        			<select class="custom-select" size="15" name="persoSelect">
+        			<select class="custom-select" size="15" name="select">
                   		<?php 
-                  		echo "CHINOIS 0 ! ";
                   		if ($GLOBALS["isActiveAdherent"] == TRUE)
                   		    {
                   		        $persoManager = new PersonneManager();
@@ -78,7 +77,7 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
                                 {
                                     $nombreDeJeux = $jeuManager->readCountJeux($fiche->id());
                        ?>
-	                      <option value=<?= $fiche->id() ?>> <?php echo "{$fiche->titre()} - $nombreDeJeux jeux" ?> </option>
+	                      <option value=<?= $fiche->id() ?>> <?php echo "$nombreDeJeux jeux - {$fiche->titre()}" ?> </option>
                       
                       
                       <?php }} else if ($GLOBALS["isActiveAlerte"] == TRUE) 
@@ -94,7 +93,14 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
     			<?php if ($GLOBALS["isActiveAdherent"] == TRUE) { ?>
     			
     			
+    			<?php } else if ($GLOBALS["isActiveArticle"] == TRUE) {?>
     			
+                <div class="row">                    
+                    <div class="col-md-12" style="text-align:center ; ; margin-top :20px">
+            			<button type="submit" class="btn btn-lg btn-success" value="Page Creer Adherent" name="PageCreerAdherent">
+            			<span class="glyphicon glyphicon-eye-open"></span> Afficher les articles </button>
+                    </div>
+                </div>
     			
     			<?php } else { ?>
                 
@@ -117,11 +123,11 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             	</div>
 
             	<div>
-            		<button type="submit" class="btn btn-lg btn-warning" value="Modifier Adherent" name="ModifierAdherent">
+            		<button type="submit" class="btn btn-lg btn-warning" value="Modifier Adherent" name="ModifierAdherent" style="margin-top :20px">
             		<span class="glyphicon glyphicon-cog"></span> Gérer adhérent</button>
             	</div>
             	<div>
-            		<button type="submit" class="btn btn-lg btn-danger" value="Supprimer utilisateur" name="SupprimerUtilisateur">
+            		<button type="submit" class="btn btn-lg btn-danger" value="Supprimer utilisateur" name="SupprimerUtilisateur" style="margin-top :20px">
             		<span class="glyphicon glyphicon-trash"></span> Supprimer adhérent</button>
             	</div>
             </form>
@@ -130,15 +136,15 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
 
     			<div>
             		<button type="submit" class="btn btn-lg btn-success" value="Page Ajouter Fiche" name="PageAjouterFiche">
-            		<span class="glyphicon glyphicon-user"></span> Ajouter fiche jeu</button>
+            		<span class="glyphicon glyphicon-list-alt"></span> Ajouter fiche jeu</button>
             	</div>
 
             	<div>
-            		<button type="submit" class="btn btn-lg btn-primary" value="Modifier utilisateur" name="ModifierUtilisateur">
+            		<button type="submit" class="btn btn-lg btn-warning" value="Modifier utilisateur" name="ModifierUtilisateur" style="margin-top :20px">
             		<span class="glyphicon glyphicon-cog"></span> Modifier fiche jeu</button>
             	</div>
             	<div>
-            		<button type="submit" class="btn btn-lg btn-danger" value="Supprimer utilisateur" name="SupprimerUtilisateur">
+            		<button type="submit" class="btn btn-lg btn-danger" value="Supprimer utilisateur" name="SupprimerFicherJeu" style="margin-top :20px">
             		<span class="glyphicon glyphicon-trash"></span> Supprimer fiche jeu</button>
             	</div>
             </form>
@@ -151,16 +157,16 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             	</div>
 			
     			<div>
-            		<button type="submit" class="btn btn-lg btn-success" value="Page Ajouter Fiche" name="PageAjouterFiche">
+            		<button type="submit" class="btn btn-lg btn-success" value="Page Ajouter Fiche" name="PageAjouterFiche" style="margin-top :20px">
             		<span class="glyphicon glyphicon-user"></span> Ajouter alerte a l'article</button>
             	</div>
 
             	<div>
-            		<button type="submit" class="btn btn-lg btn-primary" value="Modifier utilisateur" name="ModifierUtilisateur">
+            		<button type="submit" class="btn btn-lg btn-primary" value="Modifier utilisateur" name="ModifierUtilisateur" style="margin-top :20px">
             		<span class="glyphicon glyphicon-cog"></span> Afficher les alertes</button>
             	</div>
             	<div>
-            		<button type="submit" class="btn btn-lg btn-danger" value="Supprimer utilisateur" name="SupprimerUtilisateur">
+            		<button type="submit" class="btn btn-lg btn-danger" value="Supprimer utilisateur" name="ddzdazdz" style="margin-top :20px">
             		<span class="glyphicon glyphicon-trash"></span>Alertes de l'article réglées</button>
             	</div>
             </form>

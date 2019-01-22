@@ -223,10 +223,10 @@ function PageModifierAdherent()
 {
     $GLOBALS["isActiveAdherent"] = TRUE;
     
-    if(isset($_POST["persoSelect"]))
+    if(isset($_POST["select"]))
     {
         $PersonManager = new PersonneManager();
-        $perso = $PersonManager->readAdherent($_POST["persoSelect"]);
+        $perso = $PersonManager->readAdherent($_POST["select"]);
         require("view/AffichageAdherentView.php");
     }
     else
@@ -271,10 +271,10 @@ function DeleteAdherent()
 {
     $GLOBALS["isActiveAdherent"] = TRUE;
     
-    if(isset($_POST["persoSelect"]))
+    if(isset($_POST["select"]))
     {
         $personneManager = new PersonneManager();
-        $perso = $personneManager->readAdherent($_POST["persoSelect"]);
+        $perso = $personneManager->readAdherent($_POST["select"]);
         $personneManager->deleteAdherent($perso);
         
         require("view/GestionAdherentView.php");
@@ -330,7 +330,7 @@ function RenouvellerAdhesion()
     require("view/AffichageAdherentView.php");
 }
 
-function createFicheJeu()
+function CreateFicheJeu()
 {
     $ficheJeuManager = new FicheJeuManager();
     
@@ -357,5 +357,23 @@ function createFicheJeu()
     
     $GLOBALS["isActiveArticle"] = TRUE;
     require("view/FormulaireFicheJeu.php");
+}
+
+function DeleteFicheJeu()
+{
+    $GLOBALS["isActiveArticle"] = TRUE;
+    
+    if(isset($_POST["select"]))
+    {
+        $ficheJeuManager = new FicheJeuManager();
+        $ficheJeu = $ficheJeuManager->readFicheJeu($_POST["select"]);
+        $ficheJeuManager->deleteFicheJeu($ficheJeu);
+        
+        require("view/GestionArticleView.php");
+    }
+    else
+    {
+        require("view/GestionArticleView.php");
+    }
 }
 
