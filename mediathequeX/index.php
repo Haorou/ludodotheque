@@ -12,7 +12,7 @@ try
     {
         GestionAlertePage();
     }
-    else if(isset($_POST["gestionArticles"]))
+    else if(isset($_POST["gestionJeux"]))
     {
         GestionArticlesPage();
     }

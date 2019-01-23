@@ -5,9 +5,9 @@ if ($GLOBALS["isActiveAdherent"] == TRUE)
 {
     $placeholder = "Rechercher un adherent";
 }
-elseif($GLOBALS["isActiveArticle"] == TRUE)
+elseif($GLOBALS["isActiveJeu"] == TRUE)
 {
-    $placeholder = "Rechercher un article";
+    $placeholder = "Rechercher un jeu";
 }
 elseif($GLOBALS["isActiveAlerte"] == TRUE)
 {
@@ -67,7 +67,7 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
                       		<?="{$adherent->nom()} {$adherent->prenom()}" ?> 
                       </option>
                       
-                      <?php } } else if ($GLOBALS["isActiveArticle"] == TRUE) 
+                      <?php } } else if ($GLOBALS["isActiveJeu"] == TRUE) 
                             { 
                                 $ficheManager = new FicheJeuManager();
                                 $jeuManager = new JeuManager();
@@ -94,7 +94,7 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
     			<?php if ($GLOBALS["isActiveAdherent"] == TRUE) { ?>
     			
     			
-    			<?php } else if ($GLOBALS["isActiveArticle"] == TRUE) {?>
+    			<?php } else if ($GLOBALS["isActiveJeu"] == TRUE) {?>
     			
                 <div class="row">                    
                     <div class="col-md-12" style="text-align:center ; margin-top :20px">
@@ -133,7 +133,7 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             	</div>
             </form>
 
-			<?php } else if ($GLOBALS["isActiveArticle"] == TRUE) { ?>
+			<?php } else if ($GLOBALS["isActiveJeu"] == TRUE) { ?>
 
     			<div>
             		<button type="submit" class="btn btn-lg btn-success" value="Page Ajouter Fiche" name="PageAjouterFiche">

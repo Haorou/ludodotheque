@@ -176,7 +176,7 @@ $adherent->setAyant_droits($ayantdroit2);
 
 $isActiveMenu = FALSE;
 $isActiveAdherent = FALSE;
-$isActiveArticle = FALSE;
+$isActiveJeu = FALSE;
 $isActiveAlerte = FALSE;
 
 function ConnexionPage()
@@ -198,7 +198,7 @@ function GestionAlertePage()
 
 function GestionArticlesPage()
 {
-    $GLOBALS["isActiveArticle"] = TRUE;
+    $GLOBALS["isActiveJeu"] = TRUE;
     require("view/GestionArticleView.php");
 }
 
@@ -216,7 +216,7 @@ function PageFormulaireAdhesion()
 
 function PageFormulaireFicheJeu()
 {
-    $GLOBALS["isActiveArticle"] = TRUE;
+    $GLOBALS["isActiveJeu"] = TRUE;
     $ficheJeuManager = new FicheJeuManager();
     
     $typesJeu = $ficheJeuManager->readTypesJeux();
@@ -356,13 +356,13 @@ function CreateFicheJeu()
     
     $ficheJeuManager->createFicheJeu($ficheJeu);
     
-    $GLOBALS["isActiveArticle"] = TRUE;
+    $GLOBALS["isActiveJeu"] = TRUE;
     require("view/GestionArticleView.php");
 }
 
 function DeleteFicheJeu()
 {
-    $GLOBALS["isActiveArticle"] = TRUE;
+    $GLOBALS["isActiveJeu"] = TRUE;
     
     if(isset($_POST["select"]))
     {
@@ -376,7 +376,7 @@ function DeleteFicheJeu()
 
 function ReadLesArticles()
 {
-    $GLOBALS["isActiveArticle"] = TRUE;
+    $GLOBALS["isActiveJeu"] = TRUE;
     
     if(isset($_POST["select"]))
     {
@@ -395,7 +395,7 @@ function ReadLesArticles()
 
 function CreateArticle()
 {
-    $GLOBALS["isActiveArticle"] = TRUE;
+    $GLOBALS["isActiveJeu"] = TRUE;
     
     $jeuManager = new JeuManager();
     $ficheJeuManager = new FicheJeuManager();
@@ -413,7 +413,7 @@ function CreateArticle()
 
 function ModifierFicheJeu()
 {
-    $GLOBALS["isActiveArticle"] = TRUE;
+    $GLOBALS["isActiveJeu"] = TRUE;
     if(isset($_POST["select"]))
     {
         $_SESSION["id_fiche_article"]  = $_POST["select"];
@@ -433,7 +433,7 @@ function ModifierFicheJeu()
     
 function UpdateFicheJeu()
 {
-    $GLOBALS["isActiveArticle"] = TRUE;
+    $GLOBALS["isActiveJeu"] = TRUE;
 
     $ficheJeuManager = new FicheJeuManager();
     $ficheJeu = new FicheJeu([

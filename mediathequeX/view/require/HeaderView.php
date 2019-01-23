@@ -12,9 +12,9 @@
             </form>
         </a>
         
-        <a class="nav-item nav-link <?=$GLOBALS["isActiveArticle"]==TRUE?"active":""; ?>" href="#">
+        <a class="nav-item nav-link <?=$GLOBALS["isActiveJeu"]==TRUE?"active":""; ?>" href="#">
             <form action="index.php?action=gestionArticles" method="post">
-            	<button type="submit" class="btn <?=$GLOBALS["isActiveArticle"]==TRUE?"btn-primary":""; ?> btn-block" value="Gestion Articles" name="gestionArticles">Gestion Articles</button>
+            	<button type="submit" class="btn <?=$GLOBALS["isActiveJeu"]==TRUE?"btn-primary":""; ?> btn-block" value="Gestion Jeux" name="gestionJeux">Gestion Jeux</button>
             </form>
         </a>
         

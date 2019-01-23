@@ -9,11 +9,9 @@
                 
         			<select class="custom-select" size="15" name="select">
                   		
-                  		<?php  for($index = 0 ; $index < $nombreDeJeux ; $index++) 
-                  		       { 
-                  		           $numero = $index + 1; ?>
+                  		<?php  for($index = 0 ; $index < $nombreDeJeux ; $index++) {  ?>
                   		
-	                      <option value=<?= $listeJeux[$index]->id() ?> > <?= "$numero - {$listeJeux[$index]->date_ajout()} | {$listeJeux[$index]->prix_achat()}€" ?> </option>
+	                      <option value=<?= $listeJeux[$index]->id() ?> > <?= "ID : {$listeJeux[$index]->id()} - {$listeJeux[$index]->date_ajout()} | {$listeJeux[$index]->prix_achat()}€" ?> </option>
         				
         				<?php } ?>
                       
