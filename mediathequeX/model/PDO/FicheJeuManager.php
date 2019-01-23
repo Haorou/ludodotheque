@@ -67,7 +67,7 @@ class FicheJeuManager extends ManagerPDO
         }
     }
         
-    public function updateJeu(FicheJeu $ficheJeu)
+    public function updateFicheJeu(FicheJeu $ficheJeu)
     {
         $updateFicheArticle = $this->_db->prepare("UPDATE fiche_article
                                                    SET titre = :titre,
@@ -92,8 +92,8 @@ class FicheJeuManager extends ManagerPDO
                                               nombre_de_joueurs_max = :nombre_de_joueurs_max,
                                               duree_min_de_jeu = :duree_min_de_jeu,
                                               duree_max_de_jeu = :duree_max_de_jeu,
-                                              descriptif = :descriptif,
-                                              WHERE id_fiche_article = :id");
+                                              descriptif = :descriptif
+                                              WHERE id_fiche_article = :id ");
         $updateFicheJeu->execute(array(
             "nombre_de_joueurs_min" => $ficheJeu->nombre_de_joueurs_min(),
             "nombre_de_joueurs_max" => $ficheJeu->nombre_de_joueurs_max(),
@@ -102,6 +102,34 @@ class FicheJeuManager extends ManagerPDO
             "descriptif" => $ficheJeu->descriptif(),
             "id" => $ficheJeu->id()
         ));
+        
+        $deleteTypesJeu = $this->_db->prepare("DELETE FROM comp_fiche_jeu_type_jeu
+                                               WHERE id_fiche_jeu = :id_fiche_jeu");
+        
+        $deleteTypesJeu->execute(array("id_fiche_jeu" => $ficheJeu->id()));
+        
+        foreach($ficheJeu->types_de_jeu() as $typeJeu)
+        {
+            $addFicheJeuTypeJeu = $this->_db->prepare("INSERT INTO comp_fiche_jeu_type_jeu(id_fiche_jeu, type_jeu)
+                                                       VALUES(:id_fiche_jeu, :type_jeu)");
+            $addFicheJeuTypeJeu->execute(array(
+                "id_fiche_jeu" => $ficheJeu->id(),
+                "type_jeu" => $typeJeu
+            ));
+        }
+        
+        foreach($ficheJeu->elements_du_jeu() as $elementDuJeu)
+        {
+            $addComptElementJeuFicheJeu = $this->_db->prepare("INSERT INTO comp_element_jeu_fiche_jeu(id_fiche_jeu, element_jeu, couleur, quantite)
+                                                           VALUES(:id_fiche_jeu, :element_jeu, :couleur, :quantite)");
+            
+            $addComptElementJeuFicheJeu->execute(array(
+                "id_fiche_jeu" => $ficheJeu->id(),
+                "element_jeu" => $elementDuJeu->element_jeu(),
+                "couleur" => $elementDuJeu->couleur(),
+                "quantite" => $elementDuJeu->quantite()
+            ));
+        }
     }
     
     public function deleteFicheJeu(FicheJeu $ficheJeu) // A VOIR

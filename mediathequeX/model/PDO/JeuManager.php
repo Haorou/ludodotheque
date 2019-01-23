@@ -54,8 +54,6 @@ class JeuManager extends ManagerPDO
                 "date" => $alerte->date()
             ));
         }
-        
-        
     }
     
     public function updateJeu(Jeu $jeu)
@@ -224,4 +222,24 @@ class JeuManager extends ManagerPDO
     {
         return $this->_db->query("SELECT COUNT(*) FROM adherent")->fetchColumn();
     }
+    
+    public function readSelectJeux($id_fiche_jeu)
+    {
+        $resultatRequeteJeu = $this->_db->prepare('SELECT article.id FROM article
+                                                   INNER JOIN fiche_article ON fiche_article.id = article.id_fiche_article
+                                                   WHERE id_fiche_article = :id_fiche_article');
+        
+        $resultatRequeteJeu->execute(["id_fiche_article" => $id_fiche_jeu]);
+        
+        $listeJeux= [];
+        
+        while($id = $resultatRequeteJeu->fetch())
+        {
+            $listeJeux[] = $this->readJeu($id["id"]);
+        }
+        
+        
+        return $listeJeux;
+    }
+
 }

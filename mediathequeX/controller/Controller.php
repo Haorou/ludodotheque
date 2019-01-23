@@ -227,12 +227,13 @@ function PageModifierAdherent()
     {
         $PersonManager = new PersonneManager();
         $perso = $PersonManager->readAdherent($_POST["select"]);
+
+        $_SESSION["id_adherent"]  = $_POST["select"];
+        
         require("view/AffichageAdherentView.php");
     }
     else
-    {
         require("view/GestionAdherentView.php");
-    }
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -276,13 +277,9 @@ function DeleteAdherent()
         $personneManager = new PersonneManager();
         $perso = $personneManager->readAdherent($_POST["select"]);
         $personneManager->deleteAdherent($perso);
-        
-        require("view/GestionAdherentView.php");
     }
-    else
-    {
-        require("view/GestionAdherentView.php");
-    }
+
+    require("view/GestionAdherentView.php");
 }
 
 function CreateAyantDroit()
@@ -350,13 +347,12 @@ function CreateFicheJeu()
     $ficheJeu->setTypes_de_jeu($_POST["type_jeu_1"]);
 
     if($_POST["type_jeu_1"] != $_POST["type_jeu_2"])
-    {
         $ficheJeu->setTypes_de_jeu($_POST["type_jeu_2"]);
-    }
+    
     $ficheJeuManager->createFicheJeu($ficheJeu);
     
     $GLOBALS["isActiveArticle"] = TRUE;
-    require("view/FormulaireFicheJeu.php");
+    require("view/GestionArticleView.php");
 }
 
 function DeleteFicheJeu()
@@ -368,12 +364,92 @@ function DeleteFicheJeu()
         $ficheJeuManager = new FicheJeuManager();
         $ficheJeu = $ficheJeuManager->readFicheJeu($_POST["select"]);
         $ficheJeuManager->deleteFicheJeu($ficheJeu);
+    }
+    
+    require("view/GestionArticleView.php");
+}
+
+function ReadLesArticles()
+{
+    $GLOBALS["isActiveArticle"] = TRUE;
+    $_SESSION["id_fiche_article"]  = $_POST["select"];
+    
+    if(isset($_POST["select"]))
+    {
+        $jeuManager = new JeuManager();
+        $ficheJeuManager = new FicheJeuManager();
         
-        require("view/GestionArticleView.php");
+        $listeJeux = $jeuManager->readSelectJeux($_POST["select"]);
+        
+        $fiche = $ficheJeuManager->readFicheJeu($_POST["select"]);
+    }
+
+    require("view/GestionArticleView.php");
+
+}
+function CreateArticle()
+{
+    $GLOBALS["isActiveArticle"] = TRUE;
+    
+    $jeuManager = new JeuManager();
+    $ficheJeuManager = new FicheJeuManager();
+    
+    $Jeu = new Jeu([
+        "prix_achat" => $_POST["prix"],
+        "date_ajout" => date_format(new DateTime('now'), 'Y-m-d H:i:s'),
+        "commentaire" => $_POST["commentaire"]]);
+    $Jeu->setFiche_article($ficheJeuManager->readFicheJeu($_SESSION["id_fiche_article"]));
+    
+    $jeuManager->createJeu($Jeu);
+    
+    require("view/GestionArticleView.php");
+}
+
+function ModifierFicheJeu()
+{
+    $GLOBALS["isActiveArticle"] = TRUE;
+    if(isset($_POST["select"]))
+    {
+        $_SESSION["id_fiche_article"]  = $_POST["select"];
+        
+        $ficheJeuManager = new FicheJeuManager();
+        $ficheJeu = $ficheJeuManager->readFicheJeu($_SESSION["id_fiche_article"]);
+        
+        require("view/FormulaireFicheJeu.php");
     }
     else
-    {
         require("view/GestionArticleView.php");
-    }
+
 }
+    
+function UpdateFicheJeu()
+{
+    $GLOBALS["isActiveArticle"] = TRUE;
+
+    $ficheJeuManager = new FicheJeuManager();
+    $ficheJeu = new FicheJeu([
+        "nombre_de_joueurs_min" => $_POST["nbrejoueurmin"],
+        "nombre_de_joueurs_max" => $_POST["nbrejoueurmax"],
+        "duree_min_de_jeu" => $_POST["dureemin"],
+        "duree_max_de_jeu" => $_POST["dureemax"],
+        "titre" =>$_POST["nomdujeu"],
+        "editeur" => $_POST["editeurdujeu"],
+        "age_min" => $_POST["agemin"],
+        "age_max" => $_POST["agemax"],
+        "date_de_publication" => $_POST["date"],
+        "descriptif" => $_POST["descriptif"]
+    ]);
+    
+    $ficheJeu->setTypes_de_jeu($_POST["type_jeu_1"]);
+    
+    if($_POST["type_jeu_1"] != $_POST["type_jeu_2"])
+        $ficheJeu->setTypes_de_jeu($_POST["type_jeu_2"]);
+    
+    $ficheJeu->setId($_SESSION["id_fiche_article"]);
+    $ficheJeuManager->updateFicheJeu($ficheJeu);
+    
+    require("view/GestionArticleView.php");
+}
+
+
 

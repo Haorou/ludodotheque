@@ -63,9 +63,11 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
                   		        {
                   		?>
                      
-                      <option value=<?= $adherent->id() ?>> <?="{$adherent->nom()} {$adherent->prenom()}" ?> </option>
+                      <option value=<?= $adherent->id() ?> > 
+                      		<?="{$adherent->nom()} {$adherent->prenom()}" ?> 
+                      </option>
                       
-                      <?php }} else if ($GLOBALS["isActiveArticle"] == TRUE) 
+                      <?php } } else if ($GLOBALS["isActiveArticle"] == TRUE) 
                             { 
                                 $ficheManager = new FicheJeuManager();
                                 $jeuManager = new JeuManager();
@@ -96,8 +98,8 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
     			<?php } else if ($GLOBALS["isActiveArticle"] == TRUE) {?>
     			
                 <div class="row">                    
-                    <div class="col-md-12" style="text-align:center ; ; margin-top :20px">
-            			<button type="submit" class="btn btn-lg btn-success" value="Page Creer Adherent" name="PageCreerAdherent">
+                    <div class="col-md-12" style="text-align:center ; margin-top :20px">
+            			<button type="submit" class="btn btn-lg btn-success" value="Afficher les Articles" name="AfficherLesArticles">
             			<span class="glyphicon glyphicon-eye-open"></span> Afficher les articles </button>
                     </div>
                 </div>
@@ -140,7 +142,7 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             	</div>
 
             	<div>
-            		<button type="submit" class="btn btn-lg btn-warning" value="Modifier utilisateur" name="ModifierUtilisateur" style="margin-top :20px">
+            		<button type="submit" class="btn btn-lg btn-warning" value="Modifier utilisateur" name="ModifierFicheJeu" style="margin-top :20px">
             		<span class="glyphicon glyphicon-cog"></span> Modifier fiche jeu</button>
             	</div>
             	<div>

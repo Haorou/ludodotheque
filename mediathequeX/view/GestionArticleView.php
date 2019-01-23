@@ -9,7 +9,11 @@
     <body>
 		<?php require("view/require/HeaderView.php");?>
 		
-		<?php require("view/require/SearchBarView.php");?>
+		<?php if(isset($_POST["select"]))
+                  require("view/require/GestionArticleSuiteView.php");
+              
+              else
+                  require("view/require/SearchBarView.php");?>
 		
 		<?php require("view/require/FooterView.php");?>
 				

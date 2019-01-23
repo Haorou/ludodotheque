@@ -66,7 +66,24 @@ try
     {
         DeleteFicheJeu();
     }
+    else if(isset($_POST["AfficherLesArticles"]))
+    {
+        ReadLesArticles();
+    }
+    else if(isset($_POST["AjouterArticle"]))
+    {
+        CreateArticle();
+    }
+    else if(isset($_POST["ModifierFicheJeu"]))
+    {
+        ModifierFicheJeu();
+    }
+    else if(isset($_POST["UpdateFicheJeu"]))
+    {
+        UpdateFicheJeu();
+    }
     else
+    
     {
         ConnexionPage();
         // require("view/AffichageAdherentView.php");

@@ -1,13 +1,12 @@
 <h1 class="form-heading" style="text-align: center">Gérer l'adhérent</h1>
 <div class="container">
 	<div class="row">
-		<div class="col-sm">
+		<div class="col-sm" style="text-align:center">
 		<form action="index.php" method="post">
 			<div class="list-group">
   				<button type="button" class="list-group-item list-group-item-action active">Adhésions</button>
   				<?php 
-  				$_SESSION["id_adherent"]  = $perso->id();
-  				
+  	  				
   				foreach($perso->date_adhesions() as $date) {?>			
 	  				<button type="button" class="list-group-item list-group-item-action"><?= $date; ?></button>
   				<?php }?>	
@@ -46,7 +45,7 @@
 			<?php }?>
 		
 		</div>			
-		<div class="col-sm">
+		<div class="col-sm" style="text-align:center">
 			<div class="p-3 mb-2 bg-primary text-white">Adhérent</div>
 			<div class="p-3 mb-2 bg-light text-dark"> Nom : <?= $perso->nom(); ?> </div>
 			<div class="p-3 mb-2 bg-light text-dark"> Prénom : <?= $perso->prenom(); ?> </div>
@@ -60,10 +59,10 @@
 			<button type="button" class="btn btn-success">Emprunter un nouvel article</button>
 			
 			<br>
-			<button type="button" class="btn btn-danger">Rendre Un Article</button>
+			<button type="button" class="btn btn-danger"style="margin-top :20px">Rendre Un Article</button>
 			
 		</div>
-		<div class="col-sm">
+		<div class="col-sm" style="text-align:center">
 			<div class="p-3 mb-2 bg-primary text-white">Nouveau Ayant droit</div>
 
 			</form>
@@ -84,13 +83,11 @@
   				
     			<input type="text" name="nom" class="form-control" placeholder="Nom" required>
     			<input type="text" name="prenom" class="form-control" placeholder="Prenom" required>
-  				
-  				<br>
-
-  				<button type="submit" class="btn btn-success" name="creerAyantDroit">Ajouter Ayant Droit</button>
+		</div>
+  				<button type="submit" class="btn btn-success" name="creerAyantDroit" style="margin-top :20px">Ajouter Ayant Droit</button>
   				<?php }?>
 			
-			</div>
+			
 			</form>
 			
 			<form action="index.php" method="post">
