@@ -56,7 +56,7 @@
 			?>		
 			<div class="p-3 mb-2 bg-light text-dark">Nombre d'emprunt : <?= count($listEmprunts) ?></div>
 			<br>
-			<button type="button" class="btn btn-success">Emprunter un nouvel article</button>
+			<button type="submit" class="btn btn-success" name="PageEmpruntUnArticle">Emprunter un nouvel article</button>
 			
 			<br>
 			<button type="button" class="btn btn-danger"style="margin-top :20px">Rendre Un Article</button>

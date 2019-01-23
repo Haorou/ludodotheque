@@ -217,6 +217,11 @@ function PageFormulaireAdhesion()
 function PageFormulaireFicheJeu()
 {
     $GLOBALS["isActiveArticle"] = TRUE;
+    $ficheJeuManager = new FicheJeuManager();
+    
+    $typesJeu = $ficheJeuManager->readTypesJeux();
+    $nombreDeTypesJeu = count($typesJeu);
+    
     require("view/FormulaireFicheJeu.php");
 }
 function PageModifierAdherent()
@@ -362,8 +367,8 @@ function DeleteFicheJeu()
     if(isset($_POST["select"]))
     {
         $ficheJeuManager = new FicheJeuManager();
-        $ficheJeu = $ficheJeuManager->readFicheJeu($_POST["select"]);
-        $ficheJeuManager->deleteFicheJeu($ficheJeu);
+        $fiche = $ficheJeuManager->readFicheJeu($_POST["select"]);
+        $ficheJeuManager->deleteFicheJeu($fiche);
     }
     
     require("view/GestionArticleView.php");
@@ -372,21 +377,22 @@ function DeleteFicheJeu()
 function ReadLesArticles()
 {
     $GLOBALS["isActiveArticle"] = TRUE;
-    $_SESSION["id_fiche_article"]  = $_POST["select"];
     
     if(isset($_POST["select"]))
     {
+        $_SESSION["id_fiche_article"]  = $_POST["select"];
+        
         $jeuManager = new JeuManager();
         $ficheJeuManager = new FicheJeuManager();
         
         $listeJeux = $jeuManager->readSelectJeux($_POST["select"]);
+        $nombreDeJeux = count($listeJeux);
         
         $fiche = $ficheJeuManager->readFicheJeu($_POST["select"]);
     }
-
     require("view/GestionArticleView.php");
-
 }
+
 function CreateArticle()
 {
     $GLOBALS["isActiveArticle"] = TRUE;
@@ -414,6 +420,9 @@ function ModifierFicheJeu()
         
         $ficheJeuManager = new FicheJeuManager();
         $ficheJeu = $ficheJeuManager->readFicheJeu($_SESSION["id_fiche_article"]);
+        
+        $typesJeu = $ficheJeuManager->readTypesJeux();
+        $nombreDeTypesJeu = count($typesJeu);
         
         require("view/FormulaireFicheJeu.php");
     }
@@ -451,5 +460,7 @@ function UpdateFicheJeu()
     require("view/GestionArticleView.php");
 }
 
-
-
+function PageEmprunterUnArticle()
+{
+    
+}

@@ -271,6 +271,20 @@ class FicheJeuManager extends ManagerPDO
         return $listeDeFicheJeux;
     }
     
+    public function readTypesJeux()
+    {
+        $resultatRequeteTypeJeu = $this->_db->query('SELECT * FROM type_jeu');
+        
+        $listeDeTypesJeu = [];
+        
+        while($unTypeJeu = $resultatRequeteTypeJeu->fetch())
+        {
+            $listeDeTypesJeu[] = $unTypeJeu["type_jeu"];
+        }
+        
+        return $listeDeTypesJeu;
+    }
+    
     public function countJeux()
     {
         return $this->_db->query("SELECT COUNT(*) FROM adherent")->fetchColumn();

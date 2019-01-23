@@ -12,21 +12,24 @@
                 
                 <div class="col-md-2" style="text-align: center">
         			<select name="type_jeu_1" id="inputState" class="form-control">
-         				<option <?= $ficheJeu->types_de_jeu()[0]=='familial'?"selected":"";?> > familial </option>
-        				<option <?= $ficheJeu->types_de_jeu()[0]=='handicap'?"selected":"";?> > handicap </option>
-        				<option <?= $ficheJeu->types_de_jeu()[0]=='hasard'?"selected":"";?> > hasard </option>
-        				<option <?= $ficheJeu->types_de_jeu()[0]=='jeu de rôle'?"selected":"";?> > jeu de rôle </option>
-        				<option <?= $ficheJeu->types_de_jeu()[0]=='stratégie'?"selected":"";?> > stratégie </option>
+        			
+        			<?php for($index = 0; $index < $nombreDeTypesJeu ; $index++) { ?>
+
+        				<option <?= $ficheJeu->types_de_jeu()[0]==$typesJeu[$index]?"selected":"" ?> > <?= $typesJeu[$index] ?></option>
+        				
+        			<?php } ?>
+
         			</select>
                 </div> 
                 
                 <div class="col-md-2" style="text-align: center">
         			<select name="type_jeu_2" id="inputState" class="form-control">
-        				<option <?= $ficheJeu->types_de_jeu()[1]=='familial'?"selected":"";?> > familial </option>
-        				<option <?= $ficheJeu->types_de_jeu()[1]=='handicap'?"selected":"";?> > handicap </option>
-        				<option <?= $ficheJeu->types_de_jeu()[1]=='hasard'?"selected":"";?> > hasard </option>
-        				<option <?= $ficheJeu->types_de_jeu()[1]=='jeu de rôle'?"selected":"";?> > jeu de rôle </option>
-        				<option <?= $ficheJeu->types_de_jeu()[1]=='stratégie'?"selected":"";?> > stratégie </option>
+        			
+        			<?php for($index = 0; $index < $nombreDeTypesJeu ; $index++) { ?>
+
+        				<option <?= $ficheJeu->types_de_jeu()[1]==$typesJeu[$index]?"selected":"" ?> > <?= $typesJeu[$index] ?></option>
+        				
+        			<?php } ?>
         			</select>
                 </div> 
                 

@@ -7,15 +7,15 @@
     </head>
 
     <body>
-		<?php require("view/require/HeaderView.php");?>
+		<?php require("view/require/HeaderView.php");
 
-		<?php if(isset($_POST["ModifierFicheJeu"]))
-		    require("view/require/FormulaireFicheJeuModifierView.php");
+			if(isset($_POST["ModifierFicheJeu"]))
+		        require("view/require/FormulaireFicheJeuModifierView.php");
 		    
         	else if(isset($_POST["PageAjouterFiche"]))
-        	    require("view/require/FormulaireFicheJeuView.php"); ?>
+        	    require("view/require/FormulaireFicheJeuView.php");
 		
-		<?php require("view/require/FooterView.php");?>
+			require("view/require/FooterView.php");?>
 		
     </body>
 </html>

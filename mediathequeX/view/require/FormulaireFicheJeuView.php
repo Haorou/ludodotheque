@@ -12,21 +12,25 @@
                 
                 <div class="col-md-2" style="text-align: center">
         			<select name="type_jeu_1" id="inputState" class="form-control">
-        				<option selected>familial</option>
-        				<option>handicap</option>
-        				<option>hasard</option>
-        				<option>jeu de rôle</option>
-        				<option>stratégie</option>
+
+        			<?php for($index = 0; $index < $nombreDeTypesJeu ; $index++) { ?>
+
+        				<option <?= $index==0?"selected":""; ?> > <?= $typesJeu[$index] ?></option>
+        				
+        			<?php } ?>
+        			
         			</select>
                 </div> 
                 
                 <div class="col-md-2" style="text-align: center">
         			<select name="type_jeu_2" id="inputState" class="form-control">
-        				<option>familial</option>
-        				<option>handicap</option>
-        				<option selected>hasard</option>
-        				<option>jeu de rôle</option>
-        				<option>stratégie</option>
+        			
+        			<?php for($index = 0; $index < $nombreDeTypesJeu ; $index++) { ?>
+
+        				<option <?= $index==1?"selected":""; ?> > <?= $typesJeu[$index] ?></option>
+        				
+        			<?php } ?>
+        			
         			</select>
                 </div> 
                 

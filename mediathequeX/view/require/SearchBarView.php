@@ -82,11 +82,10 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
 	                      <option value=<?= $fiche->id() ?>> <?php echo "$nombreDeJeux jeux - {$fiche->titre()}" ?> </option>
                       
                       
-                      <?php }} else if ($GLOBALS["isActiveAlerte"] == TRUE) 
-                            { 
+                      <?php }} else if ($GLOBALS["isActiveAlerte"] == TRUE) { ?>
                             
                                 
-                      ?>
+                      
                       
                       <?php } ?>
                       

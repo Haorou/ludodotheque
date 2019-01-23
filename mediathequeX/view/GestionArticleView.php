@@ -7,15 +7,15 @@
     </head>
 
     <body>
-		<?php require("view/require/HeaderView.php");?>
+		<?php require("view/require/HeaderView.php");
 		
-		<?php if(isset($_POST["select"]))
+		      if(isset($_POST["AfficherLesArticles"]) && isset($_POST["select"]))
                   require("view/require/GestionArticleSuiteView.php");
               
               else
-                  require("view/require/SearchBarView.php");?>
+                  require("view/require/SearchBarView.php");
 		
-		<?php require("view/require/FooterView.php");?>
+		      require("view/require/FooterView.php");?>
 				
     </body>
 </html>
