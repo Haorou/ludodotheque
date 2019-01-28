@@ -56,5 +56,3 @@ else if(isset($_GET["action"]) && $_GET["action"] == "gestionJeux")
 
 else if(isset($_GET["action"]) && $_GET["action"] == "gestionAlertes")
     include("./controller/ControllerAlerte.php");
-
-

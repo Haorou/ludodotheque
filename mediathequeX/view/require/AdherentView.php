@@ -149,8 +149,11 @@
    			<?php }?>
    			
    			<br>
+
+		<?php if($nombreAyandroit > 0){ ?>
 			<button type="submit" class="btn btn-danger">Supprimer Ayant droit</button>
-		
+		<?php }?>
+
 			</form>
 		</div>
 	</div>

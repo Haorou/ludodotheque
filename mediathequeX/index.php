@@ -81,11 +81,14 @@ try
         if(isset($_POST["gestionJeux"]))
             GestionArticlesPage();
             
+            
         else if(isset($_POST["ajouterFicheJeu"]))
             CreateFicheJeu();
         
+            
         else if(isset($_POST["PageAjouterFiche"]))
             PageFormulaireFicheJeu();
+        
             
         else if(isset($_POST["ModifierFicheJeu"]))
             ModifierFicheJeu();
@@ -106,8 +109,10 @@ try
         else if(isset($_POST["UpdateFicheJeu"]))
             UpdateFicheJeu();
         
+            
         else if(isset($_POST["SupprimerArticle"]))
             SupprimerArticle();
+        
     }
     else
     {
