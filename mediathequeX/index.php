@@ -88,7 +88,10 @@ try
     {
         EmprunterArticle();
     }
-    
+    else if(isset($_POST["RendreUnArticle"]))
+    {
+        RendreUnArticle();
+    }
     else
     {
         ConnexionPage();

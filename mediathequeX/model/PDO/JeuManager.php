@@ -212,7 +212,8 @@ class JeuManager extends ManagerPDO
     {
         $resultatRequeteCountJeu = $this->_db->prepare('SELECT COUNT(*) as count_article FROM article
                                                       WHERE id_fiche_article = :id_fiche_article 
-                                                      AND id NOT IN (SELECT id_article FROM emprunt)');
+                                                      AND id NOT IN (SELECT id_article FROM emprunt
+                                                                     WHERE date_retour_effectif IS NULL)');
         
         $resultatRequeteCountJeu->execute(["id_fiche_article" => $id_fiche_jeu]);
         
@@ -260,7 +261,8 @@ class JeuManager extends ManagerPDO
         $resultatRequeteJeu = $this->_db->prepare('SELECT article.id AS id_article FROM article
                                                    INNER JOIN fiche_article ON fiche_article.id = article.id_fiche_article
                                                    WHERE id_fiche_article = :id_fiche_article 
-                                                   AND article.id NOT IN (SELECT id_article FROM emprunt)');
+                                                   AND article.id NOT IN (SELECT id_article FROM emprunt 
+                                                                          WHERE date_retour_effectif IS NULL)');
       
         
         $resultatRequeteJeu->execute(["id_fiche_article" => $id_fiche_jeu]);

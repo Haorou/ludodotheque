@@ -31,13 +31,16 @@ require_once("model/PDO/ManagerPDO.php");
         public function updateEmprunt(Emprunt $empruntArticle)
         {
             $updateEmprunt = $this->_db->prepare("UPDATE emprunt SET
-                                                    date_de_retour_effectif = :date_de_retour_effectif,
+                                                    date_retour_effectif = :date_retour_effectif,
                                                     commentaire = :commentaire WHERE 
-                                                    id_article = id_article AND date_emprunt = :date_emprunt )");
+                                                    id_article = :id_article 
+                                                    AND date_emprunt = :date_emprunt
+                                                    AND id_adherent = :id_adherent");
             $updateEmprunt->execute(array(
-                "date_de_retour_effectif" => $empruntArticle->id(),
+                "date_retour_effectif" => $empruntArticle->date_retour_effectif(),
                 "commentaire" => $empruntArticle->commentaire(),
                 "id_article" => $empruntArticle->article()->id(),
+                "id_adherent" => $empruntArticle->adherent()->id(),
                 "date_emprunt" => $empruntArticle->date_emprunt()
             ));
         }
@@ -80,6 +83,30 @@ require_once("model/PDO/ManagerPDO.php");
             }
             
             return $listeEmprunts;
+        }
+        
+        public function readCurrentEmpruntsAdherentAndArticle(Adherent $perso, Article $article)
+        {
+            $requeteEmprunts = $this->_db->prepare('SELECT * FROM emprunt
+                                      WHERE id_adherent = :id_adherent
+                                      AND id_article = :id_article
+                                      AND emprunt.date_retour_effectif IS NULL');
+            
+            $requeteEmprunts->execute([
+                'id_adherent' => $perso->id(),
+                'id_article' => $article->id()
+            ]);
+            
+           
+            $jeuManager = new JeuManager();
+            while($requeteEmprunt = $requeteEmprunts->fetch())
+            {
+                $emprunt = new Emprunt($requeteEmprunt);
+                $emprunt->setAdherent($perso);
+                $emprunt->setArticle($jeuManager->readJeu($requeteEmprunt["id_article"]));
+            }
+            
+            return $emprunt;
         }
         
         public function readAllEmpruntsArticle(Article $article)

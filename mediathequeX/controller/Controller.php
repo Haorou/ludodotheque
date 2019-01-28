@@ -495,13 +495,33 @@ function EmprunterArticle()
             "date_emprunt" => date_format(new DateTime('now'), 'Y-m-d H:i:s')
         ]);
     
-        $adherent = $adherentManager->readAdherent($_SESSION["id_adherent"]);
+        $perso = $adherentManager->readAdherent($_SESSION["id_adherent"]);
         $article = $jeuManager->readJeu($_POST["select"]);
         
-        $emprunt->setAdherent($adherent);
+        $emprunt->setAdherent($perso);
         $emprunt->setArticle($article);
         
         $empruntManager->createEmprunt($emprunt);
     }
-    require("view/GestionAdherentView.php");
+    require("view/AffichageAdherentView.php");
+}
+
+function RendreUnArticle()
+{
+    $GLOBALS["isActiveAdherent"] = TRUE;
+   
+    $jeuManager = new JeuManager();
+    $adherentManager = new PersonneManager();
+    $empruntManager = new EmpruntManager();
+    
+    $jeu = $jeuManager->readJeu($_POST["article_rendu"]);
+    $perso =  $adherentManager->readAdherent($_SESSION["id_adherent"]);
+    
+    $emprunt = $empruntManager->readCurrentEmpruntsAdherentAndArticle($perso, $jeu);
+    
+    $emprunt->setDate_retour_effectif(date_format(new DateTime('now'), 'Y-m-d H:i:s'));
+    $empruntManager->updateEmprunt($emprunt);
+    
+    require("view/AffichageAdherentView.php");
+    
 }

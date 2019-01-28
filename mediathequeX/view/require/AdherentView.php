@@ -21,16 +21,15 @@
             <div class="form-row" style="margin-top :20px">
                 <div class="input-group input-group-lg col-md-6 mx-auto">
                     <div class="input-group-prepend">
-            			<input type="radio" name="emprunt_a_supprimer" value=<?= $emprunt->article()->id()?> id="emprunt_article_id<?= $emprunt->article()->id()?>" /></input>
+            			<input type="radio" name="article_rendu" value=<?= $emprunt->article()->id()?> id="emprunt_article_id<?= $emprunt->article()->id()?>" /></input>
                    				<label for="emprunt_article_id<?= $emprunt->article()->id()?>"><?= "{$emprunt->date_emprunt()} <br> 
                                                                         {$emprunt->article()->fiche_article()->titre()}  " ?></label>
        				</div>
        			</div>
        		</div>
-       		<?php }?>
-			<br>
-			<button type="button" class="btn btn-danger"style="margin-top :20px">Rendre un article</button>
-			
+       		<?php } if($nombreEmprunts > 0) {?>
+			<button type="submit" class="btn btn-danger" name="RendreUnArticle" style="margin-top :20px">Rendre un article</button>
+			<?php }?>
 		
 		</div>			
 		<div class="col-sm" style="text-align:center">
