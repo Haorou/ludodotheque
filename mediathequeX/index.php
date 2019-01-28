@@ -80,6 +80,15 @@ try
     {
         PageEmprunterUnArticle();
     }
+    else if(isset($_POST["VoirArticlesEmprunts"]))
+    {
+        VoirArticlesEmprunts();
+    }
+    else if(isset($_POST["EmprunterArticle"]))
+    {
+        EmprunterArticle();
+    }
+    
     else
     {
         ConnexionPage();

@@ -37,17 +37,20 @@
             <form action="index.php" method="post">
             
         			<select class="custom-select" size="15" name="select">
-                  		<?php 
-                  		
-                  		?>
-                     
-                      <option value=<?= $adherent->id() ?> > 
-                      		<?="{$adherent->nom()} {$adherent->prenom()}" ?> 
-                      </option>
-                       		
-                    	<?php } ?>
+        			<?php 
+                           $ficheManager = new FicheJeuManager();
+                                $jeuManager = new JeuManager();
+                                
+                                $listeDeFiche = $ficheManager->readAllFicheJeux();
+                                $nombreDeJeux = "";
+                                
+                                foreach($listeDeFiche as $fiche)
+                                {
+                                    $nombreDeJeux = $jeuManager->readCountJeuxNonEmprunte($fiche->id());
+                       ?>
+	                      <option value=<?= $fiche->id() ?>> <?php echo "$nombreDeJeux jeux - {$fiche->titre()}" ?> </option>
                            		
-                      
+                      <?php } ?>
                     </select>
 
     			<?php if ($GLOBALS["isActiveAdherent"] == TRUE) { ?>
@@ -78,17 +81,8 @@
             <?php if ($GLOBALS["isActiveAdherent"] == TRUE) { ?>
 
     			<div>
-            		<button type="submit" class="btn btn-lg btn-success" value="Page Creer Adherent" name="PageCreerAdherent">
-            		<span class="glyphicon glyphicon-user"></span> Créer adhérent</button>
-            	</div>
-
-            	<div>
-            		<button type="submit" class="btn btn-lg btn-warning" value="Modifier Adherent" name="ModifierAdherent" style="margin-top :20px">
-            		<span class="glyphicon glyphicon-cog"></span> Gérer adhérent</button>
-            	</div>
-            	<div>
-            		<button type="submit" class="btn btn-lg btn-danger" value="Supprimer utilisateur" name="SupprimerUtilisateur" style="margin-top :20px">
-            		<span class="glyphicon glyphicon-trash"></span> Supprimer adhérent</button>
+            		<button type="submit" class="btn btn-lg btn-success" value="Voir Articles Emprunts" name="VoirArticlesEmprunts">
+            		<span class="glyphicon glyphicon-user"></span> Voir articles</button>
             	</div>
             </form>
 

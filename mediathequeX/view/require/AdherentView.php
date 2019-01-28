@@ -3,6 +3,44 @@
 	<div class="row">
 		<div class="col-sm" style="text-align:center">
 		<form action="index.php" method="post">
+			
+			<div class="p-3 mb-2 bg-primary text-white">Emprunts</div>
+			
+			<?php 
+			$empruntManager = new EmpruntManager();
+			$listEmprunts = $empruntManager->readCurrentEmpruntsAdherent($perso);
+			$nombreEmprunts = count($listEmprunts);
+			if($nombreEmprunts < 2) {?>
+			<br>
+			<button type="submit" class="btn btn-success" name="PageEmpruntUnArticle">Emprunter un nouvel article</button>
+			<?php }
+			
+			foreach($listEmprunts as $emprunt )
+			{
+			?>
+            <div class="form-row" style="margin-top :20px">
+                <div class="input-group input-group-lg col-md-6 mx-auto">
+                    <div class="input-group-prepend">
+            			<input type="radio" name="emprunt_a_supprimer" value=<?= $emprunt->article()->id()?> id="emprunt_article_id<?= $emprunt->article()->id()?>" /></input>
+                   				<label for="emprunt_article_id<?= $emprunt->article()->id()?>"><?= "{$emprunt->date_emprunt()} <br> 
+                                                                        {$emprunt->article()->fiche_article()->titre()}  " ?></label>
+       				</div>
+       			</div>
+       		</div>
+       		<?php }?>
+			<br>
+			<button type="button" class="btn btn-danger"style="margin-top :20px">Rendre un article</button>
+			
+		
+		</div>			
+		<div class="col-sm" style="text-align:center">
+			<div class="p-3 mb-2 bg-primary text-white">Adhérent</div>
+			<div class="p-3 mb-2 bg-light text-dark"> Nom : <?= $perso->nom(); ?> </div>
+			<div class="p-3 mb-2 bg-light text-dark"> Prénom : <?= $perso->prenom(); ?> </div>
+			<div class="p-3 mb-2 bg-light text-dark">Coordonnées : <?= $perso->adresse()->code_postal(); ?></div>	
+			<div class="p-3 mb-2 bg-light text-dark">Nombre d'emprunt : <?= $nombreEmprunts ?></div>
+			
+			
 			<div class="list-group">
   				<button type="button" class="list-group-item list-group-item-action active">Adhésions</button>
   				<?php 
@@ -43,61 +81,52 @@
             </div>
 			
 			<?php }?>
-		
-		</div>			
-		<div class="col-sm" style="text-align:center">
-			<div class="p-3 mb-2 bg-primary text-white">Adhérent</div>
-			<div class="p-3 mb-2 bg-light text-dark"> Nom : <?= $perso->nom(); ?> </div>
-			<div class="p-3 mb-2 bg-light text-dark"> Prénom : <?= $perso->prenom(); ?> </div>
-			<div class="p-3 mb-2 bg-light text-dark">Coordonnées : <?= $perso->adresse()->code_postal(); ?></div>	
-			<?php 
-			     $empruntManager = new EmpruntManager();
-			     $listEmprunts = $empruntManager->readCurrentEmpruntsAdherent($perso);
-			?>		
-			<div class="p-3 mb-2 bg-light text-dark">Nombre d'emprunt : <?= count($listEmprunts) ?></div>
-			<br>
-			<button type="submit" class="btn btn-success" name="PageEmpruntUnArticle">Emprunter un nouvel article</button>
-			
-			<br>
-			<button type="button" class="btn btn-danger"style="margin-top :20px">Rendre Un Article</button>
 			
 		</div>
+		
+		
+		</form>
+			
 		<div class="col-sm" style="text-align:center">
-			<div class="p-3 mb-2 bg-primary text-white">Nouveau Ayant droit</div>
+			<div class="p-3 mb-2 bg-primary text-white">Ayant droits</div>
 
-			</form>
+		
 			
 			<form action="index.php" method="post">
-			<div class="input-group">
+
 
   				<?php 
   				$nombreAyandroit = count($perso->ayant_droits());
   				if($nombreAyandroit < 2){
   				?>
-  				
-    			<select name="civilite" id="inputState" class="form-control">
-    				<option selected>monsieur</option>
-    				<option>madame</option>
-    				<option>autre</option>
-    			</select>
-  				
-    			<input type="text" name="nom" class="form-control" placeholder="Nom" required>
-    			<input type="text" name="prenom" class="form-control" placeholder="Prenom" required>
-		</div>
-  				<button type="submit" class="btn btn-success" name="creerAyantDroit" style="margin-top :20px">Ajouter Ayant Droit</button>
+    			<div class="input-group">
+        			<select name="civilite" id="inputState" class="form-control">
+        				<option selected>monsieur</option>
+        				<option>madame</option>
+        				<option>autre</option>
+        			</select>
+      				
+        			<input type="text" name="nom" class="form-control" placeholder="Nom" required>
+        			<input type="text" name="prenom" class="form-control" placeholder="Prenom" required>
+    			</div>
+      				<button type="submit" class="btn btn-success" name="creerAyantDroit" style="margin-top :20px">Ajouter Ayant Droit</button>
   				<?php }?>
 			
 			
 			</form>
 			
 			<form action="index.php" method="post">
-			<br>
-			<p>
 			<?php foreach($perso->ayant_droits() as $ayantdroit) {?>
-       				<input type="radio" name="ayantdroit_a_supprimer" value=<?= $ayantdroit->id()?> id="ayantDroit1" /> 
-       				<label for="ayantDroit1"><?= "{$ayantdroit->nom()} {$ayantdroit->prenom()}  " ?></label><br />
+			
+            <div class="form-row">
+                <div class="input-group input-group-lg col-md-6 mx-auto">
+                    <div class="input-group-prepend">
+           				<input type="radio" name="ayantdroit_a_supprimer" value=<?= $ayantdroit->id()?> id="ayantDroit<?= $ayantdroit->id()?>" /></input>
+           				<label for="ayantDroit<?= $ayantdroit->id()?>"><?= " {$ayantdroit->nom()} {$ayantdroit->prenom()}  " ?></label>
+           			</div>
+       			</div>
+   			</div>
    			<?php }?>
-   			</p>
    			
    			<br>
 			<button type="submit" class="btn btn-danger">Supprimer Ayant droit</button>

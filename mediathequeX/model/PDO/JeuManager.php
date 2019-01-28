@@ -208,6 +208,19 @@ class JeuManager extends ManagerPDO
         return $nombreDeJeu["count_article"];
     }
     
+    public function readCountJeuxNonEmprunte($id_fiche_jeu)
+    {
+        $resultatRequeteCountJeu = $this->_db->prepare('SELECT COUNT(*) as count_article FROM article
+                                                      WHERE id_fiche_article = :id_fiche_article 
+                                                      AND id NOT IN (SELECT id_article FROM emprunt)');
+        
+        $resultatRequeteCountJeu->execute(["id_fiche_article" => $id_fiche_jeu]);
+        
+        $nombreDeJeu = $resultatRequeteCountJeu->fetch();
+        
+        return $nombreDeJeu["count_article"];
+    }
+    
     public function readAllCountJeux()
     {
         $resultatRequeteCountJeu = $this->_db->query('SELECT COUNT(id_fiche_article) as count_article FROM article');
@@ -238,6 +251,26 @@ class JeuManager extends ManagerPDO
             $listeJeux[] = $this->readJeu($id["id"]);
         }
         
+        
+        return $listeJeux;
+    }
+    
+    public function readSelectJeuxNonEmprunte($id_fiche_jeu)
+    {
+        $resultatRequeteJeu = $this->_db->prepare('SELECT article.id AS id_article FROM article
+                                                   INNER JOIN fiche_article ON fiche_article.id = article.id_fiche_article
+                                                   WHERE id_fiche_article = :id_fiche_article 
+                                                   AND article.id NOT IN (SELECT id_article FROM emprunt)');
+      
+        
+        $resultatRequeteJeu->execute(["id_fiche_article" => $id_fiche_jeu]);
+        
+        $listeJeux= [];
+        
+        while($id = $resultatRequeteJeu->fetch())
+        {
+            $listeJeux[] = $this->readJeu($id["id_article"]);
+        }
         
         return $listeJeux;
     }

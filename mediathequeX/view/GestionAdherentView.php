@@ -13,6 +13,10 @@
            		{
            		    require("view/require/EmpruntJeuView.php");
            		}
+           		else if(isset($_POST["VoirArticlesEmprunts"]) && isset($_POST["select"]))
+           		{
+           		    require("view/require/EmpruntArticleView.php");
+           		}
            		else
            		{
            		    require("view/require/SearchBarView.php");

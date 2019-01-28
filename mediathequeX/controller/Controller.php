@@ -33,8 +33,6 @@ spl_autoload_register('chargerClasse');
 session_start();
 
 
-
-
 /*
 =========================================   CODE QUI PERMET D'AVOIR LA DATE D'AUJOURD'HUI =============================================
 echo date_format(new DateTime('now'), 'Y-m-d H:i:s');
@@ -449,6 +447,7 @@ function UpdateFicheJeu()
         "descriptif" => $_POST["descriptif"]
     ]);
     
+    
     $ficheJeu->setTypes_de_jeu($_POST["type_jeu_1"]);
     
     if($_POST["type_jeu_1"] != $_POST["type_jeu_2"])
@@ -462,6 +461,47 @@ function UpdateFicheJeu()
 
 function PageEmprunterUnArticle()
 {
+    $GLOBALS["isActiveAdherent"] = TRUE; 
+    require("view/GestionAdherentView.php");
+}
+
+function VoirArticlesEmprunts()
+{
+    $GLOBALS["isActiveAdherent"] = TRUE; 
+    if(isset($_POST["select"]))
+    {
+        $_SESSION["id_fiche_article"]  = $_POST["select"];
+        
+        $jeuManager = new JeuManager();
+        $ficheJeuManager = new FicheJeuManager();
+        
+        $listeJeux = $jeuManager->readSelectJeuxNonEmprunte($_POST["select"]);
+        $nombreDeJeux = count($listeJeux);
+        
+        $fiche = $ficheJeuManager->readFicheJeu($_POST["select"]);
+    }
+    require("view/GestionAdherentView.php");
+}
+
+function EmprunterArticle()
+{
     $GLOBALS["isActiveAdherent"] = TRUE;
+    if(isset($_POST["select"]))
+    {
+        $jeuManager = new JeuManager();
+        $adherentManager = new PersonneManager();
+        $empruntManager = new EmpruntManager();
+        $emprunt = new Emprunt([
+            "date_emprunt" => date_format(new DateTime('now'), 'Y-m-d H:i:s')
+        ]);
+    
+        $adherent = $adherentManager->readAdherent($_SESSION["id_adherent"]);
+        $article = $jeuManager->readJeu($_POST["select"]);
+        
+        $emprunt->setAdherent($adherent);
+        $emprunt->setArticle($article);
+        
+        $empruntManager->createEmprunt($emprunt);
+    }
     require("view/GestionAdherentView.php");
 }
