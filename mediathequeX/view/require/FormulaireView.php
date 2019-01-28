@@ -10,7 +10,7 @@
 					<div>
                         <form action="index.php?action=creerUtilisateur" method="post">
                         
-                        	<div class="form-row justify-content-center">
+                        	<div class="form-row" style="margin-top :20px">
                         		<div class="form-group col-md-2">
                         			<select name="civilite" id="inputState" class="form-control">
                         				<option selected>monsieur</option>
@@ -30,7 +30,7 @@
                         	</div>
                         
                         
-                        	<div class="form-row justify-content-center">
+                        	<div class="form-row " style="margin-top :20px">
                         		<div class="form-group col-md-1">
                         			<input name="numero" type="text" class="form-control" placeholder="N°" required>
                         		</div>
@@ -51,7 +51,7 @@
                         		</div>
                         	</div>
                         
-                        	<div class="form-row justify-content-center">
+                        	<div class="form-row " style="margin-top :20px">
                         		<div class="form-group col-md-2">
                         			<input name="code_postal" type="text" class="form-control" placeholder="Code Postal" required>
                         		</div>
@@ -61,7 +61,7 @@
                         		</div>
                         	</div>
                         
-                        	<button type="submit" class="btn btn-success" value="Creer Adherent" name="CreerAdherent">Créer Adhérent</button>								
+                        	<button type="submit" class="btn btn-success" value="Creer Adherent" name="CreerAdherent" style="margin-top :20px">Créer Adhérent</button>								
                         </form>
 					</div>
 				</div>
