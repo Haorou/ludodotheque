@@ -14,7 +14,7 @@
 			<br>
 			<button type="submit" class="btn btn-success" name="PageEmpruntUnArticle">Emprunter un nouvel article</button>
 			<?php }
-			
+			$tempsActuel = time();
 			foreach($listEmprunts as $emprunt )
 			{
 			?>
@@ -27,7 +27,29 @@
        				</div>
        			</div>
        		</div>
-       		<?php } if($nombreEmprunts > 0) {?>
+       		<?php 
+           		$date_emprunt = strtotime($emprunt->date_emprunt());
+           		$tempsEntreMaintenantEtEmprunt = $tempsActuel - $date_emprunt;
+           		if($tempsEntreMaintenantEtEmprunt > 2678401)
+           		{
+           		    ?>
+           		 <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Attention : </strong> plus de 15 jours de retard
+                </div>
+           		    <?php 
+           		}
+           		else if($tempsEntreMaintenantEtEmprunt > 1339201)
+           		{
+    		      ?>
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Attention : </strong> retard
+                    </div>
+        			
+    		      <?php
+           		}
+			}
+       		
+			if($nombreEmprunts > 0) {?>
 			<button type="submit" class="btn btn-danger" name="RendreUnArticle" style="margin-top :20px">Rendre un article</button>
 			<?php }?>
 		
@@ -52,7 +74,6 @@
 			<br>
 			<?php
 			$tempsAbonnement = strtotime($perso->last_date_adhesion());
-			$tempsActuel = time();
 			
 			if(($tempsActuel - $tempsAbonnement) > 31536000) // une année
 			{     

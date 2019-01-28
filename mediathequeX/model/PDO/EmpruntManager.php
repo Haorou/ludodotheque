@@ -131,6 +131,28 @@ require_once("model/PDO/ManagerPDO.php");
             return $listeEmprunts;
         }
         
+        public function readAllCurrentEmprunts()
+        {
+            $requeteEmprunts = $this->_db->prepare('SELECT * FROM emprunt
+                                                  WHERE date_retour_effectif IS NULL');
+            
+            $requeteEmprunts->execute();
+            
+            $listeEmprunts = [];
+            
+            $adherentManager = new PersonneManager();
+            $jeuManager = new JeuManager();
+            while($requeteEmprunt = $requeteEmprunts->fetch())
+            {
+                $emprunt = new Emprunt($requeteEmprunt);
+                $emprunt->setAdherent($adherentManager->readAdherent($requeteEmprunt["id_adherent"]));
+                $emprunt->setArticle($jeuManager->readJeu($requeteEmprunt["id_article"]));
+                
+                $listeEmprunts[] = $emprunt;
+            }
+            
+            return $listeEmprunts;
+        }
         
         public function deleteEmprunts(Emprunt $emprunt)
         {

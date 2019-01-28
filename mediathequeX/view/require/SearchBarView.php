@@ -82,12 +82,26 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
 	                      <option value=<?= $fiche->id() ?>> <?php echo "$nombreDeJeux jeux - {$fiche->titre()}" ?> </option>
                       
                       
-                      <?php }} else if ($GLOBALS["isActiveAlerte"] == TRUE) { ?>
-                            
-                                
+                      <?php }} else if ($GLOBALS["isActiveAlerte"] == TRUE) 
+                      {
                       
-                      
-                      <?php } ?>
+                          $tempsActuel = time();
+                          $empruntManager = new EmpruntManager();
+                          $listeEmprunts = $empruntManager->readAllCurrentEmprunts();
+                          
+                          foreach($listeEmprunts as $emprunt)
+                          {
+                              $date_emprunt = strtotime($emprunt->date_emprunt());
+                              $tempsEntreMaintenantEtEmprunt = $tempsActuel - $date_emprunt;
+                              if($tempsEntreMaintenantEtEmprunt > 2678401) 
+                              { ?>
+                           
+                           <option value=<?= $emprunt->article()->id() ?>> <?php echo " retard +15 jours | {$emprunt->article()->fiche_article()->titre()} | {$emprunt->adherent()->nom()} {$emprunt->adherent()->prenom()}" ?> </option>
+                           
+       		    <?php         } 
+                          } 
+                      } 
+                      ?>
                       
                     </select>
 
