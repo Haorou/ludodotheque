@@ -1,5 +1,5 @@
 		<h1 class="form-heading" style="text-align: center">Ajouter une fiche jeu</h1>
-    	<form action="index.php" method="post">
+    	<form action="?action=gestionJeux" method="post">
         <div class="container" style="margin-top: 10px">
             <div class ="row">
                 <div class="col-md-3" style="text-align: center">

@@ -5,7 +5,7 @@
                 <!-- IL FAUT PEUPLER CECI EN FONCTION D'UNE REQUETE INITAL GENERAL "SELECT * FROM ... " -->
     	        <!-- PUIS PRECISER LA REQUETE EN FONCTION DES MOTS TAPPER DANS LE CHAMPS DE RECHERCE "SELECT * FROM ... WHERE = "champs de recherche" " -->
     	        <!-- POUR ACTUALISER : UTILISATION JAVASCRIPT -->
-                <form action="index.php" method="post">
+                <form action="?action=gestionAdherents" method="post">
                 
         			<select class="custom-select" size="15" name="select">
                   		

@@ -2,7 +2,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm" style="text-align:center">
-		<form action="index.php" method="post">
+		<form action="?action=gestionAdherents" method="post">
 			
 			<div class="p-3 mb-2 bg-primary text-white">Emprunts</div>
 			
@@ -89,7 +89,7 @@
 			
 			<?php 
 			} 
-			else if(($tempsActuel - $tempsAbonnement) > (31536000 - 2678400)) // une année
+			else if(($tempsActuel - $tempsAbonnement) > (31536000 - 2678400)) // un mois avant la fin
 			{
 			?>
 			
@@ -112,7 +112,7 @@
 
 		
 			
-			<form action="index.php" method="post">
+			<form action="?action=gestionAdherents" method="post">
 
 
   				<?php 
@@ -135,7 +135,7 @@
 			
 			</form>
 			
-			<form action="index.php" method="post">
+			<form action="?action=gestionAdherents" method="post">
 			<?php foreach($perso->ayant_droits() as $ayantdroit) {?>
 			
             <div class="form-row">

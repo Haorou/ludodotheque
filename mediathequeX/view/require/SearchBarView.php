@@ -51,12 +51,13 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             <!-- IL FAUT PEUPLER CECI EN FONCTION D'UNE REQUETE INITAL GENERAL "SELECT * FROM ... " -->
 	        <!-- PUIS PRECISER LA REQUETE EN FONCTION DES MOTS TAPPER DANS LE CHAMPS DE RECHERCE "SELECT * FROM ... WHERE = "champs de recherche" " -->
 	        <!-- POUR ACTUALISER : UTILISATION JAVASCRIPT -->
-            <form action="index.php" method="post">
             
-        			<select class="custom-select" size="15" name="select">
+              		<?php if ($GLOBALS["isActiveAdherent"] == TRUE) { ?>
+                  		<form action="?action=gestionAdherents" method="post">
+                  		
+                  		<select class="custom-select" size="15" name="select">
+                  		
                   		<?php 
-                  		if ($GLOBALS["isActiveAdherent"] == TRUE)
-                  		    {
                   		        $persoManager = new PersonneManager();
                       		    $listeDeAdherent = $persoManager->readAllAdherent();
                       		    foreach($listeDeAdherent as $adherent)
@@ -67,8 +68,12 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
                       		<?="{$adherent->nom()} {$adherent->prenom()}" ?> 
                       </option>
                       
-                      <?php } } else if ($GLOBALS["isActiveJeu"] == TRUE) 
-                            { 
+                      <?php } } else if ($GLOBALS["isActiveJeu"] == TRUE) { ?>
+                      
+                  		<form action="?action=gestionJeux" method="post">
+                  		
+                  		<select class="custom-select" size="15" name="select">
+              			<?php 
                                 $ficheManager = new FicheJeuManager();
                                 $jeuManager = new JeuManager();
                                 
@@ -79,12 +84,15 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
                                 {
                                     $nombreDeJeux = $jeuManager->readCountJeux($fiche->id());
                        ?>
-	                      <option value=<?= $fiche->id() ?>> <?php echo "$nombreDeJeux jeux - {$fiche->titre()}" ?> </option>
+	                      <option value=<?= $fiche->id() ?>> <?= "$nombreDeJeux jeux - {$fiche->titre()}" ?> </option>
                       
                       
-                      <?php }} else if ($GLOBALS["isActiveAlerte"] == TRUE) 
-                      {
+                      <?php }} else if ($GLOBALS["isActiveAlerte"] == TRUE) { ?>
                       
+                  		<form action="?action=gestionAlertes" method="post">
+                  		
+                  		<select class="custom-select" size="15" name="select">
+              			<?php 
                           $tempsActuel = time();
                           $empruntManager = new EmpruntManager();
                           $listeEmprunts = $empruntManager->readAllCurrentEmprunts();
@@ -96,7 +104,7 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
                               if($tempsEntreMaintenantEtEmprunt > 2678401) 
                               { ?>
                            
-                           <option value=<?= $emprunt->article()->id() ?>> <?php echo " retard +15 jours | {$emprunt->article()->fiche_article()->titre()} | {$emprunt->adherent()->nom()} {$emprunt->adherent()->prenom()}" ?> </option>
+                           <option value=<?= $emprunt->article()->id() ?>> <?= " retard +15 jours | {$emprunt->article()->fiche_article()->titre()} | {$emprunt->adherent()->nom()} {$emprunt->adherent()->prenom()}" ?> </option>
                            
        		    <?php         } 
                           } 
@@ -145,7 +153,6 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             		<button type="submit" class="btn btn-lg btn-danger" value="Supprimer utilisateur" name="SupprimerUtilisateur" style="margin-top :20px">
             		<span class="glyphicon glyphicon-trash"></span> Supprimer adhérent</button>
             	</div>
-            </form>
 
 			<?php } else if ($GLOBALS["isActiveJeu"] == TRUE) { ?>
 
@@ -162,8 +169,7 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             		<button type="submit" class="btn btn-lg btn-danger" value="Supprimer utilisateur" name="SupprimerFicherJeu" style="margin-top :20px">
             		<span class="glyphicon glyphicon-trash"></span> Supprimer fiche jeu</button>
             	</div>
-            </form>
-            
+
 			<?php } else if ($GLOBALS["isActiveAlerte"] == TRUE) { ?>
 
     			<div>
@@ -184,10 +190,9 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             		<button type="submit" class="btn btn-lg btn-danger" value="Supprimer utilisateur" name="ddzdazdz" style="margin-top :20px">
             		<span class="glyphicon glyphicon-trash"></span>Alertes de l'article réglées</button>
             	</div>
-            </form>
 
 			<?php } ?>
-
+            </form>
 			</div>
         </div>
     </div>

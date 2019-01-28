@@ -34,7 +34,7 @@
             <!-- IL FAUT PEUPLER CECI EN FONCTION D'UNE REQUETE INITAL GENERAL "SELECT * FROM ... " -->
 	        <!-- PUIS PRECISER LA REQUETE EN FONCTION DES MOTS TAPPER DANS LE CHAMPS DE RECHERCE "SELECT * FROM ... WHERE = "champs de recherche" " -->
 	        <!-- POUR ACTUALISER : UTILISATION JAVASCRIPT -->
-            <form action="index.php" method="post">
+            <form action="?action=gestionAdherents" method="post">
             
         			<select class="custom-select" size="15" name="select">
         			<?php 
@@ -53,40 +53,16 @@
                       <?php } ?>
                     </select>
 
-    			<?php if ($GLOBALS["isActiveAdherent"] == TRUE) { ?>
-    			
-    			
-    			<?php } else if ($GLOBALS["isActiveJeu"] == TRUE) {?>
-    			
-                <div class="row">                    
-                    <div class="col-md-12" style="text-align:center ; margin-top :20px">
-            			<button type="submit" class="btn btn-lg btn-success" value="Afficher les Articles" name="AfficherLesArticles">
-            			<span class="glyphicon glyphicon-eye-open"></span> Afficher les articles </button>
-                    </div>
-                </div>
-    			
-    			<?php } else { ?>
-                
-                <div class="row">
-                    <div class="col-md-6">.col-md-6</div>
-                    <div class="col-md-6">.col-md-6</div>
-                </div>
-                
-                <?php }?>
                 
             </div>
             
             <div class="col-md-2">
-            
-            <?php if ($GLOBALS["isActiveAdherent"] == TRUE) { ?>
 
     			<div>
             		<button type="submit" class="btn btn-lg btn-success" value="Voir Articles Emprunts" name="VoirArticlesEmprunts">
             		<span class="glyphicon glyphicon-user"></span> Voir articles</button>
             	</div>
             </form>
-
-			<?php } ?>
 
 			</div>
         </div>

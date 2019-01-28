@@ -5,7 +5,7 @@
                 <!-- IL FAUT PEUPLER CECI EN FONCTION D'UNE REQUETE INITAL GENERAL "SELECT * FROM ... " -->
     	        <!-- PUIS PRECISER LA REQUETE EN FONCTION DES MOTS TAPPER DANS LE CHAMPS DE RECHERCE "SELECT * FROM ... WHERE = "champs de recherche" " -->
     	        <!-- POUR ACTUALISER : UTILISATION JAVASCRIPT -->
-                <form action="index.php" method="post">
+                <form action="?action=gestionJeux" method="post">
                 
         			<select class="custom-select" size="15" name="select">
                   		
@@ -38,7 +38,7 @@
             
             <div class="col-md-2">
          
-            <form action="index.php" method="post">
+            <form action="?action=gestionJeux" method="post">
             	<div>
             		<button type="submit" class="btn btn-lg btn-warning" value="Afficher Article" name="AfficherArticle" style="margin-top :20px">
             		<span class="glyphicon glyphicon-cog"></span> Afficher Article</button>

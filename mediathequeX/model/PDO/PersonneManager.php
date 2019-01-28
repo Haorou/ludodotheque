@@ -175,6 +175,22 @@ require_once("model/PDO/ManagerPDO.php");
         
         public function deleteAdherent(Adherent $perso)
         {
+            // ============== ICI ON SUPPRIME :   SES AYANTDROITS   ================================ //
+            
+            foreach($perso->ayant_droits() as $ayantdroit)
+            {
+                $deleteAyantdroit = $this->_db->prepare("DELETE FROM ayantdroit
+                                        WHERE id_adherent = :id");
+                $deleteAyantdroit->execute(array(
+                    "id" => $perso->id()));
+                
+                $deletePersonne = $this->_db->prepare("DELETE FROM personne
+                                        WHERE id = :id");
+                
+                $deletePersonne->execute(array(
+                    "id" => $ayantdroit->id()));
+            }
+            
             // ============== ICI ON SUPPRIME :   SA DATE ADHESION   =========================== //
             
             $deleteAdhesion = $this->_db->prepare("DELETE FROM adhesion
@@ -213,22 +229,6 @@ require_once("model/PDO/ManagerPDO.php");
             
             $deletePersonne->execute(array(
                 "id" => $perso->id()));
-            
-            // ============== ICI ON SUPPRIME :   SES AYANTDROITS   ================================ //
-            
-            foreach($perso->ayant_droits() as $ayantdroit)
-            {
-                $deleteAyantdroit = $this->_db->prepare("DELETE FROM ayantdroit
-                                        WHERE id_adherent = :id");
-                $deleteAyantdroit->execute(array(
-                    "id" => $perso->id()));
-                
-                $deletePersonne = $this->_db->prepare("DELETE FROM personne
-                                        WHERE id = :id");
-                
-                $deletePersonne->execute(array(
-                    "id" => $ayantdroit->id()));
-            }
         }
         
         public function deleteAyantDroit(AyantDroit $perso)

@@ -8,7 +8,7 @@
 				<h1 class="form-heading">Formulaire d'adhésion</h1>
 				<div>
 					<div>
-                        <form action="index.php?action=creerUtilisateur" method="post">
+                        <form action="?action=gestionAdherents" method="post">
                         
                         	<div class="form-row" style="margin-top :20px">
                         		<div class="form-group col-md-2">

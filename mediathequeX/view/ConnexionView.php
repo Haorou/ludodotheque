@@ -15,7 +15,7 @@
             <div class="panel">
            <p>Entrez votre nom d'utilisateur et votre mot de passe</p>
            </div>
-            <form id="Login" action="index.php?action=seConnecter" method="post">
+            <form id="Login" action="index.php?action=menuPrincipal" method="post">
         
                 <div class="form-group">
                     <input type="text" name="nomUtilisateur" class="form-control" id="inputEmail" placeholder="Nom d'utilisateur">
