@@ -9,7 +9,14 @@
     <body>
 		<?php require("view/require/HeaderView.php");
 		
-		       require("view/require/SearchBarView.php");
+           		if(isset($_POST["PageEmpruntUnArticle"]))
+           		{
+           		    require("view/require/EmpruntJeuView.php");
+           		}
+           		else
+           		{
+           		    require("view/require/SearchBarView.php");
+           		}
 		
 			   require("view/require/FooterView.php");?>
 		

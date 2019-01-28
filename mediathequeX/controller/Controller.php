@@ -441,7 +441,7 @@ function UpdateFicheJeu()
         "nombre_de_joueurs_max" => $_POST["nbrejoueurmax"],
         "duree_min_de_jeu" => $_POST["dureemin"],
         "duree_max_de_jeu" => $_POST["dureemax"],
-        "titre" =>$_POST["nomdujeu"],
+        "titre" => $_POST["nomdujeu"],
         "editeur" => $_POST["editeurdujeu"],
         "age_min" => $_POST["agemin"],
         "age_max" => $_POST["agemax"],
@@ -462,5 +462,6 @@ function UpdateFicheJeu()
 
 function PageEmprunterUnArticle()
 {
-    
+    $GLOBALS["isActiveAdherent"] = TRUE;
+    require("view/GestionAdherentView.php");
 }
