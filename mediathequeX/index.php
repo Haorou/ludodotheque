@@ -105,6 +105,9 @@ try
             
         else if(isset($_POST["UpdateFicheJeu"]))
             UpdateFicheJeu();
+        
+        else if(isset($_POST["SupprimerArticle"]))
+            SupprimerArticle();
     }
     else
     {

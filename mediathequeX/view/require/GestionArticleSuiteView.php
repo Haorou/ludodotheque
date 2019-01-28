@@ -16,29 +16,9 @@
         				<?php } ?>
                       
                     </select>
-    
-                     <div class="row">    
-                       <div class="col-md-3" style="text-align:center ; margin-top :20px"> 
-                        		<strong> <?= $fiche->titre(); ?> </strong>
-                        </div> 
-                          <div class="col-md-3" style="text-align:center ; margin-top :20px"> 
-                        	<input name="prix" type="text" class="form-control" placeholder="Prix" required>
-                        </div> 
-                          <div class="col-md-3" style="text-align:center ; margin-top :20px"> 
-                        		<input name="commentaire" type="text" class="form-control" placeholder="Commentaire">
-                        </div>                  
-                        <div class="col-md-3" style="text-align:center ; margin-top :20px"> 
-                        		<button type="submit" class="btn btn-lg btn-success" value="Ajouter Article" name="AjouterArticle">
-                		<span class="glyphicon glyphicon-list-alt"></span> Ajouter Article</button>
-                        </div> 
-        			</div> 
-   				</form>
             </div>
             
-            
             <div class="col-md-2">
-         
-            <form action="?action=gestionJeux" method="post">
             	<div>
             		<button type="submit" class="btn btn-lg btn-warning" value="Afficher Article" name="AfficherArticle" style="margin-top :20px">
             		<span class="glyphicon glyphicon-cog"></span> Afficher Article</button>
@@ -52,4 +32,23 @@
 
 			</div>
         </div>
+        
+        <form action="?action=gestionJeux" method="post">
+             <div class="row">    
+               <div class="col-md-3" style="text-align:center ; margin-top :20px"> 
+                		<strong> <?= $fiche->titre(); ?> </strong>
+                </div> 
+                  <div class="col-md-3" style="text-align:center ; margin-top :20px"> 
+                	<input name="prix" type="text" class="form-control" placeholder="Prix" required>
+                </div> 
+                  <div class="col-md-3" style="text-align:center ; margin-top :20px"> 
+                		<input name="commentaire" type="text" class="form-control" placeholder="Commentaire">
+                </div>                  
+                <div class="col-md-3" style="text-align:center ; margin-top :20px"> 
+                		<button type="submit" class="btn btn-lg btn-success" value="Ajouter Article" name="AjouterArticle">
+        		<span class="glyphicon glyphicon-list-alt"></span> Ajouter Article</button>
+                </div> 
+    		</div>
+		</form>
+        
     </div>

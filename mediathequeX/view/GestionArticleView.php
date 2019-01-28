@@ -9,9 +9,11 @@
     <body>
 		<?php require("view/require/HeaderView.php");
 		
-		      if(isset($_POST["AfficherLesArticles"]) && isset($_POST["select"]))
-                  require("view/require/GestionArticleSuiteView.php");
-              
+		      if( (isset($_POST["AfficherLesArticles"]) && isset($_POST["select"]))
+		      || isset($_POST["SupprimerArticle"]) || isset($_POST["AjouterArticle"]) )
+		      {
+		          require("view/require/GestionArticleSuiteView.php");
+		      }
               else
                   require("view/require/SearchBarView.php");
 		

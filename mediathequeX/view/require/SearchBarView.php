@@ -16,15 +16,12 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
 ?>
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    <div class="container"><br/>
+    <div class="container" ><br/>
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-8">
-                <form class="card card-sm">
-                    <div class="card-body row no-gutters align-items-center">
-                        
-                        <div class="col-auto">
-                            <i class="fas fa-search h4 text-body"></i>
-                        </div>
+                <form class="">
+                
+                    <div class="card-body row no-gutters align-items-center" >
                         
                         <!--end of col-->
                         <div class="col">
@@ -33,11 +30,13 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
                         
                         <!--end of col-->
                         <div class="col-auto">
-                        	<button class="btn btn-lg btn-success" type="submit">Rechercher</button>
+                        	<button class="btn btn-lg btn-success" type="submit">
+                        	<span class="glyphicon glyphicon-search"></span>Rechercher</button>
                         </div>
                         <!--end of col-->
                     
                     </div>
+                    
                 </form>
             </div>
         <!--end of col-->
@@ -183,7 +182,7 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             	</div>
 
             	<div>
-            		<button type="submit" class="btn btn-lg btn-primary" value="Modifier utilisateur" name="ModifierUtilisateur" style="margin-top :20px">
+            		<button type="submit" class="btn btn-lg btn-primary" value="Modifier utilisateur" name="ModifierUtilisateur" style="margin-top :20px">       		
             		<span class="glyphicon glyphicon-cog"></span> Afficher les alertes</button>
             	</div>
             	<div>

@@ -20,22 +20,22 @@ function CreateFicheJeu()
     $ficheJeuManager = new FicheJeuManager();
     
     $ficheJeu = new FicheJeu([
-        "nombre_de_joueurs_min" => $_POST["nbrejoueurmin"],
-        "nombre_de_joueurs_max" => $_POST["nbrejoueurmax"],
-        "duree_min_de_jeu" => $_POST["dureemin"],
-        "duree_max_de_jeu" => $_POST["dureemax"],
-        "titre" =>$_POST["nomdujeu"],
-        "editeur" => $_POST["editeurdujeu"],
-        "age_min" => $_POST["agemin"],
-        "age_max" => $_POST["agemax"],
-        "date_de_publication" => $_POST["date"],
-        "descriptif" => $_POST["descriptif"]
+        "nombre_de_joueurs_min" => htmlspecialchars($_POST["nbrejoueurmin"]),
+        "nombre_de_joueurs_max" => htmlspecialchars($_POST["nbrejoueurmax"]),
+        "duree_min_de_jeu" => htmlspecialchars($_POST["dureemin"]),
+        "duree_max_de_jeu" => htmlspecialchars($_POST["dureemax"]),
+        "titre" => htmlspecialchars($_POST["nomdujeu"]),
+        "editeur" => htmlspecialchars($_POST["editeurdujeu"]),
+        "age_min" => htmlspecialchars($_POST["agemin"]),
+        "age_max" => htmlspecialchars($_POST["agemax"]),
+        "date_de_publication" => htmlspecialchars($_POST["date"]),
+        "descriptif" => htmlspecialchars($_POST["descriptif"])
     ]);
     
-    $ficheJeu->setTypes_de_jeu($_POST["type_jeu_1"]);
+    $ficheJeu->setTypes_de_jeu(htmlspecialchars($_POST["type_jeu_1"]));
     
-    if($_POST["type_jeu_1"] != $_POST["type_jeu_2"])
-        $ficheJeu->setTypes_de_jeu($_POST["type_jeu_2"]);
+    if($_POST["type_jeu_1"] != htmlspecialchars($_POST["type_jeu_2"]))
+        $ficheJeu->setTypes_de_jeu(htmlspecialchars($_POST["type_jeu_2"]));
         
         $ficheJeuManager->createFicheJeu($ficheJeu);
         
@@ -47,7 +47,7 @@ function DeleteFicheJeu()
     if(isset($_POST["select"]))
     {
         $ficheJeuManager = new FicheJeuManager();
-        $fiche = $ficheJeuManager->readFicheJeu($_POST["select"]);
+        $fiche = $ficheJeuManager->readFicheJeu(htmlspecialchars($_POST["select"]));
         $ficheJeuManager->deleteFicheJeu($fiche);
     }
     
@@ -58,15 +58,15 @@ function ReadLesArticles()
 {
     if(isset($_POST["select"]))
     {
-        $_SESSION["id_fiche_article"]  = $_POST["select"];
+        $_SESSION["id_fiche_article"]  = htmlspecialchars($_POST["select"]);
         
         $jeuManager = new JeuManager();
         $ficheJeuManager = new FicheJeuManager();
         
-        $listeJeux = $jeuManager->readSelectJeux($_POST["select"]);
+        $listeJeux = $jeuManager->readSelectJeux(htmlspecialchars($_POST["select"]));
         $nombreDeJeux = count($listeJeux);
         
-        $fiche = $ficheJeuManager->readFicheJeu($_POST["select"]);
+        $fiche = $ficheJeuManager->readFicheJeu(htmlspecialchars($_POST["select"]));
     }
     require("view/GestionArticleView.php");
 }
@@ -77,12 +77,19 @@ function CreateArticle()
     $ficheJeuManager = new FicheJeuManager();
     
     $Jeu = new Jeu([
-        "prix_achat" => $_POST["prix"],
+        "prix_achat" => htmlspecialchars($_POST["prix"]),
         "date_ajout" => date_format(new DateTime('now'), 'Y-m-d H:i:s'),
-        "commentaire" => $_POST["commentaire"]]);
-    $Jeu->setFiche_article($ficheJeuManager->readFicheJeu($_SESSION["id_fiche_article"]));
+        "commentaire" => htmlspecialchars($_POST["commentaire"])
+    ]);
+    $Jeu->setFiche_article($ficheJeuManager->readFicheJeu(htmlspecialchars($_SESSION["id_fiche_article"])));
     
     $jeuManager->createJeu($Jeu);
+    
+    
+    $listeJeux = $jeuManager->readSelectJeux(htmlspecialchars($_SESSION["id_fiche_article"]));
+    $nombreDeJeux = count($listeJeux);
+    
+    $fiche = $ficheJeuManager->readFicheJeu(htmlspecialchars($_SESSION["id_fiche_article"]));
     
     require("view/GestionArticleView.php");
 }
@@ -91,10 +98,10 @@ function ModifierFicheJeu()
 {
     if(isset($_POST["select"]))
     {
-        $_SESSION["id_fiche_article"]  = $_POST["select"];
+        $_SESSION["id_fiche_article"]  = htmlspecialchars($_POST["select"]);
         
         $ficheJeuManager = new FicheJeuManager();
-        $ficheJeu = $ficheJeuManager->readFicheJeu($_SESSION["id_fiche_article"]);
+        $ficheJeu = $ficheJeuManager->readFicheJeu(htmlspecialchars($_SESSION["id_fiche_article"]));
         
         $typesJeu = $ficheJeuManager->readTypesJeux();
         $nombreDeTypesJeu = count($typesJeu);
@@ -110,26 +117,45 @@ function UpdateFicheJeu()
 {
     $ficheJeuManager = new FicheJeuManager();
     $ficheJeu = new FicheJeu([
-        "nombre_de_joueurs_min" => $_POST["nbrejoueurmin"],
-        "nombre_de_joueurs_max" => $_POST["nbrejoueurmax"],
-        "duree_min_de_jeu" => $_POST["dureemin"],
-        "duree_max_de_jeu" => $_POST["dureemax"],
-        "titre" => $_POST["nomdujeu"],
-        "editeur" => $_POST["editeurdujeu"],
-        "age_min" => $_POST["agemin"],
-        "age_max" => $_POST["agemax"],
-        "date_de_publication" => $_POST["date"],
-        "descriptif" => $_POST["descriptif"]
+        "nombre_de_joueurs_min" => htmlspecialchars($_POST["nbrejoueurmin"]),
+        "nombre_de_joueurs_max" => htmlspecialchars($_POST["nbrejoueurmax"]),
+        "duree_min_de_jeu" => htmlspecialchars($_POST["dureemin"]),
+        "duree_max_de_jeu" => htmlspecialchars($_POST["dureemax"]),
+        "titre" => htmlspecialchars($_POST["nomdujeu"]),
+        "editeur" => htmlspecialchars($_POST["editeurdujeu"]),
+        "age_min" => htmlspecialchars($_POST["agemin"]),
+        "age_max" => htmlspecialchars($_POST["agemax"]),
+        "date_de_publication" => htmlspecialchars($_POST["date"]),
+        "descriptif" => htmlspecialchars($_POST["descriptif"])
     ]);
     
     
-    $ficheJeu->setTypes_de_jeu($_POST["type_jeu_1"]);
+    $ficheJeu->setTypes_de_jeu(htmlspecialchars($_POST["type_jeu_1"]));
     
-    if($_POST["type_jeu_1"] != $_POST["type_jeu_2"])
-        $ficheJeu->setTypes_de_jeu($_POST["type_jeu_2"]);
+    if($_POST["type_jeu_1"] != htmlspecialchars($_POST["type_jeu_2"]))
+        $ficheJeu->setTypes_de_jeu(htmlspecialchars($_POST["type_jeu_2"]));
         
-        $ficheJeu->setId($_SESSION["id_fiche_article"]);
-        $ficheJeuManager->updateFicheJeu($ficheJeu);
+        $ficheJeu->setId(htmlspecialchars($_SESSION["id_fiche_article"]));
+    $ficheJeuManager->updateFicheJeu($ficheJeu);
         
-        require("view/GestionArticleView.php");
+    require("view/GestionArticleView.php");
+}
+
+function SupprimerArticle()
+{
+    if(isset($_POST["select"]))
+    {
+        $jeuManager = new JeuManager();
+        $ficheJeuManager = new FicheJeuManager();
+        
+        $jeu = $jeuManager->readJeu(htmlspecialchars(["select"]));
+        $jeuManager->deleteJeu($jeu);
+        
+        $listeJeux = $jeuManager->readSelectJeux(htmlspecialchars($_SESSION["id_fiche_article"]));
+        $nombreDeJeux = count($listeJeux);
+        
+        $fiche = $ficheJeuManager->readFicheJeu(htmlspecialchars($_SESSION["id_fiche_article"]));
+    }
+    
+    require("view/GestionArticleView.php");
 }

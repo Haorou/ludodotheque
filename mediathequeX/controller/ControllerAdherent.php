@@ -16,7 +16,7 @@ function PageModifierAdherent()
         $PersonManager = new PersonneManager();
         $perso = $PersonManager->readAdherent($_POST["select"]);
         
-        $_SESSION["id_adherent"]  = $_POST["select"];
+        $_SESSION["id_adherent"]  = htmlspecialchars($_POST["select"]);
         
         require("view/AffichageAdherentView.php");
     }
@@ -29,17 +29,17 @@ function CreateAdherent()
     $PersonManager = new PersonneManager();
     
     $perso = new Adherent([
-        "civilite" => $_POST["civilite"],
-        "nom" => $_POST["nom"],
-        "prenom" => $_POST["prenom"]
+        "civilite" => htmlspecialchars($_POST["civilite"]),
+        "nom" => htmlspecialchars($_POST["nom"]),
+        "prenom" => htmlspecialchars($_POST["prenom"])
     ]);
     
     $adresse = new Adresse([
-        "numero" => $_POST["numero"],
-        "type_voie" => $_POST["type_voie"],
-        "nom_voie" => $_POST["nom_voie"],
-        "code_postal" => $_POST["code_postal"],
-        "ville" => $_POST["ville"],
+        "numero" => htmlspecialchars($_POST["numero"]),
+        "type_voie" => htmlspecialchars($_POST["type_voie"]),
+        "nom_voie" => htmlspecialchars($_POST["nom_voie"]),
+        "code_postal" => htmlspecialchars($_POST["code_postal"]),
+        "ville" => htmlspecialchars($_POST["ville"])
     ]);
     
     $adresse->setRegion($PersonManager->readRegion($adresse->code_postal()));
@@ -61,7 +61,7 @@ function DeleteAdherent()
     if(isset($_POST["select"]))
     {
         $personneManager = new PersonneManager();
-        $perso = $personneManager->readAdherent($_POST["select"]);
+        $perso = $personneManager->readAdherent(htmlspecialchars($_POST["select"]));
         $personneManager->deleteAdherent($perso);
     }
     
@@ -73,14 +73,14 @@ function CreateAyantDroit()
     $personneManager = new PersonneManager();
     
     $ayantdroit = new AyantDroit([
-        "civilite" => $_POST["civilite"],
-        "nom" => $_POST["nom"],
-        "prenom"=> $_POST["prenom"]
+        "civilite" => htmlspecialchars($_POST["civilite"]),
+        "nom" => htmlspecialchars($_POST["nom"]),
+        "prenom"=> htmlspecialchars($_POST["prenom"])
     ]);
     
-    $personneManager->createAyantDroit($ayantdroit, $personneManager->readAdherent($_SESSION["id_adherent"]));
+    $personneManager->createAyantDroit($ayantdroit, $personneManager->readAdherent(htmlspecialchars($_SESSION["id_adherent"])));
     
-    $perso = $personneManager->readAdherent($_SESSION["id_adherent"]);
+    $perso = $personneManager->readAdherent(htmlspecialchars($_SESSION["id_adherent"]));
     
     require("view/AffichageAdherentView.php");
 }
@@ -89,11 +89,11 @@ function DeleteAyandroit()
 {
     $personneManager = new PersonneManager();
     
-    $ayantdroit = $personneManager->readAyantDroitById($_POST["ayantdroit_a_supprimer"]);
+    $ayantdroit = $personneManager->readAyantDroitById(htmlspecialchars($_POST["ayantdroit_a_supprimer"]));
     
     $personneManager->deleteAyantDroit($ayantdroit);
     
-    $perso = $personneManager->readAdherent($_SESSION["id_adherent"]);
+    $perso = $personneManager->readAdherent(htmlspecialchars($_SESSION["id_adherent"]));
     
     require("view/AffichageAdherentView.php");
 }
@@ -102,7 +102,7 @@ function RenouvellerAdhesion()
 {
     $personneManager = new PersonneManager();
     
-    $perso = $personneManager->readAdherent($_SESSION["id_adherent"]);
+    $perso = $personneManager->readAdherent(htmlspecialchars($_SESSION["id_adherent"]));
     $perso->setDate_adhesions(date_format(new DateTime('now'), 'Y-m-d H:i:s'));
     $personneManager->addAdhesion($perso);
     
