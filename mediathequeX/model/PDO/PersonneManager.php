@@ -391,4 +391,9 @@ require_once("model/PDO/ManagerPDO.php");
         {
             return $this->_db->query("SELECT COUNT(*) FROM ayantdroit")->fetchColumn();
         }
+        
+        public function closeConnexion()
+        {
+            $this->_db = null;
+        }
     }

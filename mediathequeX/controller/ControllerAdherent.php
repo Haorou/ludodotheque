@@ -18,30 +18,32 @@ function PageModifierAdherent()
         
         $_SESSION["id_adherent"]  = htmlspecialchars($_POST["select"]);
         
+        $PersonManager->closeConnexion();
+        
         require("view/AffichageAdherentView.php");
     }
     else
         require("view/GestionAdherentView.php");
+    
+        
 }
 
 function CreateAdherent()
 {
     $PersonManager = new PersonneManager();
     
-    $perso = new Adherent([
-        "civilite" => htmlspecialchars($_POST["civilite"]),
-        "nom" => htmlspecialchars($_POST["nom"]),
-        "prenom" => htmlspecialchars($_POST["prenom"])
-    ]);
+    $perso = new Adherent();
+    $perso->setCivilite(htmlspecialchars($_POST["civilite"]));
+    $perso->setNom(htmlspecialchars($_POST["nom"]));
+    $perso->setPrenom(htmlspecialchars($_POST["prenom"]));
     
-    $adresse = new Adresse([
-        "numero" => htmlspecialchars($_POST["numero"]),
-        "type_voie" => htmlspecialchars($_POST["type_voie"]),
-        "nom_voie" => htmlspecialchars($_POST["nom_voie"]),
-        "code_postal" => htmlspecialchars($_POST["code_postal"]),
-        "ville" => htmlspecialchars($_POST["ville"])
-    ]);
-    
+    $adresse = new Adresse();
+    $adresse->setNumero(htmlspecialchars($_POST["numero"]));
+    $adresse->setType_voie(htmlspecialchars($_POST["type_voie"]));
+    $adresse->setNom_voie(htmlspecialchars($_POST["nom_voie"]));
+    $adresse->setCode_postal(htmlspecialchars($_POST["code_postal"]));
+    $adresse->setVille(htmlspecialchars($_POST["ville"]));
+
     $adresse->setRegion($PersonManager->readRegion($adresse->code_postal()));
     
     $perso->setDate_adhesions(date_format(new DateTime('now'), 'Y-m-d H:i:s'));
@@ -51,6 +53,8 @@ function CreateAdherent()
     $PersonManager->createAdherent($perso);
 
     $_SESSION["id_adherent"]  = $perso->id();
+    
+    $PersonManager->closeConnexion();
     
     require("view/AffichageAdherentView.php");
 }
@@ -63,6 +67,8 @@ function DeleteAdherent()
         $personneManager = new PersonneManager();
         $perso = $personneManager->readAdherent(htmlspecialchars($_POST["select"]));
         $personneManager->deleteAdherent($perso);
+        
+        $personneManager->closeConnexion();
     }
     
     require("view/GestionAdherentView.php");
@@ -82,6 +88,8 @@ function CreateAyantDroit()
     
     $perso = $personneManager->readAdherent(htmlspecialchars($_SESSION["id_adherent"]));
     
+    $personneManager->closeConnexion();
+    
     require("view/AffichageAdherentView.php");
 }
 
@@ -95,6 +103,8 @@ function DeleteAyandroit()
     
     $perso = $personneManager->readAdherent(htmlspecialchars($_SESSION["id_adherent"]));
     
+    $personneManager->closeConnexion();
+    
     require("view/AffichageAdherentView.php");
 }
 
@@ -105,6 +115,8 @@ function RenouvellerAdhesion()
     $perso = $personneManager->readAdherent(htmlspecialchars($_SESSION["id_adherent"]));
     $perso->setDate_adhesions(date_format(new DateTime('now'), 'Y-m-d H:i:s'));
     $personneManager->addAdhesion($perso);
+    
+    $personneManager->closeConnexion();
     
     require("view/AffichageAdherentView.php");
 }
@@ -127,6 +139,8 @@ function VoirArticlesEmprunts()
         $nombreDeJeux = count($listeJeux);
         
         $fiche = $ficheJeuManager->readFicheJeu(htmlspecialchars($_POST["select"]));
+        
+        $ficheJeuManager->closeConnexion();
     }
     require("view/GestionAdherentView.php");
 }
@@ -149,6 +163,10 @@ function EmprunterArticle()
         $emprunt->setArticle($article);
         
         $empruntManager->createEmprunt($emprunt);
+        
+        $jeuManager->closeConnexion();
+        $adherentManager->closeConnexion();
+        $empruntManager->closeConnexion();
     }
     require("view/AffichageAdherentView.php");
 }
@@ -167,8 +185,56 @@ function RendreUnArticle()
         $emprunt = $empruntManager->readCurrentEmpruntsAdherentAndArticle($perso, $jeu);
         
         $emprunt->setDate_retour_effectif(date_format(new DateTime('now'), 'Y-m-d H:i:s'));
+
+        $tempsActuel = time();
+        $date_emprunt = strtotime($emprunt->date_emprunt());
+        $tempsEntreMaintenantEtEmprunt = $tempsActuel - $date_emprunt;
+        
+        if($tempsEntreMaintenantEtEmprunt > 2678401)
+        {
+           $alert = new AlerteJeu(
+           [   "adherent" => $perso,
+               "commentaire" => "En retard",
+               "date" => $emprunt->date_emprunt(),
+           ]);
+
+           $jeu->setAlertes($alert);
+           $jeuManager->updateJeu($jeu);
+        }
+        
+        if(isset($_POST["manquant"]))
+        {
+            $alert = new AlerteJeu(
+                [   "adherent" => $perso,
+                    "commentaire" => htmlspecialchars($_POST["commentaire"]),
+                    "date" => $emprunt->date_emprunt(),
+                    "probleme" => "manquant"
+                ]);
+                $jeu->setAlertes($alert);
+                $jeuManager->updateJeu($jeu);
+        }
+        
+        if(isset($_POST["degrade"]))
+        {
+            $alert = new AlerteJeu(
+                [   "adherent" => $perso,
+                    "commentaire" => htmlspecialchars($_POST["commentaire"]),
+                    "date" => $emprunt->date_emprunt(),
+                    "probleme" => "degradé"
+                ]);
+                
+                $jeu->setAlertes($alert);
+                $jeuManager->updateJeu($jeu);
+        }
+   
         $empruntManager->updateEmprunt($emprunt);
+      
+        $jeuManager->closeConnexion();
+        $adherentManager->closeConnexion();
+        $empruntManager->closeConnexion();
     }
     
     require("view/AffichageAdherentView.php");
 }
+
+

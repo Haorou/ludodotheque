@@ -11,6 +11,8 @@ function PageFormulaireFicheJeu()
     $typesJeu = $ficheJeuManager->readTypesJeux();
     $nombreDeTypesJeu = count($typesJeu);
     
+    $ficheJeuManager->closeConnexion();
+    
     require("view/FormulaireFicheJeu.php");
 }
 
@@ -37,9 +39,11 @@ function CreateFicheJeu()
     if($_POST["type_jeu_1"] != htmlspecialchars($_POST["type_jeu_2"]))
         $ficheJeu->setTypes_de_jeu(htmlspecialchars($_POST["type_jeu_2"]));
         
-        $ficheJeuManager->createFicheJeu($ficheJeu);
-        
-        require("view/GestionArticleView.php");
+    $ficheJeuManager->createFicheJeu($ficheJeu);
+    
+    $ficheJeuManager->closeConnexion();
+    
+    require("view/GestionArticleView.php");
 }
 
 function DeleteFicheJeu()
@@ -49,6 +53,8 @@ function DeleteFicheJeu()
         $ficheJeuManager = new FicheJeuManager();
         $fiche = $ficheJeuManager->readFicheJeu(htmlspecialchars($_POST["select"]));
         $ficheJeuManager->deleteFicheJeu($fiche);
+        
+        $ficheJeuManager->closeConnexion();
     }
     
     require("view/GestionArticleView.php");
@@ -67,6 +73,10 @@ function ReadLesArticles()
         $nombreDeJeux = count($listeJeux);
         
         $fiche = $ficheJeuManager->readFicheJeu(htmlspecialchars($_POST["select"]));
+        
+        $jeuManager->closeConnexion();
+        $ficheJeuManager->closeConnexion();
+        
     }
     require("view/GestionArticleView.php");
 }
@@ -91,6 +101,9 @@ function CreateArticle()
     
     $fiche = $ficheJeuManager->readFicheJeu(htmlspecialchars($_SESSION["id_fiche_article"]));
     
+    $jeuManager->closeConnexion();
+    $ficheJeuManager->closeConnexion();
+    
     require("view/GestionArticleView.php");
 }
 
@@ -105,6 +118,8 @@ function ModifierFicheJeu()
         
         $typesJeu = $ficheJeuManager->readTypesJeux();
         $nombreDeTypesJeu = count($typesJeu);
+        
+        $ficheJeuManager->closeConnexion();
         
         require("view/FormulaireFicheJeu.php");
     }
@@ -138,6 +153,8 @@ function UpdateFicheJeu()
         $ficheJeu->setId(htmlspecialchars($_SESSION["id_fiche_article"]));
     $ficheJeuManager->updateFicheJeu($ficheJeu);
         
+    $ficheJeuManager->closeConnexion();
+    
     require("view/GestionArticleView.php");
 }
 
@@ -155,6 +172,10 @@ function SupprimerArticle()
         $nombreDeJeux = count($listeJeux);
         
         $fiche = $ficheJeuManager->readFicheJeu(htmlspecialchars($_SESSION["id_fiche_article"]));
+        
+        $jeuManager->closeConnexion();
+        $ficheJeuManager->closeConnexion();
+        
     }
     
     require("view/GestionArticleView.php");

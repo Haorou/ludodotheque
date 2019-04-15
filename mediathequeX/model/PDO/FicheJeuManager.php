@@ -290,4 +290,9 @@ class FicheJeuManager extends ManagerPDO
         return $this->_db->query("SELECT COUNT(*) FROM adherent")->fetchColumn();
     }
 
+    public function closeConnexion()
+    {
+        $this->_db = null;
+    }
+    
 }

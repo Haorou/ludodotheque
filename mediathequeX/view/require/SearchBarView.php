@@ -47,6 +47,7 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             <div class="col-md-10" > 
             
               		<?php if ($GLOBALS["isActiveAdherent"] == TRUE) { ?>
+              		
                   		<form action="?action=gestionAdherents" method="post">
                   		
                   		<select class="custom-select" size="15" name="select">
@@ -87,6 +88,24 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
                   		
                   		<select class="custom-select" size="15" name="select">
               			<?php 
+              			
+              			  $jeuManager = new JeuManager();
+              			  $arrayJeu = $jeuManager->readAllJeuxAlert();
+              			  
+              			  echo "Hello";
+              			  foreach($arrayJeu as $jeu)
+              			  {
+              			      foreach($jeu->alertes() as $alert)
+              			      {
+              			          ?>
+                           	<option value=<?= $alert->id() ?>> <?= $alert->probleme() . " | " . $alert->commentaire().  " | " . "{$alert->adherent()->nom()} {$alert->adherent()->prenom()}" ?> </option>
+                           
+              			          <?php
+              			      }
+              			  }
+
+              			  echo "Poulet";
+              			  
                           $tempsActuel = time();
                           $empruntManager = new EmpruntManager();
                           $listeEmprunts = $empruntManager->readAllCurrentEmprunts();
@@ -155,26 +174,15 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             	</div>
 
 			<?php } else if ($GLOBALS["isActiveAlerte"] == TRUE) { ?>
-
-    			<div>
-            		<button type="submit" class="btn btn-lg btn-success" value="Page Ajouter Fiche" name="PageAjouterFiche">
-            		<span class="glyphicon glyphicon-user"></span> Ajouter un article</button>
-            	</div>
-			
     			<div>
             		<button type="submit" class="btn btn-lg btn-success" value="Page Ajouter Fiche" name="PageAjouterFiche" style="margin-top :20px">
-            		<span class="glyphicon glyphicon-user"></span> Ajouter alerte a l'article</button>
+            		<span class="glyphicon glyphicon-user"></span> Ajouter alerte à article</button>
             	</div>
 
             	<div>
             		<button type="submit" class="btn btn-lg btn-primary" value="Modifier utilisateur" name="ModifierUtilisateur" style="margin-top :20px">       		
             		<span class="glyphicon glyphicon-cog"></span> Afficher les alertes</button>
             	</div>
-            	<div>
-            		<button type="submit" class="btn btn-lg btn-danger" value="Supprimer utilisateur" name="ddzdazdz" style="margin-top :20px">
-            		<span class="glyphicon glyphicon-trash"></span>Alertes de l'article réglées</button>
-            	</div>
-
 			<?php } ?>
             </form>
 			</div>

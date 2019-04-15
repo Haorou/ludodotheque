@@ -50,7 +50,20 @@
 			}
        		
 			if($nombreEmprunts > 0) {?>
-			<button type="submit" class="btn btn-danger" name="RendreUnArticle" style="margin-top :20px">Rendre un article</button>
+			<button type="submit" class="btn btn-danger" name="RendreUnArticle" style="margin-top :20px">Rendre un article</button><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="manquant" value="option1">
+              <label class="form-check-label" for="inlineCheckbox1">Manquant</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="degrade" value="option2">
+              <label class="form-check-label" for="inlineCheckbox2">Degrade</label>
+            </div>
+             <div class="form-group">
+                <label for="exampleFormControlTextarea1">Commentaire</label>
+                <textarea class="form-control border" id="exampleFormControlTextarea1" rows="3" name="commentaire" value=""></textarea>
+             </div>
+            
 			<?php }?>
 		
 		</div>			
@@ -82,9 +95,6 @@
             
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Attention : </strong> l'abonnement doit être renouvellé.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
 			
 			<?php 

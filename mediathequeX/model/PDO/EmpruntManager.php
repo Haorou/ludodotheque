@@ -180,4 +180,9 @@ require_once("model/PDO/ManagerPDO.php");
             return $this->_db->query("SELECT COUNT(*) FROM emprunt")->fetchColumn();
         }
         
+        public function closeConnexion()
+        {
+            $this->_db = null;
+        }
+        
     }

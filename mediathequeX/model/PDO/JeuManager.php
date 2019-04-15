@@ -62,7 +62,7 @@ class JeuManager extends ManagerPDO
                                                  SET id_fiche_article = :id_fiche_article,
                                                  date_ajout = :date_ajout,
                                                  prix_achat = :prix_achat
-                                                 WHERE id = :id)");
+                                                 WHERE id = :id");
         
         $updateArticle->execute(array(
             "id_fiche_article" => $jeu->fiche_article()->id(),
@@ -73,25 +73,26 @@ class JeuManager extends ManagerPDO
         
         foreach($jeu->alertes() as $alerte)
         {
-            $updateAlerteJeu = $this->_db->prepare("UPDATE alerte
-                                                    SET couleur = :couleur,
-                                                    element_jeu = :element_jeu,
-                                                    probleme = :probleme,
-                                                    quantite = :quantite,
-                                                    commentaire = :commentaire,
-                                                    WHERE id = :id)");
-            
-            $updateAlerteJeu->execute(array(
-                "couleur" => $alerte->couleur(),
-                "element_jeu" => $alerte->element_jeu(),
-                "probleme" => $alerte->probleme(),
-                "quantite" => $alerte->quantite(),
-                "commentaire" => $alerte->commentaire(),
-                "id" => $alerte->id()
-            ));
+            if($alerte->id() == NULL)
+            {
+                $addAlerteJeu = $this->_db->prepare("INSERT INTO alerte(commentaire, probleme)
+                                        VALUES(:commentaire, :probleme)");
+                $addAlerteJeu->execute(array(
+                    "commentaire" => $alerte->commentaire(),
+                    "probleme" => $alerte->probleme()
+                ));
+                
+                $alerte->hydrate([ 'id' => $this->_db->lastInsertId() ]);
+                
+                $addCompAlerteJeu = $this->_db->prepare("INSERT INTO comp_alerte_jeu(id_alerte, id_article, date)
+                                        VALUES(:id_alerte, :id_article, :date)");
+                $addCompAlerteJeu->execute(array(
+                    "id_alerte" => $alerte->id(),
+                    "id_article" => $jeu->id(),
+                    "date" => $alerte->date()
+                ));
+            }
         }
-        
-        // emprunt
     }
     
     public function deleteJeu(Jeu $jeu)
@@ -163,6 +164,7 @@ class JeuManager extends ManagerPDO
                 $adherentManager = new PersonneManager();
                 $resultAdherentAlerte = $this->_db->prepare('SELECT * FROM emprunt
                                                      WHERE date_emprunt = :date_emprunt');
+                
                 $resultAdherentAlerte->execute(array(
                     "date_emprunt" => $alerteInstance->date()));
                 
@@ -277,4 +279,28 @@ class JeuManager extends ManagerPDO
         return $listeJeux;
     }
 
+    public function readAllJeuxAlert()
+    {
+        $resultatRequeteJeu = $this->_db->prepare('SELECT * FROM article
+                                                   INNER JOIN comp_alerte_jeu ON comp_alerte_jeu.id_article = article.id');
+        
+        
+        $resultatRequeteJeu->execute();
+        
+        $listeJeux= [];
+        
+        while($id = $resultatRequeteJeu->fetch())
+        {
+            $listeJeux[] = $this->readJeu($id["id"]);
+        }
+        
+        return $listeJeux;
+    }
+    
+    
+    public function closeConnexion()
+    {
+        $this->_db = null;
+    }
+    
 }

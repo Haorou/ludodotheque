@@ -22,7 +22,7 @@ class MediathequeManager extends ManagerPDO
             $q = $this->_db->query('SELECT * FROM parametres');
             $donnees = $q->fetch(PDO::FETCH_ASSOC);
             
-          return new Mediatheque($donnees);
+            return new Mediatheque($donnees);
         }
      
         
@@ -47,5 +47,10 @@ class MediathequeManager extends ManagerPDO
                 "duree_retard" => $mediatheque->duree_retard()
                 
             ));
-       } 
+       }
+       
+       public function closeConnexion()
+       {
+           $this->_db = null;
+       }
     }
