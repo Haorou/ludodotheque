@@ -20,10 +20,6 @@
             
             <div class="col-md-2">
             	<div>
-            		<button type="submit" class="btn btn-lg btn-warning" value="Afficher Article" name="AfficherArticle" style="margin-top :20px">
-            		<span class="glyphicon glyphicon-cog"></span> Afficher Article</button>
-            	</div>
-            	<div>
             		<button type="submit" class="btn btn-lg btn-danger" value="Supprimer Article" name="SupprimerArticle" style="margin-top :20px">
             		<span class="glyphicon glyphicon-trash"></span> Supprimer Article</button>
             	</div>

@@ -92,7 +92,6 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
               			  $jeuManager = new JeuManager();
               			  $arrayJeu = $jeuManager->readAllJeuxAlert();
               			  
-              			  echo "Hello";
               			  foreach($arrayJeu as $jeu)
               			  {
               			      foreach($jeu->alertes() as $alert)
@@ -104,8 +103,6 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
               			      }
               			  }
 
-              			  echo "Poulet";
-              			  
                           $tempsActuel = time();
                           $empruntManager = new EmpruntManager();
                           $listeEmprunts = $empruntManager->readAllCurrentEmprunts();
@@ -173,16 +170,6 @@ elseif($GLOBALS["isActiveAlerte"] == TRUE)
             		<span class="glyphicon glyphicon-trash"></span> Supprimer fiche jeu</button>
             	</div>
 
-			<?php } else if ($GLOBALS["isActiveAlerte"] == TRUE) { ?>
-    			<div>
-            		<button type="submit" class="btn btn-lg btn-success" value="Page Ajouter Fiche" name="PageAjouterFiche" style="margin-top :20px">
-            		<span class="glyphicon glyphicon-user"></span> Ajouter alerte à article</button>
-            	</div>
-
-            	<div>
-            		<button type="submit" class="btn btn-lg btn-primary" value="Modifier utilisateur" name="ModifierUtilisateur" style="margin-top :20px">       		
-            		<span class="glyphicon glyphicon-cog"></span> Afficher les alertes</button>
-            	</div>
 			<?php } ?>
             </form>
 			</div>
