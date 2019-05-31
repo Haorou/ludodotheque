@@ -18,11 +18,11 @@
             <form id="Login" action="index.php?action=menuPrincipal" method="post">
         
                 <div class="form-group">
-                    <input type="text" name="nomUtilisateur" class="form-control" id="inputEmail" placeholder="Nom d'utilisateur">
+                    <input type="text" name="nomUtilisateur" class="form-control" id="inputPseudo" placeholder="Nom d'utilisateur" required>
                 </div>
         
                 <div class="form-group">
-                    <input type="password"  name="motDePasse" class="form-control" id="inputPassword" placeholder="Mot de passe">
+                    <input type="password"  name="motDePasse" class="form-control" id="inputPassword" placeholder="Mot de passe" required>
                 </div>
                         
                 <div class="forgot">

@@ -8,9 +8,14 @@ try
     {
         $GLOBALS["isActiveMenu"] = TRUE;
         
-        if((isset($_POST["connexion"])) || isset($_POST["menuPrincipal"]))
-            MenuPrincipalPage();
-        
+        if(isset($_POST["menuPrincipal"]))
+        {
+            ConnexionPage();
+        }
+        else if (isset($_POST["connexion"])) 
+        {
+            TentativeConnexion();
+        }
     }
     
     else if(isset($_GET["action"]) && $_GET["action"] == "gestionAlertes")

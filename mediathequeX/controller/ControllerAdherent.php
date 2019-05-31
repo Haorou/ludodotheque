@@ -32,12 +32,12 @@ function CreateAdherent()
 {
     $PersonManager = new PersonneManager();
     
-    $perso = new Adherent();
+    $perso = new Adherent([]);
     $perso->setCivilite(htmlspecialchars($_POST["civilite"]));
     $perso->setNom(htmlspecialchars($_POST["nom"]));
     $perso->setPrenom(htmlspecialchars($_POST["prenom"]));
     
-    $adresse = new Adresse();
+    $adresse = new Adresse([]);
     $adresse->setNumero(htmlspecialchars($_POST["numero"]));
     $adresse->setType_voie(htmlspecialchars($_POST["type_voie"]));
     $adresse->setNom_voie(htmlspecialchars($_POST["nom_voie"]));

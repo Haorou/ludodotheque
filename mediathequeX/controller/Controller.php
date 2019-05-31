@@ -42,6 +42,7 @@ $isActiveAlerte = FALSE;
 
 function ConnexionPage()
 {
+    unset($_SESSION["utilisateur"]);
     require("view/ConnexionView.php");
 }
 

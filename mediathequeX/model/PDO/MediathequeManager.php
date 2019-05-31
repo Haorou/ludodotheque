@@ -24,7 +24,27 @@ class MediathequeManager extends ManagerPDO
             
             return new Mediatheque($donnees);
         }
-     
+
+        public function connexion(Utilisateur $utilisateur)
+        {
+            $q = $this->_db->prepare('SELECT * FROM utilisateur WHERE 
+                                    pseudo = :pseudo AND 
+                                    mot_de_passe = :mot_de_passe');
+            
+            $q->execute(array(
+                "pseudo" => $utilisateur->pseudo(),
+                "mot_de_passe" => $utilisateur->mot_de_passe()
+            ));
+            
+            $donnees = $q->fetch(PDO::FETCH_ASSOC);
+            
+            $connexionIsReady = FALSE;
+            
+            if($donnees != NULL)
+                $connexionIsReady = TRUE;
+            
+            return $connexionIsReady;
+        }
         
        public function updateParametre(Mediatheque $mediatheque)
         {
