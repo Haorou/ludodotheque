@@ -32,17 +32,19 @@ function CreateAdherent()
 {
     $PersonManager = new PersonneManager();
     
-    $perso = new Adherent([]);
-    $perso->setCivilite(htmlspecialchars($_POST["civilite"]));
-    $perso->setNom(htmlspecialchars($_POST["nom"]));
-    $perso->setPrenom(htmlspecialchars($_POST["prenom"]));
+    $perso = new Adherent(
+        [   "civilite" => htmlspecialchars($_POST["civilite"]),
+            "nom" => htmlspecialchars($_POST["nom"]),
+            "prenom" => htmlspecialchars($_POST["prenom"])
+        ]);
     
-    $adresse = new Adresse([]);
-    $adresse->setNumero(htmlspecialchars($_POST["numero"]));
-    $adresse->setType_voie(htmlspecialchars($_POST["type_voie"]));
-    $adresse->setNom_voie(htmlspecialchars($_POST["nom_voie"]));
-    $adresse->setCode_postal(htmlspecialchars($_POST["code_postal"]));
-    $adresse->setVille(htmlspecialchars($_POST["ville"]));
+    $adresse = new Adresse(
+        [   "numero" => htmlspecialchars($_POST["numero"]),
+            "type_voie" => htmlspecialchars($_POST["type_voie"]),
+            "nom_voie" => htmlspecialchars($_POST["nom_voie"]),
+            "code_postal" => htmlspecialchars($_POST["code_postal"]),
+            "ville" => htmlspecialchars($_POST["ville"])
+        ]);
 
     $adresse->setRegion($PersonManager->readRegion($adresse->code_postal()));
     

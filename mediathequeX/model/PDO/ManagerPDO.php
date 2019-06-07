@@ -9,7 +9,7 @@ class ManagerPDO
         try 
         {
             //$db = new PDO("mysql:host=localhost;port=3306;dbname=promo19_marcantoine;charset=utf8","promo19","user@sio19"); //connexion a la BD sio56@.org
-            $db = new PDO("mysql:host=localhost;port=3308;dbname=mediatheque;charset=utf8","root",""); // connexion localhost
+            $db = new PDO("mysql:host=localhost;port=3306;dbname=mediatheque;charset=utf8","root",""); // connexion localhost
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); // On �met une alerte � chaque fois qu'une requ�te a �chou�.
         } 
         catch (PDOException $e) 
